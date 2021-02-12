@@ -51,7 +51,7 @@ const Dashboard = (props) => {
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>
-          <Col className="mb-5 mb-xl-0" xl="8">
+          <Col className="mt-8 mb-5 mb-xl-0" xl="8">
             <Card className="shadow">
               <CardHeader className="bg-transparent">
                 <Row className="align-items-center">
@@ -104,7 +104,7 @@ const Dashboard = (props) => {
               </CardBody>
             </Card>
           </Col>
-          <Col xl="4">
+          <Col xl="4 mt-8">
             <Card className="shadow">
               <CardHeader className="bg-transparent">
                 <Row className="align-items-center">

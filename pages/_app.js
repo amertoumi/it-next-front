@@ -3,12 +3,17 @@ import ReactDOM from "react-dom";
 import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
-
 import PageChange from "components/PageChange/PageChange.js";
 
 import "assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/nextjs-argon-dashboard.scss";
+
+// redux config
+import { Provider } from 'react-redux';
+import withRedux from 'next-redux-wrapper';
+import store from '../redux/store';
+
 
 Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
@@ -28,10 +33,11 @@ Router.events.on("routeChangeError", () => {
 });
 
 export default class MyApp extends App {
-  componentDidMount() {
+    componentDidMount() {
     let comment = document.createComment('Platform Loading...');
     document.insertBefore(comment, document.documentElement);
-  }
+  } 
+
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
 
@@ -41,7 +47,9 @@ export default class MyApp extends App {
 
     return { pageProps };
   }
+
   render() {
+
     const { Component, pageProps } = this.props;
 
     const Layout = Component.layout || (({ children }) => <>{children}</>);
@@ -54,7 +62,7 @@ export default class MyApp extends App {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <title> Inspire Talent</title>
-          <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+          <script src=""></script>
         </Head>
         <Layout>
           <Component {...pageProps} />
@@ -63,3 +71,7 @@ export default class MyApp extends App {
     );
   }
 }
+
+//const makeStore = () => store;
+
+//export default withRedux(makeStore)(App);

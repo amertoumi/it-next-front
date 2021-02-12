@@ -21,7 +21,25 @@ function logout() {
     delete axios.defaults.headers["Authorization"];
 }
 
+// Create New skill 
+
+function CreateSkills(skillFields) {
+
+    var data = skillFields
+    axios('http://localhost:8000/api/skills', 
+    {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json, text/plain',
+          'Content-Type': 'application/json;charset=UTF-8'
+      },
+      data: data
+  }).then(()=> console.log('data inserted to db'));
+  return true;
+  }
+
 export default {
     auth_api,
-    logout
+    logout,
+    CreateSkills
 }
