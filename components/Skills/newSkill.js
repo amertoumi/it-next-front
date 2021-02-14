@@ -4,15 +4,26 @@ import { Container, Form, Button, FormGroup, Label, Input } from "reactstrap";
 import Api from "../../pages/api";
 
 const ListTypeSkills = (props) => {
+  
   const [skillFields, setSkillFields] = React.useState({
     name: "",
-    type: "",
+    typeSkills: "",
   });
 
   const handleChange = ({ currentTarget }) => {
     const { value, name } = currentTarget;
     setSkillFields({ ...skillFields, [name]: value });
   };
+
+  //list type skills
+  const [type_skills, setType_Skills] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/type_skills")
+      .then((response) => response.data["hydra:member"])
+      .then((data) => setType_Skills(data))
+      .catch((error) => console.log(error.response));
+  }, []);
 
   const [error, setError] = React.useState("");
 
@@ -28,14 +39,6 @@ const ListTypeSkills = (props) => {
       setError(" les informations sont incorrect");
     }
   };
-  const [typeskills, setTypeSkills] = useState([]);
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/config/typemission/list")
-      .then((response) => response.data)
-      .then((data) => setTypeSkills(data))
-      //.catch((error) => console.log(error.response));
-  }, []);
 
   return (
     <Container fluid>
@@ -47,36 +50,37 @@ const ListTypeSkills = (props) => {
           <Input
             type="text"
             name="name"
-            id="exampleEmail"
+            id="name"
             placeholder="Enter the skill name"
             value={skillFields.name}
             onChange={handleChange}
-            /* className={"form-control" + (error && " is-invalid")} */
+          /* className={"form-control" + (error && " is-invalid")} */
           />
           {/* {error && <p className="invalid-feedback">{error}</p>} */}
         </FormGroup>
         <FormGroup className="mb-2 mr-sm-3 mb-sm-0">
           <Label for="exampleSelectMulti" className="mr-sm-2 ml-3">
-            Select Skill Type
+            Select New Skill 
           </Label>
           <Input
             type="select"
-            name="type"
+            name="typeSkills"
             id="exampleSelectMulti"
-            value={skillFields.type}
+            value={skillFields.typeSkills}
             onChange={handleChange}
-            /* className={"form-control" + (error && " is-invalid")} */
+            placeholder="select type "
+          /* className={"form-control" + (error && " is-invalid")} */
           >
-            <option defaultValue hidden value="">
-                
-            {/* {typeskills.map((skill) => (
-                <option key={skill.id}>
-                {skill.id}
-                </option>
-                    
-                ))} */}
-            </option>
-            
+           <option defaultValue hidden value=""></option>
+
+            {type_skills.map((type) => (
+                    <option key={type.id}>
+                    {type.name}
+                    </option>
+                      
+                  ))}
+           
+
           </Input>
           {/* {error && <p className="invalid-feedback">{error}</p>} */}
         </FormGroup>
