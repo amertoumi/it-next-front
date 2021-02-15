@@ -3,25 +3,16 @@ import axios from "axios";
 import { Container, Card, Table, Col, Button } from "react-bootstrap";
 // layout for this page
 import Admin from "layouts/Admin.js";
-import NewSkill from '../../components/Skills/newSkill';
+import NewSkill from "../../components/Skills/newSkill";
 import Header from "components/Headers/Header.js";
-import api from "../api";
 
-function Skills() {
+function SkillsList() {
   const [skills, setSkills] = useState([]);
-  const [type_skills, setType_Skills] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/type_skills")
-      .then((response) => response.data["hydra:member"])
-      .then((data) => setType_Skills(data))
-      .catch((error) => console.log(error.response));
-  }, []);
 
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/skills")
+      //.then((response)=>console.log(response.data["hydra:member"]))
       .then((response) => response.data["hydra:member"])
       .then((data) => setSkills(data))
       .catch((error) => console.log(error.response));
@@ -35,7 +26,7 @@ function Skills() {
         <Col md="12">
           <Card className="card-plain table-plain-bg">
             <Card.Header>
-              <Card.Title as="h2">Table For All Skills</Card.Title>
+              <Card.Title as="h2">Table For All SkillsList</Card.Title>
             </Card.Header>
             <Card.Body className="table-full-width table-responsive px-0">
               <Table className="table-hover">
@@ -52,9 +43,9 @@ function Skills() {
                     <tr key={skill.id}>
                       <td>{skill.id}</td>
                       <td>{skill.name}</td>
-                      <td>{skill.type}</td>
+                      <td>{skill.type.name}</td>
                       <td>
-                        <Button variant="warning">Edit</Button>
+                        <Button variant="info">Edit</Button>
                         <Button variant="danger" className="ml-3">
                           Delete
                         </Button>
@@ -71,6 +62,6 @@ function Skills() {
   );
 }
 
-Skills.layout = Admin;
+SkillsList.layout = Admin;
 
-export default Skills;
+export default SkillsList;
