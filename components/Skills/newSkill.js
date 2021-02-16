@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Form, Button, FormGroup, Label, Input } from "reactstrap";
+import { API_HOST, API_TYPE_SKILLS_PATH } from "../../api";
 import Api from "../../pages/api";
 
-const NewSkill = (props) => {
-  const [skillFields, setSkillFields] = React.useState({
+const NewSkill = () => {
+  const [skillFields, setSkillFields] = useState({
     name: "",
     type: "",
   });
@@ -17,16 +18,17 @@ const NewSkill = (props) => {
   //list type skills
   const [type_skills, setType_Skills] = useState([]);
   useEffect(() => {
+    let URL = API_HOST + API_TYPE_SKILLS_PATH;
     axios
-      .get("http://localhost:8000/api/type_skills")
+      .get(URL)
       .then((response) => response.data["hydra:member"])
       .then((data) => setType_Skills(data))
       .catch((error) => console.log(error.response));
   }, []);
 
-  const [error, setError] = React.useState("");
+  const [error, setError] = useState("");
 
-/*   const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
@@ -37,12 +39,6 @@ const NewSkill = (props) => {
     } catch (error) {
       setError(" les informations sont incorrect");
     }
-  }; */
-
-  //test handle submit with console 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(skillFields);
   };
 
   return (
@@ -50,7 +46,6 @@ const NewSkill = (props) => {
       <Label className="mb-sm-0 ml-5">
         <h2>Create New Skill</h2>
       </Label>
-
       <Form inline onSubmit={handleSubmit}>
         <FormGroup className="mt-3 mb-2 mr-sm-2 mb-sm-0 ml-5">
           <Label for="skillName" className="mr-sm-2">
@@ -66,24 +61,8 @@ const NewSkill = (props) => {
             /* className={"form-control" + (error && " is-invalid")} */
           />
           {/* {error && <p className="invalid-feedback">{error}</p>} */}
-          <Label for="exampleSelectMulti" className="mr-sm-2 ml-3">
-            
-          </Label>
-          <FormGroup check>
-          {type_skills.map((type) => (
-            <Label check key={type.id}>
-              <Input 
-              type="radio" 
-              name="type"
-              id="type"
-              value={skillFields.type}
-              onChange={handleChange} />
-              <span>{type.name}</span>
-            </Label>
-          ))}
-          </FormGroup>
-
-          {/* <Input
+          <Label for="exampleSelectMulti" className="mr-sm-2 ml-3"></Label>
+          <Input
             type="select"
             name="type"
             id="exampleSelectMulti"
@@ -92,14 +71,16 @@ const NewSkill = (props) => {
             placeholder="select type "
             className={"form-control" + (error && " is-invalid")}
           >
-            <option defaultValue hidden value=""></option>
-
+            <option defaultValue hidden value="">
+              Select type here
+            </option>
             {type_skills.map((type) => (
-              <option key={type.id}>{type.name}</option>
+              <option key={type.id} value={`/api/type_skills/` + type.id}>
+                {type.name}
+              </option>
             ))}
-          </Input> */}
+          </Input>
           {/* {error && <p className="invalid-feedback">{error}</p>} */}
-
           <Button color="primary" type="submit" className="ml-5">
             Create
           </Button>

@@ -1,26 +1,40 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Card, Table, Col, Button } from "react-bootstrap";
-// layout for this page
 import Admin from "layouts/Admin.js";
 import NewSkill from "../../components/Skills/newSkill";
 import Header from "components/Headers/Header.js";
+import NewSkillType from "../../components/Skills/newSkillType";
+import "../../assets/css/GlobalStyle.css";
+import { API_HOST, API_SKILLS_PATH } from "../../api";
+import Api from "../../pages/api";
 
 function SkillsList() {
   const [skills, setSkills] = useState([]);
-
+  const [error, setError] = useState("");
   useEffect(() => {
+    let URL = API_HOST + API_SKILLS_PATH;
     axios
-      .get("http://localhost:8000/api/skills")
+      .get(URL)
       //.then((response)=>console.log(response.data["hydra:member"]))
       .then((response) => response.data["hydra:member"])
       .then((data) => setSkills(data))
       .catch((error) => console.log(error.response));
   }, []);
 
+  function handleRemoveSkill(id) {
+    try {
+      Api.DeleteSkill(id);
+      setError("");
+    } catch (error) {
+      setError(" Cannot remove skill ");
+    }
+  }
+
   return (
     <>
       <Header />
+      <NewSkillType />
       <NewSkill />
       <Container fluid className="mt-3">
         <Col md="12">
@@ -32,21 +46,29 @@ function SkillsList() {
               <Table className="table-hover">
                 <thead>
                   <tr>
-                    <th className="border-0">ID</th>
-                    <th className="border-0">Name</th>
-                    <th className="border-0">Type</th>
-                    <th className="border-0">Action</th>
+                    <th className="border-0">
+                      <span id="span">Name</span>
+                    </th>
+                    <th className="border-0">
+                      <span id="span">Type</span>
+                    </th>
+                    <th className="border-0">
+                      <span id="span">Action</span>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {skills.map((skill) => (
                     <tr key={skill.id}>
-                      <td>{skill.id}</td>
                       <td>{skill.name}</td>
                       <td>{skill.type.name}</td>
                       <td>
                         <Button variant="info">Edit</Button>
-                        <Button variant="danger" className="ml-3">
+                        <Button
+                          variant="danger"
+                          className="ml-3"
+                          onClick={() => handleRemoveSkill(skill.id)}
+                        >
                           Delete
                         </Button>
                       </td>
