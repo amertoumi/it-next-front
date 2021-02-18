@@ -22,6 +22,7 @@ import api from "../api";
 
 function Login() {
   const [error, setError] = React.useState("");
+  const [is_auth, setIs_auth] = React.useState(false);
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = async(data, event) => {
     event.preventDefault();
@@ -29,14 +30,14 @@ function Login() {
     try {
       await api.auth_api(data);
       setError("");
-      //setIs_auth(true);
-      Router.push('admin/dashboard');
-
+      setIs_auth(true);
+      
     } 
     catch(error) {
       setError(
           "informations is invalid"
       );
+      setIs_auth(false);
     }
   };
 

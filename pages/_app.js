@@ -9,12 +9,6 @@ import "assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/nextjs-argon-dashboard.scss";
 
-// redux config
-import { Provider } from 'react-redux';
-import withRedux from 'next-redux-wrapper';
-import store from '../redux/store';
-
-
 Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
   document.body.classList.add("body-page-transition");
@@ -49,7 +43,7 @@ export default class MyApp extends App {
   }
 
   render() {
-
+    
     const { Component, pageProps } = this.props;
 
     const Layout = Component.layout || (({ children }) => <>{children}</>);
@@ -65,8 +59,8 @@ export default class MyApp extends App {
           <script src=""></script>
         </Head>
         <Layout>
-          <Component {...pageProps} />
-        </Layout>
+            <Component {...pageProps} />
+          </Layout>    
       </React.Fragment>
     );
   }

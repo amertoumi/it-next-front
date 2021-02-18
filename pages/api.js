@@ -5,6 +5,7 @@ import {
   API_SKILLS_PATH,
   API_TYPE_SKILLS_PATH,
 } from "../api";
+import Router from 'next/router';
 
 //Login
 function auth_api(data) {
@@ -17,9 +18,12 @@ function auth_api(data) {
       window.localStorage.setItem("authToken", token);
       // Prévient axios qu'on a un header par défault sur toutes les futures requettes http
       axios.defaults.headers["Authorization"] = "Bearer  " + token;
+      Router.push('/admin/dashboard');
       return true;
     });
 }
+
+
 
 //Logout
 function logout() {
@@ -76,5 +80,5 @@ export default {
   logout,
   CreateSkills,
   CreateSkillType,
-  DeleteSkill,
+  DeleteSkill
 };

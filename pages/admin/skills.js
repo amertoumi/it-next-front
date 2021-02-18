@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, Card, Table, Col, Button } from "react-bootstrap";
+import { Container, Card, Col, Table, Button,} from "react-bootstrap";
 import Admin from "layouts/Admin.js";
 import NewSkill from "../../components/Skills/newSkill";
 import Header from "components/Headers/Header.js";
@@ -8,6 +8,10 @@ import NewSkillType from "../../components/Skills/newSkillType";
 import "../../assets/css/GlobalStyle.css";
 import { API_HOST, API_SKILLS_PATH } from "../../api";
 import Api from "../../pages/api";
+import { Segment, Icon } from "semantic-ui-react";
+
+import { SkillsContextProvider } from "../../ContextAPI/skills-context";
+import SkillsTable from "./skillsTable";
 
 function SkillsList() {
   const [skills, setSkills] = useState([]);
@@ -36,6 +40,9 @@ function SkillsList() {
       <Header />
       <NewSkillType />
       <NewSkill />
+      {/* <SkillsContextProvider>
+        <SkillsTable />
+      </SkillsContextProvider> */}
       <Container fluid className="mt-3">
         <Col md="12">
           <Card className="card-plain table-plain-bg">
@@ -63,13 +70,13 @@ function SkillsList() {
                       <td>{skill.name}</td>
                       <td>{skill.type.name}</td>
                       <td>
-                        <Button variant="info">Edit</Button>
+                        <Button variant="info"> <Icon name="pen" />Edit</Button>
                         <Button
                           variant="danger"
                           className="ml-3"
                           onClick={() => handleRemoveSkill(skill.id)}
                         >
-                          Delete
+                          <Icon name="trash" />Delete
                         </Button>
                       </td>
                     </tr>

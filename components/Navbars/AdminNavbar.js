@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import Api from '../../pages/api';
+
 // reactstrap components
 import {
   DropdownMenu,
@@ -16,6 +18,7 @@ import {
   Nav,
   Container,
   Media,
+  Button
 } from "reactstrap";
 
 function AdminNavbar({ brandText }) {
@@ -57,6 +60,9 @@ function AdminNavbar({ brandText }) {
                   </Media>
                 </Media>
               </DropdownToggle>
+             {/*  <Button
+              onClick={()=>Api.logout()}
+              >Logout</Button> */}
               <DropdownMenu className="dropdown-menu-arrow" right>
                 <DropdownItem className="noti-title" header tag="div">
                   <h6 className="text-overflow m-0">Welcome!</h6>
