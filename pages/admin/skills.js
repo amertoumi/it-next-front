@@ -6,7 +6,7 @@ import NewSkill from "../../components/Skills/newSkill";
 import Header from "components/Headers/Header.js";
 import NewSkillType from "../../components/Skills/newSkillType";
 import "../../assets/css/GlobalStyle.css";
-import { API_HOST, API_SKILLS_PATH } from "../../api";
+import { API_HOST, API_SKILLS_PATH } from "../../API";
 import Api from "../../pages/api";
 import { Segment, Icon } from "semantic-ui-react";
 

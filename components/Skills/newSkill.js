@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Form, Button, FormGroup, Label, Input } from "reactstrap";
-import { API_HOST, API_TYPE_SKILLS_PATH } from "../../api";
+import { API_HOST, API_TYPE_SKILLS_PATH } from "../../API";
 import Api from "../../pages/api";
 
 const NewSkill = () => {

@@ -4,7 +4,7 @@ import {
   API_AUTH_PATH,
   API_SKILLS_PATH,
   API_TYPE_SKILLS_PATH,
-} from "../api";
+} from "../API";
 import Router from 'next/router';
 
 //Login
@@ -22,8 +22,6 @@ function auth_api(data) {
       return true;
     });
 }
-
-
 
 //Logout
 function logout() {
@@ -75,10 +73,27 @@ function DeleteSkill(id) {
   return true;
 }
 
+//Sent Selected skills on Checkbox Form
+// Create New skill Type
+
+function SentSelectedSkills(data) {
+  var URL = API_HOST + API_ProfilS_PATH;
+  var data = data;
+  axios(URL, {
+    method: "POST",
+    headers: {
+      Accept: "application/json, text/plain",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+    data: data,
+  }).then(() => console.log("Profils skills updated"));
+  return true;
+}
 export default {
   auth_api,
   logout,
   CreateSkills,
   CreateSkillType,
-  DeleteSkill
+  DeleteSkill,
+  SentSelectedSkills
 };

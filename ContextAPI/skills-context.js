@@ -1,5 +1,5 @@
 import React, { useState, useReducer, createContext } from "react";
-import { API_HOST, API_SKILLS_PATH } from "../api";
+import { API_HOST, API_SKILLS_PATH } from "../API";
 //import Api from "../pages/api";
 
 export const SkillsContext = createContext();

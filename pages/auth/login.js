@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Router from 'next/router';
 // reactstrap components
 import {
   Button,
@@ -47,10 +46,10 @@ function Login() {
       <Col lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
-            <div className="text-muted text-center mt-2 mb-3">
+            {/*<div className="text-muted text-center mt-2 mb-3">
               <small>Sign in with</small>
             </div>
-            <div className="btn-wrapper text-center">
+             <div className="btn-wrapper text-center">
               <Button
                 className="btn-neutral btn-icon"
                 color="default"
@@ -79,11 +78,11 @@ function Login() {
                 </span>
                 <span className="btn-inner--text">Google</span>
               </Button>
-            </div>
+            </div> */}
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-              <small>Or sign in with credentials</small>
+              <small> Sign in with credentials</small>
             </div>
             <form role="form" onSubmit={handleSubmit(onSubmit)}>
               <FormGroup className="mb-3">
@@ -97,7 +96,7 @@ function Login() {
                     placeholder="Email"
                     type="email"
                     autoComplete="new-email"
-                    name="username"
+                    name="email"
                     ref={register({
                       required: "Required",
                       pattern: {
