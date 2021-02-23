@@ -4,6 +4,8 @@ import {
   API_AUTH_PATH,
   API_SKILLS_PATH,
   API_TYPE_SKILLS_PATH,
+  API_USERS_PATH,
+  API_PROFILS_PATH
 } from "../API";
 import Router from 'next/router';
 
@@ -73,12 +75,11 @@ function DeleteSkill(id) {
   return true;
 }
 
-//Sent Selected skills on Checkbox Form
-// Create New skill Type
+//Create new user from profil form
 
-function SentSelectedSkills(data) {
-  var URL = API_HOST + API_ProfilS_PATH;
-  var data = data;
+function CreateNewUser(dataUser) {
+  var URL = API_HOST + API_USERS_PATH;
+  var data = dataUser;
   axios(URL, {
     method: "POST",
     headers: {
@@ -86,7 +87,24 @@ function SentSelectedSkills(data) {
       "Content-Type": "application/json;charset=UTF-8",
     },
     data: data,
-  }).then(() => console.log("Profils skills updated"));
+  })
+  .then("New User is created from Profil form");
+  return true;
+}
+
+//Create new inspirnaute user
+function CreateNewProfil(dataProfil) {
+  var URL = API_HOST + API_PROFILS_PATH;
+  var data = dataProfil;
+  axios(URL, {
+    method: "POST",
+    headers: {
+      Accept: "application/json, text/plain",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+    data: data,
+  })
+  .then("Profil is created");
   return true;
 }
 export default {
@@ -95,5 +113,6 @@ export default {
   CreateSkills,
   CreateSkillType,
   DeleteSkill,
-  SentSelectedSkills
+  CreateNewProfil,
+  CreateNewUser
 };

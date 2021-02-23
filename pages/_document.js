@@ -22,6 +22,11 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
             rel="stylesheet"
           />
+            {/* Font Robot for Material UI */}
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+            {/* Font Icons for Material UI */}
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
         </Head>
         <body>
           <div id="page-transition"></div>

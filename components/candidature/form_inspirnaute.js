@@ -1,140 +1,199 @@
 import React from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Container,
-} from "reactstrap";
-import { useForm } from "react-hook-form";
-import dynamic from "next/dynamic";
+import axios from "axios";
+import { API_HOST, API_SKILLS_PATH } from "../../API";
 import Api from "../../pages/api";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { Container, Row } from "reactstrap";
+import { makeStyles } from "@material-ui/core/styles";
+import Icon from "@material-ui/core/Icon";
 
-const SkillsBox = dynamic(() =>
-  import("../../components/Skills/skillsCheckBox")
-);
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
+  button: {
+    marginTop: "20px",
+  },
+}));
 
-const Inspirenaute_Form = (props) => {
-  const { register, handleSubmit, watch, errors } = useForm();
-  const [error, setError] = React.useState("");
-  //handle Post selected skills
-  const onSubmit = async (data, event) => {
+export default function Inspirenaute_Form() {
+  const classes = useStyles();
+  const [isActive, setIsActive] = React.useState(false);
+  const [name, setName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [username, setUserName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [country, setCountry] = React.useState("");
+  const [city, setCity] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [poste, setPoste] = React.useState("");
+  const [mySkills, setMySkills] = React.useState("");
+  const [otherSkills, setOtherSkills] = React.useState("");
+  const [tarif, setTarif] = React.useState("");
+  const [nbrAnneeExp, setNbrAnneeExp] = React.useState();
+
+  function handleSubmit(event) {
     event.preventDefault();
-
-    try {
-      await Api.SentSelectedSkills(data);
-      setError("");
-      setIs_auth(true);
-      console.log("sent checked skills");
-    } catch (error) {
-      setError(" cannot sent selected skills");
+    const dataUser = { username, email, password };
+    const dataProfil = {
+      isActive,
+      username,
+      email,
+      password,
+      name,
+      lastName,
+      country,
+      city,
+      address,
+      phone,
+      poste,
+      mySkills,
+      otherSkills,
+      tarif,
+      nbrAnneeExp,
     }
-  };
+    
+    Api.CreateNewProfil(dataProfil);
+    Api.CreateNewUser(dataUser);
+   // console.log("Profil created with success");
+  }
+
   return (
     <Container>
-      <Form className="col-6 mt-3" role="form" onSubmit={handleSubmit(onSubmit)}>
-        <FormGroup>
-          <Label for="name">Name</Label>
-          <Input
-            type="name"
-            name="name"
+      <h2>Inscription Inspirnaute</h2>
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+        <Row>
+          <input type="hidden" value={isActive} onInput={(e) => setIsActive()}/>
+          <TextField
             id="name"
-            placeholder="Enter your name"
-            ref={register({required: "Required"})}
+            label="Name"
+            type="search"
+            value={name}
+            onInput={(e) => setName(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
-          <Label for="lastName">Last Name</Label>
-          <Input
-            type="lastName"
-            name="lastName"
+          <TextField
             id="lastName"
-            placeholder="Enter your LastName"
-            ref={register({required: "Required"})}
+            label="LastName"
+            type="search"
+            value={lastName}
+            onInput={(e) => setLastName(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
-          <Label for="email">Email</Label>
-          <Input
-            type="email"
-            name="email"
+        </Row>
+        <Row>
+          <TextField
+            id="username"
+            label="Username"
+            type="search"
+            value={username}
+            onInput={(e) => setUserName(e.target.value)}
+          />
+          <TextField
             id="email"
-            placeholder="Enter your email"
-            ref={register({required: "Required"})}
+            label="Email"
+            type="search"
+            value={email}
+            onInput={(e) => setEmail(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
-          <Label for="country">Country</Label>
-          <Input 
-          type="select" 
-          name="country" 
-          id="country"
-          ref={register({required: "Required"})}
-          >
-            <option default>
-              Select your Country
-            </option>
-            <option>Tunisia</option>
-            <option>France</option>
-          </Input>
-        </FormGroup>
-        <FormGroup>
-          <Label for="city">City</Label>
-          <Input
-            type="text"
-            name="city"
+          <TextField
+            id="password"
+            label="Password"
+            type="password"
+            value={password}
+            onInput={(e) => setPassword(e.target.value)}
+          />
+        </Row>
+        <Row>
+          <TextField
+            id="country"
+            label="Country"
+            type="search"
+            value={country}
+            onInput={(e) => setCountry(e.target.value)}
+          />
+          <TextField
             id="city"
-            placeholder="Enter your city"
-            ref={register({required: "Required"})}
+            label="City"
+            type="search"
+            value={city}
+            onInput={(e) => setCity(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
-          <Label for="address">Address</Label>
-          <Input
-            type="text"
-            name="address"
+          <TextField
             id="address"
-            placeholder="Enter your adrdess"
-            ref={register({required: "Required"})}
+            label="Address"
+            type="search"
+            value={address}
+            onInput={(e) => setAddress(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
-          <Label for="phone">Phone</Label>
-          <Input
-            type="text"
-            name="phone"
+        </Row>
+        <Row>
+          <TextField
             id="phone"
-            placeholder="Enter your Phone Number"
-            ref={register({required: "Required"})}
+            label="Phone Number"
+            type="search"
+            value={phone}
+            onInput={(e) => setPhone(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
-          <FormGroup>
-            <Label for="exampleText">My Skills</Label>
-            <SkillsBox />
-          </FormGroup>
-          <Label for="exampleText">Others Skills</Label>
-          <Input 
-            type="textarea" 
-            name="text" 
-            id="exampleText" 
-            ref={register({required: "Required"})}/>
-        </FormGroup>
-        <FormGroup>
-          <Label for="exampleFile">File</Label>
-          <Input 
-          type="file" 
-          name="file" 
-          id="exampleFile" 
-          ref={register({required: "Required"})}
+          <TextField
+            id="poste"
+            label="Poste"
+            type="search"
+            value={poste}
+            onInput={(e) => setPoste(e.target.value)}
           />
-        </FormGroup>
-        <Button className="btn btn-success center">Submit</Button>
-      </Form>
+          <TextField
+            id="number_annee_exp"
+            label="Number Years of Expérience"
+            type="number"
+            value={nbrAnneeExp}
+            onInput={(e) => setNbrAnneeExp(e.target.value)}
+          />
+        </Row>
+        <Row>
+          <TextField
+            id="mySkills"
+            label="mySkills"
+            type="search"
+            value={mySkills}
+            onInput={(e) => setMySkills(e.target.value)}
+          />
+          <TextField
+            id="otherSkills"
+            label="Other Skills"
+            type="Multiline"
+            value={otherSkills}
+            onInput={(e) => setOtherSkills(e.target.value)}
+          />
+          <TextField
+            id="tarif"
+            label="Tarif"
+            type="search"
+            value={tarif}
+            onInput={(e) => setTarif(e.target.value)}
+          />
+        </Row>
+        <Row>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            endIcon={<Icon>send</Icon>}
+            type="submit"
+          >
+            Send
+          </Button>
+        </Row>
+      </form>
     </Container>
   );
-};
-
-export default Inspirenaute_Form;
+}

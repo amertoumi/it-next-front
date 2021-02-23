@@ -64,7 +64,3 @@ export default class MyApp extends App {
     );
   }
 }
-
-//const makeStore = () => store;
-
-//export default withRedux(makeStore)(App);
