@@ -44,7 +44,7 @@ function CreateSkills(skillFields) {
       "Content-Type": "application/json;charset=UTF-8",
     },
     data: data,
-  }).then(() => console.log("data inserted to db"));
+  }).then(() => console.log("new skill created with success"));
   return true;
 }
 
@@ -88,7 +88,7 @@ function CreateNewUser(dataUser) {
     },
     data: data,
   })
-  .then("New User is created from Profil form");
+  .then(console.log("New User is created from Profil form"));
   return true;
 }
 
@@ -104,7 +104,7 @@ function CreateNewProfil(dataProfil) {
     },
     data: data,
   })
-  .then("Profil is created");
+  .then(console.log("Profil is created"));
   return true;
 }
 export default {

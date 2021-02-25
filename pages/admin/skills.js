@@ -8,10 +8,8 @@ import NewSkillType from "../../components/Skills/newSkillType";
 import "../../assets/css/GlobalStyle.css";
 import { API_HOST, API_SKILLS_PATH } from "../../API";
 import Api from "../../pages/api";
-import { Segment, Icon } from "semantic-ui-react";
-
-import { SkillsContextProvider } from "../../ContextAPI/skills-context";
-import SkillsTable from "./skillsTable";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 function SkillsList() {
   const [skills, setSkills] = useState([]);
@@ -24,7 +22,7 @@ function SkillsList() {
       .then((response) => response.data["hydra:member"])
       .then((data) => setSkills(data))
       .catch((error) => console.log(error.response));
-  }, []);
+  }, [skills]);
 
   function handleRemoveSkill(id) {
     try {
@@ -70,13 +68,13 @@ function SkillsList() {
                       <td>{skill.name}</td>
                       <td>{skill.type.name}</td>
                       <td>
-                        <Button variant="info"> <Icon name="pen" />Edit</Button>
+                        <Button variant="info"> <EditIcon />{' '}Edit</Button>
                         <Button
                           variant="danger"
                           className="ml-3"
                           onClick={() => handleRemoveSkill(skill.id)}
                         >
-                          <Icon name="trash" />Delete
+                          <DeleteForeverIcon/>{' '}Delete
                         </Button>
                       </td>
                     </tr>

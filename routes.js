@@ -18,7 +18,7 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/tables",
+    path: "/candidatures",
     name: "Candidatures",
     icon: "ni ni-bullet-list-67 text-blue",
     layout: "/admin",
