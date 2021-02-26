@@ -11,19 +11,23 @@ import Api from "../../pages/api";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
+// Get List of all Skills
 function SkillsList() {
   const [skills, setSkills] = useState([]);
   const [error, setError] = useState("");
   useEffect(() => {
     let URL = API_HOST + API_SKILLS_PATH;
-    axios
+      axios
       .get(URL)
-      //.then((response)=>console.log(response.data["hydra:member"]))
       .then((response) => response.data["hydra:member"])
       .then((data) => setSkills(data))
       .catch((error) => console.log(error.response));
+    
   }, [skills]);
 
+  
+  
+// Remove Skill by ID
   function handleRemoveSkill(id) {
     try {
       Api.DeleteSkill(id);

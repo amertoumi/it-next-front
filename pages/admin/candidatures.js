@@ -8,8 +8,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 
 // reactstrap components
 import {
@@ -39,9 +39,9 @@ import Header from "components/Headers/Header.js";
 //Make style function
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '& > *': {
+    display: "flex",
+    flexWrap: "wrap",
+    "& > *": {
       margin: theme.spacing(1),
       width: theme.spacing(16),
       height: theme.spacing(16),
@@ -50,24 +50,43 @@ const useStyles = makeStyles((theme) => ({
   CVpaper: {
     width: "300px",
     height: "500px",
-  }
+  },
 }));
 
-function Tables() {
+function Candidatures_List() {
   const classes = useStyles();
   const [listCandidatures, setListCandidatures] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const [error, setError] = useState("");
 
-  const handleClickOpen = (scrollType) => () => {
+  const handleClickOpen = (id) => () => {
+    console.log(id)
     setOpen(true);
-    setScroll(scrollType);
+    /* setScroll(scrollType); */
   };
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  //Update Profil status
+  function handleProfilStatus(id) {
+    const newcv = listCandidatures.map((cv) => {
+      if (cv.id === id) {
+        const updatedItem = {
+          ...cv,
+          isActive: !cv.isActive,
+        };
+
+        return updatedItem;
+      }
+
+      return cv;
+    });
+
+    setListCandidatures(newcv);
+  }
 
   //List table of Pending Candidature
   useEffect(() => {
@@ -77,7 +96,7 @@ function Tables() {
       .then((response) => response.data["hydra:member"])
       .then((data) => setListCandidatures(data))
       .catch((error) => console.log(error.response));
-  }, []);
+  }, [listCandidatures]);
 
   return (
     <>
@@ -251,10 +270,10 @@ function Tables() {
                       </UncontrolledDropdown>
                     </td>
                   </tr>
-                  <tr >
-                    {listCandidatures.map((cv, key) => {
+                  
+                    {listCandidatures.map((cv, indx) => {
                       return (
-                        <React.Fragment key={cv.id}>
+                        <tr key={indx}>
                           <td>
                             <span className="mb-0 text-sm text-center">
                               {cv.username}
@@ -294,93 +313,141 @@ function Tables() {
                             </span>
                           </td>
                           <td>
-                            <Button
+                            {/* <Button
                               variant="info"
                               variant="contained"
                               color="primary"
-                              onClick={handleClickOpen("paper")}
+                              onClick={handleClickOpen(cv.id)}
                             >
                               <EditIcon className="mr-2" /> Edit
-                            </Button>
+                            </Button> */}
+                            {String(cv.isActive) === "false" ?
+                                  <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => handleProfilStatus(cv.id)}
+                                  >
+                                    Accept
+                                  </Button> : 
+                                  <Button
+                                  variant="contained"
+                                  color="secondary"
+                                  onClick={() => handleProfilStatus(cv.id)}
+                                >
+                                  Refuse
+                                </Button>
+                            }
                           </td>
-                        </React.Fragment>
-                      );
-                    })}
-                  </tr>
-                </tbody>
-                <Dialog
+                          {/* <Dialog
                   open={open}
                   onClose={handleClose}
                   scroll={scroll}
-                  aria-labelledby="scroll-dialog-title"
+                  aria-labelledby="form-dialog-title"
                   aria-describedby="scroll-dialog-description"
                 >
-                  <DialogTitle id="scroll-dialog-title" className="text-center">Subscribe Profil</DialogTitle>
-                  <DialogContent dividers={scroll === "paper"} className={classes.CVpaper}>
+                  <DialogTitle id="scroll-dialog-title" className="text-center">
+                    Subscribe Profil
+                    {listCandidatures.map((cv, indx) => (
+                      <React.Fragment key={indx}> {cv.type}</React.Fragment>
+                    ))}
+                  </DialogTitle>
+                  <DialogContent dividers={scroll === "paper"}>
                     <DialogContentText
                       id="scroll-dialog-description"
                       tabIndex={-1}
                     >
                       {listCandidatures.map((cv, key) => {
-                      return (
-                        <React.Fragment key={cv.id} >
-                        <div>
-                        <span>Name :</span>
-                        <p>{cv.name}</p>
-                        </div>
-                        <div>
-                        <span>Email :</span>
-                        <p>{cv.email}</p>
-                        </div>
-                        <div>
-                        <span>Poste :</span>
-                        <p>{cv.poste}</p>
-                        </div>
-                        <div>
-                        <span>Tarif :</span>
-                        <p>{cv.tarif}</p>
-                        </div>
-                        <div>
-                        <span>Expérience :</span>
-                        <p>{cv.nbrAnneeExp}</p>
-                        </div>
-                        <div>
-                        <span>Skills :</span>
-                        {cv.mySkills.map((skill) => 
-                            <ul key={skill.id} >
-                               <li>{skill}</li>
-                            </ul>)}
+                        if (cv.id) {
+                          return (
+                            <React.Fragment key={key}>
+                              <div>
+                                <span className="font-weight-bold"mb-3>Name :</span>
+                                {cv.name}
+                              </div>
+                              <div>
+                                <span className="font-weight-bold" mb-3>Email :</span>
+                                {cv.email}
+                              </div>
+                              <div>
+                                <span className="font-weight-bold" mb-3>Poste :</span>
+                                {cv.poste}
+                              </div>
+                              <div>
+                                <span className="font-weight-bold" mb-3>Tarif :</span>
+                                {cv.tarif}
+                              </div>
+                              <div>
+                                <span className="font-weight-bold" mb-3>Expérience :</span>
+                                {cv.nbrAnneeExp}
+                              </div>
+                              <span className="font-weight-bold" mb-3>Skills :</span>
+                              {cv.mySkills.map((skill, indx) => (
+                                <ul key={indx}>
+                                  <li>{skill}</li>
+                                </ul>
+                              ))}
+                              <div>
+                                <span className="font-weight-bold" mb-3>Other Skills :</span>
+                                <p>{cv.otherSkills}</p>
+                              </div>
+                              <div>
+                                <span className="font-weight-bold" mb-3> Attachment :</span>
+                                <p>
+                                  for more information you can get the cv
+                                  attachment from here:
+                                </p>
+                                <p>cv will appear here...</p>
+                              </div>
+                              <div>
+                                <p>
+                                  So, after reading all information about this
+                                  Profil candidature <br />
+                                  you can accept or refus it.
+                                </p>
+                              </div>
+  
+                              <DialogActions>
+                              {String(cv.isActive) === "false" ?
+                                  <Button>
+                                    <span>Candidat is also pending!!</span>
+                                  </Button> : 
+                                  <Button>
+                                   <span style={{color:'green'}}>
+                                     Candidat is already Accpeted !!
+                                    </span>
+                                  </Button>
+                                } 
+                                {String(cv.isActive) === "false" ?
+                                  <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => handleProfilStatus(cv.id)}
+                                  >
+                                    Accept
+                                  </Button> : 
+                                  <Button
+                                  variant="contained"
+                                  color="secondary"
+                                  onClick={() => handleProfilStatus(cv.id)}
+                                >
+                                  Refuse
+                                </Button>
+                                } 
+                              </DialogActions>
+                            </React.Fragment>
+                          );
+                        }
                         
-                        </div>
-                        <div>
-                        <span>Other Skills :</span>
-                        <p>{cv.otherSkills}</p>
-                        </div>
-                        <div>
-                          <span> Attachment :</span>
-                        <p>for more information you can get the cv attachment from here:</p>
-                        <p>cv file will appeard here ...</p>
-                        
-                        </div>
-                        <div>
-                          <p>So, after reading all information about this Profil candidature <br/>
-                             you can accept or refus it.</p>
-                        </div>
-                        
-
-                        </React.Fragment>
-                          )})}
+                      })}
                     </DialogContentText>
                   </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                      Refus 
-                    </Button>
-                    <Button onClick={handleClose} color="primary">
-                      Accept
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+                </Dialog> */}
+                        </tr>
+                      );
+                    })}
+                  
+                </tbody>
+                
               </Table>
               <CardFooter className="py-4">
                 <nav aria-label="...">
@@ -442,6 +509,6 @@ function Tables() {
   );
 }
 
-Tables.layout = Admin;
+Candidatures_List.layout = Admin;
 
-export default Tables;
+export default Candidatures_List;

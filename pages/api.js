@@ -26,6 +26,7 @@ function auth_api(data) {
 }
 
 //Logout
+
 function logout() {
   //remove Token from localStorage
   window.localStorage.removeItem("authToken");
@@ -67,7 +68,7 @@ function CreateSkillType(skillTypeField) {
 //Delete Skill by ID
 
 function DeleteSkill(id) {
-  var URL = API_HOST + API_SKILLS_PATH;
+  var URL = API_HOST + API_SKILLS_PATH +'/';
   axios(URL + id, {
     method: "DELETE",
     headers: {},

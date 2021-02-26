@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+/* import React, { useState, useContext } from "react";
 import { Segment, Table, Button, Icon } from "semantic-ui-react";
 import { SkillsContext } from "../../ContextAPI/skills-context";
 
@@ -62,4 +62,4 @@ export default function SkillsTable() {
       </Table>
     </Segment>
   );
-}
+} */

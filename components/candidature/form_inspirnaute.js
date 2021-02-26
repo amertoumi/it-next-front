@@ -10,26 +10,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "25ch",
-    },
-  },
-  button: {
-    marginTop: "20px",
-  },
-  autoCompleteStyle: {
-    
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
-
 export default function Inspirenaute_Form() {
-  const classes = useStyles();
+
   const [isActive, setIsActive] = React.useState(false);
   const [type, setType] = React.useState("Freelancer");
   const [name, setName] = React.useState("");
@@ -63,8 +45,7 @@ export default function Inspirenaute_Form() {
   function handleSubmit(event) {
     event.preventDefault();
     const dataUser = { username, email, password, isActive };
-    const dataProfil = {
-      
+    const dataProfil = {   
       isActive,
       type,
       username,
@@ -84,14 +65,13 @@ export default function Inspirenaute_Form() {
 
     Api.CreateNewProfil(dataProfil);
     Api.CreateNewUser(dataUser);
-    // console.log("Profil created with success");
   }
 
   return (
     <Container>
       <h1 className="text-center mt-5 mb-3">Inscription Inspirnaute</h1>
       <form
-        className={classes.root}
+        
         noValidate
         autoComplete="off"
         onSubmit={handleSubmit}
@@ -99,7 +79,7 @@ export default function Inspirenaute_Form() {
         <Row>
           <h2>User Account</h2>
         </Row>
-        <Divider variant="middle" />
+        <Divider variant="middle" className="mb-2"/>
         <Row>
           <Col>
             <TextField
@@ -107,6 +87,7 @@ export default function Inspirenaute_Form() {
               label="Username"
               type="search"
               value={username}
+              required 
               onInput={(e) => setUserName(e.target.value)}
             />
           </Col>
@@ -116,6 +97,7 @@ export default function Inspirenaute_Form() {
               label="Email"
               type="search"
               value={email}
+              required
               onInput={(e) => setEmail(e.target.value)}
             />
           </Col>
@@ -125,6 +107,7 @@ export default function Inspirenaute_Form() {
               label="Password"
               type="password"
               value={password}
+              required 
               onInput={(e) => setPassword(e.target.value)}
             />
           </Col>
@@ -133,7 +116,7 @@ export default function Inspirenaute_Form() {
         <Row>
           <h2 className="mt-4">Personal Informations</h2>
         </Row>
-        <Divider variant="middle" />
+        <Divider variant="middle" className="mb-2"/>
         <Row>
           <input
             id="isActive"
@@ -207,7 +190,7 @@ export default function Inspirenaute_Form() {
         <Row>
           <h2 className="mt-4">Skills</h2>
         </Row>
-        <Divider variant="middle" />
+        <Divider variant="middle" className="mb-2"/>
         <Row>
         <Col>
             <TextField
@@ -240,11 +223,10 @@ export default function Inspirenaute_Form() {
         <Row>
         <Col>
             <Autocomplete
-              className={classes.autoCompleteStyle}
+              
               multiple
               id="mySkills"
               size="small"
-              
               options={listSkills.map((option) => option.name)}
               onChange={(e, value) => setMySkills(value)}
               renderInput={(params) => (
@@ -269,7 +251,7 @@ export default function Inspirenaute_Form() {
             />
           </Col>
           <Col>
-          <Button className="mt-3" variant="" component="label">
+          <Button className="mt-3" component="label">
             <span className="mr-3">CV</span>
             <Input
               type="file"
@@ -282,13 +264,13 @@ export default function Inspirenaute_Form() {
         </Row>
         <Row>
           <Button
-            className={classes.button}
+            className="mt-5"
             variant="contained"
             color="primary"
             endIcon={<Icon>send</Icon>}
             type="submit"
           >
-            Send
+            Subscribe
           </Button>
         </Row>
       </form>
