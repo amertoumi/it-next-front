@@ -24,7 +24,7 @@ const NewSkill = () => {
       .then((response) => response.data["hydra:member"])
       .then((data) => setType_Skills(data))
       .catch((error) => console.log(error.response));
-  }, []);
+  }, [type_skills]);
 
   const [error, setError] = useState("");
 

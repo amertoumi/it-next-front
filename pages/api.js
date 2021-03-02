@@ -5,7 +5,8 @@ import {
   API_SKILLS_PATH,
   API_TYPE_SKILLS_PATH,
   API_USERS_PATH,
-  API_PROFILS_PATH
+  API_PROFILS_PATH,
+  API_ENTREPRISES_PATH
 } from "../API";
 import Router from 'next/router';
 
@@ -108,6 +109,23 @@ function CreateNewProfil(dataProfil) {
   .then(console.log("Profil is created"));
   return true;
 }
+
+//Create new Entreprise 
+function CreateNewEntreprise(dataEntreprise) {
+  var URL = API_HOST + API_ENTREPRISES_PATH;
+  var data = dataEntreprise;
+  axios(URL, {
+    method: "POST",
+    headers: {
+      Accept: "application/json, text/plain",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+    data: data,
+  })
+  .then(console.log("Entreprise is created"));
+  return true;
+}
+
 export default {
   auth_api,
   logout,
@@ -115,5 +133,6 @@ export default {
   CreateSkillType,
   DeleteSkill,
   CreateNewProfil,
-  CreateNewUser
+  CreateNewUser,
+  CreateNewEntreprise
 };

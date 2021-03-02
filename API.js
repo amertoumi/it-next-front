@@ -6,5 +6,6 @@ export const API_USERS_PATH = '/api/users';
 export const API_TYPE_MISSION_PATH = '/api/type_missions';
 export const API_TYPE_SKILLS_PATH = '/api/type_skills';
 export const API_PROFILS_PATH = '/api/profils' ;
+export const API_ENTREPRISES_PATH = '/api/entreprises' ;
 
 

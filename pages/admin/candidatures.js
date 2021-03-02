@@ -2,14 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_HOST, API_PROFILS_PATH } from "../../API";
 import Button from "@material-ui/core/Button";
-import EditIcon from "@material-ui/icons/Edit";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+import { ButtonGroup } from "@material-ui/core";
 
 // reactstrap components
 import {
@@ -56,20 +50,17 @@ const useStyles = makeStyles((theme) => ({
 function Candidatures_List() {
   const classes = useStyles();
   const [listCandidatures, setListCandidatures] = useState([]);
-  const [open, setOpen] = React.useState(false);
-  const [scroll, setScroll] = React.useState("paper");
-  const [error, setError] = useState("");
+  const [isClicked, setisClicked]=useState(false);
 
-  const handleClickOpen = (id) => () => {
-    console.log(id)
-    setOpen(true);
-    /* setScroll(scrollType); */
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  //handle change button group
+  const handl_change_freelancer = () => {
+    setisClicked(true);
+    console.log(isClicked);
+  }
+  const handl_change_recruiter = () => {
+    setisClicked(false);
+    console.log(isClicked);
+  }
   //Update Profil status
   function handleProfilStatus(id) {
     const newcv = listCandidatures.map((cv) => {
@@ -96,12 +87,17 @@ function Candidatures_List() {
       .then((response) => response.data["hydra:member"])
       .then((data) => setListCandidatures(data))
       .catch((error) => console.log(error.response));
-  }, [listCandidatures]);
+  }, []);
 
   return (
     <>
       <Header />
-      {/* Page content */}
+      <Row className="justify-content-center mt-3">
+      <ButtonGroup disableElevation variant="contained" color="primary">
+        <Button onClick={handl_change_recruiter}><h3>Recruiter</h3></Button>
+        <Button onClick={handl_change_freelancer}><h3>Freelancer</h3></Button>
+      </ButtonGroup>
+      </Row>
       <Container className="mt-3" fluid>
         {/* Table */}
         <Row>

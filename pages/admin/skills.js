@@ -67,6 +67,7 @@ function SkillsList() {
                   </tr>
                 </thead>
                 <tbody>
+                  
                   {skills.map((skill) => (
                     <tr key={skill.id}>
                       <td>{skill.name}</td>
