@@ -126,6 +126,21 @@ function CreateNewEntreprise(dataEntreprise) {
   return true;
 }
 
+// Get Freelancer By ID
+function GetFreelancerById(id) {
+  var URL = API_HOST + API_PROFILS_PATH +'/'+id
+  axios(URL)
+  .then((response) => response.data);
+  
+}
+
+let URL = API_HOST + API_SKILLS_PATH;
+      axios
+      .get(URL)
+      .then((response) => response.data["hydra:member"])
+      .then((data) => setSkills(data))
+      .catch((error) => console.log(error.response));
+
 export default {
   auth_api,
   logout,
@@ -134,5 +149,6 @@ export default {
   DeleteSkill,
   CreateNewProfil,
   CreateNewUser,
-  CreateNewEntreprise
+  CreateNewEntreprise,
+  GetFreelancerById
 };
