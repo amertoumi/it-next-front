@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_HOST, API_ENTREPRISES_PATH } from "../../API";
 import Button from "@material-ui/core/Button";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import EditIcon from "@material-ui/icons/Edit";
-import Header from "components/Headers/Header.js";
-
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
 // reactstrap components
 import {
   Badge,
@@ -18,17 +18,44 @@ import {
   Table,
   Container,
   Row,
+  Col,
 } from "reactstrap";
+
 // layout for this page
 import Admin from "layouts/Admin.js";
+
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 // core components
 function Recruiters_Candidatures_List() {
   const [listCandidatures, setListCandidatures] = useState([]);
-  const theme = useTheme();
+  const [profilDetails, setProfilDetails] = useState({});
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   //Update Profil status
-  function handleENTREPRISEStatus(id) {
+  function handleProfilStatus(id) {
     const newcv = listCandidatures.map((cv) => {
       if (cv.id === id) {
         const updatedItem = {
@@ -52,15 +79,20 @@ function Recruiters_Candidatures_List() {
       .then((response) => response.data["hydra:member"])
       .then((data) => setListCandidatures(data))
       .catch((error) => console.log(error.response));
+    //console.log(listCandidatures)
   }, []);
 
-  // Get Recruiters by ID
-  function handleGetFreelancerById(id) {
+  // Get Freelancer By ID
+  async function GetFreelancerById(id) {
+    console.log(id);
+    var URL = API_HOST + API_ENTREPRISES_PATH + "/" + id;
     try {
-      Api.GetFreelancerById(id);
-      setError("");
+      dataProfil = await axios(URL)
+        .then((response) => response.data)
+        .then((data) => setProfilDetails(data))
+        .then(setOpen(true));
     } catch (error) {
-      setError(" Cannot remove skill ");
+      return error.message;
     }
   }
 
@@ -72,16 +104,15 @@ function Recruiters_Candidatures_List() {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <h3 className="mb-0">Recruiters Candidatures</h3>
+                <h3 className="mb-0">Inspirnautes Candidatures</h3>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Company Name</th>
-                    <th scope="col">Domain</th>
+                    <th scope="col">Campany Name</th>
+                    <th scope="col">Professional Email</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Manager Name</th>
-                    <th scope="col">Poste</th>
-                    <th scope="col">Proffesional Email</th>
                     <th scope="col">Status</th>
                     <th scope="col" className="text-center">Action</th>
                   </tr>
@@ -98,24 +129,19 @@ function Recruiters_Candidatures_List() {
                         <td>
                           {" "}
                           <span className="mb-0 text-sm text-center">
-                            {cv.domain}
+                            {cv.email}
+                          </span>
+                        </td>
+                        <td>
+                          {" "}
+                          <span className="mb-0 text-sm text-center">
+                            {cv.type}
                           </span>
                         </td>
                         <td>
                           {" "}
                           <span className="mb-0 text-sm text-center">
                             {cv.name}
-                          </span>
-                        </td>
-                        <td>
-                          <span className="mb-0 text-sm text-center">
-                            {cv.poste}
-                          </span>
-                        </td>
-                        <td>
-                          {" "}
-                          <span className="mb-0 text-sm text-center">
-                            {cv.email}
                           </span>
                         </td>
                         <td>
@@ -139,14 +165,15 @@ function Recruiters_Candidatures_List() {
                             variant="info"
                             variant="contained"
                             color="info"
+                            onClick={() => GetFreelancerById(cv.id)}
                           >
-                             Details
+                            Details
                           </Button>
                           {String(cv.isActive) === "false" ? (
                             <Button
                               variant="contained"
                               color="primary"
-                              onClick={() => handleENTREPRISEStatus(cv.id)}
+                              onClick={() => handleProfilStatus(cv.id)}
                             >
                               Accept
                             </Button>
@@ -154,7 +181,7 @@ function Recruiters_Candidatures_List() {
                             <Button
                               variant="contained"
                               color="secondary"
-                              onClick={() => handleENTREPRISEStatus(cv.id)}
+                              onClick={() => handleProfilStatus(cv.id)}
                             >
                               Refuse
                             </Button>
@@ -220,6 +247,84 @@ function Recruiters_Candidatures_List() {
             </Card>
           </div>
         </Row>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open} style={{ height: "80%", width: "500px" }}>
+            <div className={classes.paper}>
+              <h1 className="text-center">
+                {" "}
+                Candidature : {profilDetails.type}
+              </h1>
+              <hr />
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Campany Name: </h3>
+                </Col>
+                <Col>{profilDetails.username}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Campany Domain: </h3>
+                </Col>
+                <Col>{profilDetails.domain}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Profesional email: </h3>
+                </Col>
+                <Col>{profilDetails.email}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Manager Name: </h3>
+                </Col>
+                <Col>{profilDetails.name}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Manager Poste: </h3>
+                </Col>
+                <Col>{profilDetails.poste}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Phone Number: </h3>
+                </Col>
+                <Col>{profilDetails.phoneNumber}</Col>
+              </Row>
+              <hr />
+              <Row><span style={{fontSize: '20px',textDecoration: 'underline'}} className="mb-2" >Questions Part:</span></Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">* Are you working with independent : </h3>
+                </Col>
+                <Col>{profilDetails.independent==="true"? "Yes": "No"}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">* You Like works with independent : </h3>
+                </Col>
+                <Col>{profilDetails.likeIndependent==="true"? "Yes": "No"}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title"> * You Like works with Remote consultant: </h3>
+                </Col>
+                <Col>{profilDetails.remoteConsultant==="true"? "Yes": "No"}</Col>
+              </Row>
+            </div>
+          </Fade>
+        </Modal>
       </Container>
     </>
   );

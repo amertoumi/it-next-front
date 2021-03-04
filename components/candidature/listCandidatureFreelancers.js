@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_HOST, API_PROFILS_PATH } from "../../API";
 import Button from "@material-ui/core/Button";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Header from "components/Headers/Header.js";
-
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
 // reactstrap components
 import {
   Badge,
@@ -17,16 +18,41 @@ import {
   Table,
   Container,
   Row,
+  Col,
 } from "reactstrap";
+
 // layout for this page
 import Admin from "layouts/Admin.js";
-import api from "../../pages/api";
+
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 // core components
 function Freelancers_Candidatures_List() {
   const [listCandidatures, setListCandidatures] = useState([]);
   const [profilDetails, setProfilDetails] = useState({});
-  const theme = useTheme();
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   //Update Profil status
   function handleProfilStatus(id) {
@@ -53,23 +79,22 @@ function Freelancers_Candidatures_List() {
       .then((response) => response.data["hydra:member"])
       .then((data) => setListCandidatures(data))
       .catch((error) => console.log(error.response));
-      //console.log(listCandidatures)
-      
+    //console.log(listCandidatures)
   }, []);
 
-// Get Freelancer By ID
- async function GetFreelancerById(id){
-     console.log(id);
-    var URL = API_HOST + API_PROFILS_PATH +'/'+id
+  // Get Freelancer By ID
+  async function GetFreelancerById(id) {
+    console.log(id);
+    var URL = API_HOST + API_PROFILS_PATH + "/" + id;
     try {
-        let dataProfil = await axios(URL)
+      dataProfil = await axios(URL)
         .then((response) => response.data)
-        console.log(dataProfil.email)
+        .then((data) => setProfilDetails(data))
+        .then(setOpen(true));
+    } catch (error) {
+      return error.message;
     }
-    catch (error){
-        return error.message;
-    }
-   }
+  }
 
   return (
     <>
@@ -142,7 +167,7 @@ function Freelancers_Candidatures_List() {
                             color="info"
                             onClick={() => GetFreelancerById(cv.id)}
                           >
-                             Details
+                            Details
                           </Button>
                           {String(cv.isActive) === "false" ? (
                             <Button
@@ -222,6 +247,104 @@ function Freelancers_Candidatures_List() {
             </Card>
           </div>
         </Row>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open} style={{ height: "80%", width: "500px" }}>
+            <div className={classes.paper}>
+              <h1 className="text-center">
+                {" "}
+                Candidature : {profilDetails.type}
+              </h1>
+              <hr />
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Name: </h3>
+                </Col>
+                <Col>{profilDetails.username}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Last Name: </h3>
+                </Col>
+                <Col>{profilDetails.lastname}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Phone Number: </h3>
+                </Col>
+                <Col>{profilDetails.phone}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Email: </h3>
+                </Col>
+                <Col>{profilDetails.email}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">country: </h3>
+                </Col>
+                <Col>{profilDetails.country}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">City: </h3>
+                </Col>
+                <Col>{profilDetails.city}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Address: </h3>
+                </Col>
+                <Col>{profilDetails.address}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Poste : </h3>
+                </Col>
+                <Col>{profilDetails.poste}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Experience Years : </h3>
+                </Col>
+                <Col>{profilDetails.nbrAnneeExp}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Daily Pricing : </h3>
+                </Col>
+                <Col>{profilDetails.tarif}</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Skills : </h3>
+                </Col>
+                <Col>
+                  { profilDetails.mySkills }
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">Skills : </h3>
+                </Col>
+                <Col>
+                  {profilDetails.otherSkills}{' '}
+                </Col>
+              </Row>
+            </div>
+          </Fade>
+        </Modal>
       </Container>
     </>
   );
