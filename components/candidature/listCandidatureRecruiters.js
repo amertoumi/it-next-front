@@ -24,7 +24,6 @@ import {
 // layout for this page
 import Admin from "layouts/Admin.js";
 
-
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
@@ -84,7 +83,6 @@ function Recruiters_Candidatures_List() {
 
   // Get Freelancer By ID
   async function GetFreelancerById(id) {
-    console.log(id);
     var URL = API_HOST + API_ENTREPRISES_PATH + "/" + id;
     try {
       dataProfil = await axios(URL)
@@ -114,7 +112,9 @@ function Recruiters_Candidatures_List() {
                     <th scope="col">Category</th>
                     <th scope="col">Manager Name</th>
                     <th scope="col">Status</th>
-                    <th scope="col" className="text-center">Action</th>
+                    <th scope="col" className="text-center">
+                      Action
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -303,24 +303,42 @@ function Recruiters_Candidatures_List() {
                 <Col>{profilDetails.phoneNumber}</Col>
               </Row>
               <hr />
-              <Row><span style={{fontSize: '20px',textDecoration: 'underline'}} className="mb-2" >Questions Part:</span></Row>
               <Row>
-                <Col>
-                  <h3 id="transition-modal-title">* Are you working with independent : </h3>
-                </Col>
-                <Col>{profilDetails.independent==="true"? "Yes": "No"}</Col>
+                <span
+                  style={{ fontSize: "20px", textDecoration: "underline" }}
+                  className="mb-2"
+                >
+                  Questions Part:
+                </span>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">* You Like works with independent : </h3>
+                  <h3 id="transition-modal-title">
+                    * Are you working with independent :{" "}
+                  </h3>
                 </Col>
-                <Col>{profilDetails.likeIndependent==="true"? "Yes": "No"}</Col>
+                <Col>{profilDetails.independent === "true" ? "Yes" : "No"}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title"> * You Like works with Remote consultant: </h3>
+                  <h3 id="transition-modal-title">
+                    * You Like works with independent :{" "}
+                  </h3>
                 </Col>
-                <Col>{profilDetails.remoteConsultant==="true"? "Yes": "No"}</Col>
+                <Col>
+                  {profilDetails.likeIndependent === "true" ? "Yes" : "No"}
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3 id="transition-modal-title">
+                    {" "}
+                    * You Like works with Remote consultant:{" "}
+                  </h3>
+                </Col>
+                <Col>
+                  {profilDetails.remoteConsultant === "true" ? "Yes" : "No"}
+                </Col>
               </Row>
             </div>
           </Fade>

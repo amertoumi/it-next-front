@@ -336,7 +336,7 @@ function Freelancers_Candidatures_List() {
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Skills : </h3>
+                  <h3 id="transition-modal-title">Other Skills : </h3>
                 </Col>
                 <Col>
                   {profilDetails.otherSkills}{' '}

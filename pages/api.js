@@ -139,7 +139,7 @@ let URL = API_HOST + API_SKILLS_PATH;
       .get(URL)
       .then((response) => response.data["hydra:member"])
       .then((data) => setSkills(data))
-      .catch((error) => console.log(error.response));
+      .catch((error) => error.response);
 
 export default {
   auth_api,
