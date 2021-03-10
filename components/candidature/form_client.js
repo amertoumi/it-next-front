@@ -87,7 +87,7 @@ export default function Client_Form() {
     };
     console.log(dataEntreprise);
     Api.CreateNewEntreprise(dataEntreprise);
-    //Api.CreateNewUser(dataUser);
+    Api.CreateNewUser(dataUser);
   }
 
   return (

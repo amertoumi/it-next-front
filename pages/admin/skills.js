@@ -23,7 +23,7 @@ function SkillsList() {
       .then((data) => setSkills(data))
       .catch((error) => console.log(error.response));
     
-  }, [skills]);
+  }, []);
 
   
   

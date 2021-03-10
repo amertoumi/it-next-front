@@ -7,12 +7,12 @@ import Button from "@material-ui/core/Button";
 import { Container, Row, Col } from "reactstrap";
 import { Input, Divider } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 export default function Inspirenaute_Form() {
-
   const [isActive, setIsActive] = React.useState(false);
-  const [type, setType] = React.useState("Freelancer");
+  const [category, setCategory] = React.useState("Freelancer");
+  const [type, setType] = React.useState("cv");
   const [name, setName] = React.useState("");
   const [lastname, setLastName] = React.useState("");
   const [username, setUserName] = React.useState("");
@@ -28,8 +28,9 @@ export default function Inspirenaute_Form() {
   const [tarif, setTarif] = React.useState("");
   const [nbrAnneeExp, setNbrAnneeExp] = React.useState();
   const [listSkills, setSkills] = React.useState([]);
+  const [selectedFile, setSelectedFile] = React.useState(null);
   const [error, setError] = React.useState("");
-  
+
   // get list of skills
   React.useEffect(() => {
     let URL = API_HOST + API_SKILLS_PATH;
@@ -44,9 +45,9 @@ export default function Inspirenaute_Form() {
   function handleSubmit(event) {
     event.preventDefault();
     const dataUser = { username, email, password, isActive };
-    const dataProfil = {   
+    const dataProfil = {
       isActive,
-      type,
+      category,
       username,
       email,
       name,
@@ -66,19 +67,56 @@ export default function Inspirenaute_Form() {
     Api.CreateNewUser(dataUser);
   }
 
+  function handleSubmission() {
+    var formdata = new FormData();
+    formdata.append("File", selectedFile);
+    formdata.append("type", "cv");
+    //formdata.append("isActive",  false);
+    formdata.append("username", name);
+    formdata.append("lastname", lastname);
+    formdata.append("name", name);
+    formdata.append("email", email);
+    formdata.append("password", password);
+    formdata.append("phone", phone);
+    formdata.append("country", country);
+    formdata.append("city", city);
+    formdata.append("address", address);
+    formdata.append("poste", poste);
+    formdata.append("nbr_annee_exp", nbrAnneeExp);
+    formdata.append("tarif", tarif);
+    formdata.append("category", category);
+    //formdata.append("mySkills", mySkills);
+    formdata.append("otherSkills", otherSkills);
+
+    var requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+
+    if (selectedFile) {
+      fetch("http://localhost:8000/api/file/manager", requestOptions)
+        .then((response) => response)
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
+    } else {
+      console.log("Please select a file");
+    }
+  }
+
   return (
     <Container>
       <h1 className="text-center mt-5 mb-3">Inscription Inspirnaute</h1>
       <form
-        
         noValidate
         autoComplete="off"
-        onSubmit={handleSubmit}
+        /* onSubmit={handleSubmit}*/
+        onSubmit={handleSubmission}
       >
         <Row>
           <h2>User Account</h2>
         </Row>
-        <Divider variant="middle" className="mb-2"/>
+        <Divider variant="middle" className="mb-2" />
         <Row>
           <Col>
             <TextField
@@ -86,7 +124,7 @@ export default function Inspirenaute_Form() {
               label="Username"
               type="search"
               value={username}
-              required 
+              required
               onInput={(e) => setUserName(e.target.value)}
             />
           </Col>
@@ -106,7 +144,7 @@ export default function Inspirenaute_Form() {
               label="Password"
               type="password"
               value={password}
-              required 
+              required
               onInput={(e) => setPassword(e.target.value)}
             />
           </Col>
@@ -115,20 +153,11 @@ export default function Inspirenaute_Form() {
         <Row>
           <h2 className="mt-4">Personal Informations</h2>
         </Row>
-        <Divider variant="middle" className="mb-2"/>
+        <Divider variant="middle" className="mb-2" />
         <Row>
-          <input
-            id="isActive"
-            type="hidden"
-            value={isActive}
-            onInput={(e) => setIsActive()}
-          />
-          <input
-            id="type"
-            type="hidden"
-            value={type}
-            onInput={(e) => setType()}
-          />
+          <input id="isActive" type="hidden" value={isActive} />
+          <input id="category" type="hidden" value={category} />
+          <input id="type" type="hidden" value={type} />
           <Col>
             <TextField
               id="name"
@@ -189,9 +218,9 @@ export default function Inspirenaute_Form() {
         <Row>
           <h2 className="mt-4">Skills</h2>
         </Row>
-        <Divider variant="middle" className="mb-2"/>
+        <Divider variant="middle" className="mb-2" />
         <Row>
-        <Col>
+          <Col>
             <TextField
               id="poste"
               label="Poste"
@@ -220,23 +249,22 @@ export default function Inspirenaute_Form() {
           </Col>
         </Row>
         <Row>
-        <Col>
+          <Col>
             <Autocomplete
-              
               multiple
               id="mySkills"
               size="small"
               options={listSkills.map((option) => option.name)}
               onChange={(e, value) => setMySkills(value)}
               renderInput={(params) => (
-                <TextField 
-                  {...params} 
-                  variant="standard" 
+                <TextField
+                  {...params}
+                  variant="standard"
                   id="mySkills"
                   label="My Skills"
                   placeholder="Favorites"
                   value={mySkills}
-                  />
+                />
               )}
             />
           </Col>
@@ -250,15 +278,20 @@ export default function Inspirenaute_Form() {
             />
           </Col>
           <Col>
-          <Button className="mt-3" component="label">
-            <span className="mr-3">CV</span>
-            <Input
-              type="file"
-              inputProps={{
+            <Button className="mt-3" component="label">
+              <span className="mr-3">CV</span>
+              <input
+                type="file"
+                name="file"
+                id="file"
+                /* inputProps={{
                 accept: "application/pdf,application/vnd.ms-excel",
-              }}
-            />
-          </Button>
+              }} */
+                onChange={(e) => {
+                  setSelectedFile(e.target.files[0]);
+                }}
+              />
+            </Button>
           </Col>
         </Row>
         <Row>

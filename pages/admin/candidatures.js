@@ -93,23 +93,6 @@ function Candidatures_List() {
     exit: theme.transitions.duration.leavingScreen,
   };
 
-  //Update Profil status
-  function handleProfilStatus(id) {
-    const newcv = listCandidatures.map((cv) => {
-      if (cv.id === id) {
-        const updatedItem = {
-          ...cv,
-          isActive: !cv.isActive,
-        };
-
-        return updatedItem;
-      }
-
-      return cv;
-    });
-
-    setListCandidatures(newcv);
-  }
 
   //List table of Pending Candidature
   useEffect(() => {

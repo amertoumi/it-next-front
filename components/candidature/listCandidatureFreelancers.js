@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_HOST, API_PROFILS_PATH } from "../../API";
+import Api from "../../pages/api";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
@@ -23,7 +24,6 @@ import {
 
 // layout for this page
 import Admin from "layouts/Admin.js";
-
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -69,6 +69,12 @@ function Freelancers_Candidatures_List() {
     });
 
     setListCandidatures(newcv);
+  }
+
+  //Update Profil status
+  function handleAcceptCandidat(id) {
+    console.log(id)
+    Api.ActivateUser(id);
   }
 
   //List table of Pending Candidature
@@ -118,9 +124,10 @@ function Freelancers_Candidatures_List() {
                   </tr>
                 </thead>
                 <tbody>
+                  {/* {console.log(listCandidatures[0].isActive._store.validated)} */}
                   {listCandidatures.map((cv, indx) => {
                     return (
-                      <tr key={indx}>
+                      <tr key={cv.id}>
                         <td>
                           <span className="mb-0 text-sm text-center">
                             {cv.username}
@@ -140,15 +147,16 @@ function Freelancers_Candidatures_List() {
                         </td>
                         <td>
                           <span className="mb-0 text-sm text-center">
-                            {String(cv.isActive) === "false" ? (
-                              <Badge color="" className="badge-dot mr-4">
-                                <i className="bg-warning" />
-                                Pending
-                              </Badge>
-                            ) : (
+                            {/* {console.log(cv.isActive._store)} */}
+                            {cv.isActive ? (
                               <Badge color="" className="badge-dot">
                                 <i className="bg-success" />
                                 Accepted
+                              </Badge>
+                            ) : (
+                              <Badge color="" className="badge-dot mr-4">
+                                <i className="bg-warning" />
+                                Pending
                               </Badge>
                             )}
                           </span>
@@ -169,21 +177,27 @@ function Freelancers_Candidatures_List() {
                           >
                             Details
                           </Button>
-                          {String(cv.isActive) === "false" ? (
+                          {cv.isActive ? (
                             <Button
                               variant="contained"
-                              color="primary"
-                              onClick={() => handleProfilStatus(cv.id)}
+                              color="secondary"
+                              onClick={() => {
+                                handleProfilStatus(cv.id),
+                                  handleAcceptCandidat(cv.id);
+                              }}
                             >
-                              Accept
+                              Refuse
                             </Button>
                           ) : (
                             <Button
                               variant="contained"
-                              color="secondary"
-                              onClick={() => handleProfilStatus(cv.id)}
+                              color="primary"
+                              onClick={() => {
+                                handleProfilStatus(cv.id),
+                                  handleAcceptCandidat(cv.id);
+                              }}
                             >
-                              Refuse
+                              Accept
                             </Button>
                           )}
                         </td>
@@ -330,17 +344,13 @@ function Freelancers_Candidatures_List() {
                 <Col>
                   <h3 id="transition-modal-title">Skills : </h3>
                 </Col>
-                <Col>
-                  { profilDetails.mySkills }
-                </Col>
+                <Col>{profilDetails.mySkills}</Col>
               </Row>
               <Row>
                 <Col>
                   <h3 id="transition-modal-title">Other Skills : </h3>
                 </Col>
-                <Col>
-                  {profilDetails.otherSkills}{' '}
-                </Col>
+                <Col>{profilDetails.otherSkills} </Col>
               </Row>
             </div>
           </Fade>

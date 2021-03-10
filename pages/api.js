@@ -6,7 +6,8 @@ import {
   API_TYPE_SKILLS_PATH,
   API_USERS_PATH,
   API_PROFILS_PATH,
-  API_ENTREPRISES_PATH
+  API_ENTREPRISES_PATH,
+  API_ACTIVATE_USER_PATH
 } from "../API";
 import Router from 'next/router';
 
@@ -133,6 +134,16 @@ function GetFreelancerById(id) {
   .then((response) => response.data);
   
 }
+function ActivateUser(id) {
+  var URL = API_HOST + API_ACTIVATE_USER_PATH +'/'+id
+  var config = {
+    method: 'get',
+    url: URL,
+    headers: { }
+  };
+  axios(config)
+  .then(console.log("user Accepted"));
+}
 
 let URL = API_HOST + API_SKILLS_PATH;
       axios
@@ -150,5 +161,6 @@ export default {
   CreateNewProfil,
   CreateNewUser,
   CreateNewEntreprise,
-  GetFreelancerById
+  GetFreelancerById,
+  ActivateUser
 };

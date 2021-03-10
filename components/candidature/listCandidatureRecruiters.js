@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_HOST, API_ENTREPRISES_PATH } from "../../API";
+import Api from "../../pages/api";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
@@ -70,6 +71,11 @@ function Recruiters_Candidatures_List() {
     setListCandidatures(newcv);
   }
 
+  //Update Entreprise status
+  function handleAcceptCandidat(id) {
+    Api.ActivateUser(id);
+  }
+
   //List table of Pending Candidature
   useEffect(() => {
     let URL = API_HOST + API_ENTREPRISES_PATH;
@@ -120,7 +126,7 @@ function Recruiters_Candidatures_List() {
                 <tbody>
                   {listCandidatures.map((cv, indx) => {
                     return (
-                      <tr key={indx}>
+                      <tr key={cv.id}>
                         <td>
                           <span className="mb-0 text-sm text-center">
                             {cv.username}
@@ -146,15 +152,15 @@ function Recruiters_Candidatures_List() {
                         </td>
                         <td>
                           <span className="mb-0 text-sm text-center">
-                            {String(cv.isActive) === "false" ? (
-                              <Badge color="" className="badge-dot mr-4">
-                                <i className="bg-warning" />
-                                Pending
-                              </Badge>
-                            ) : (
+                            {cv.isActive ? (
                               <Badge color="" className="badge-dot">
                                 <i className="bg-success" />
                                 Accepted
+                              </Badge>
+                            ) : (
+                              <Badge color="" className="badge-dot mr-4">
+                                <i className="bg-warning" />
+                                Pending
                               </Badge>
                             )}
                           </span>
@@ -169,21 +175,27 @@ function Recruiters_Candidatures_List() {
                           >
                             Details
                           </Button>
-                          {String(cv.isActive) === "false" ? (
+                          {cv.isActive ? (
                             <Button
                               variant="contained"
-                              color="primary"
-                              onClick={() => handleProfilStatus(cv.id)}
+                              color="secondary"
+                              onClick={() => {
+                                handleProfilStatus(cv.id),
+                                  handleAcceptCandidat(cv.id);
+                              }}
                             >
-                              Accept
+                              Refuse
                             </Button>
                           ) : (
                             <Button
                               variant="contained"
-                              color="secondary"
-                              onClick={() => handleProfilStatus(cv.id)}
+                              color="primary"
+                              onClick={() => {
+                                handleProfilStatus(cv.id),
+                                  handleAcceptCandidat(cv.id);
+                              }}
                             >
-                              Refuse
+                              Accept
                             </Button>
                           )}
                         </td>
