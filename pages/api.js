@@ -142,7 +142,7 @@ function ActivateUser(id) {
     headers: { }
   };
   axios(config)
-  .then(console.log("user Accepted"));
+  .then((response)=> response);
 }
 
 let URL = API_HOST + API_SKILLS_PATH;

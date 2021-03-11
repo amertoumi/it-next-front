@@ -9,3 +9,4 @@ export const API_TYPE_SKILLS_PATH = '/api/type_skills';
 export const API_PROFILS_PATH = '/api/profils' ;
 export const API_ENTREPRISES_PATH = '/api/entreprises' ;
 export const API_ACTIVATE_USER_PATH = '/api/user/activate' ;
+export const API_LIST_PROFILS_PATH = '/api/user/listbyprofil' ;

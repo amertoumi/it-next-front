@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_HOST, API_PROFILS_PATH } from "../../API";
+import { API_HOST, API_PROFILS_PATH, API_LIST_PROFILS_PATH } from "../../API";
 import Api from "../../pages/api";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -57,7 +57,7 @@ function Freelancers_Candidatures_List() {
   //Update Profil status
   function handleProfilStatus(id) {
     const newcv = listCandidatures.map((cv) => {
-      if (cv.id === id) {
+      if (cv.userId === id) {
         const updatedItem = {
           ...cv,
           isActive: !cv.isActive,
@@ -73,24 +73,21 @@ function Freelancers_Candidatures_List() {
 
   //Update Profil status
   function handleAcceptCandidat(id) {
-    console.log(id)
     Api.ActivateUser(id);
   }
 
   //List table of Pending Candidature
   useEffect(() => {
-    let URL = API_HOST + API_PROFILS_PATH;
+    let URL = API_HOST + API_LIST_PROFILS_PATH;
     axios
       .get(URL)
-      .then((response) => response.data["hydra:member"])
-      .then((data) => setListCandidatures(data))
+      .then((response) => response.data)
+      .then((response) => setListCandidatures(response))
       .catch((error) => console.log(error.response));
-    //console.log(listCandidatures)
   }, []);
 
   // Get Freelancer By ID
   async function GetFreelancerById(id) {
-    console.log(id);
     var URL = API_HOST + API_PROFILS_PATH + "/" + id;
     try {
       dataProfil = await axios(URL)
@@ -105,7 +102,6 @@ function Freelancers_Candidatures_List() {
   return (
     <>
       <Container className="mt-3" fluid>
-        {/* Table */}
         <Row>
           <div className="col">
             <Card className="shadow">
@@ -117,14 +113,12 @@ function Freelancers_Candidatures_List() {
                   <tr>
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Category</th>
+                    <th scope="col">Poste</th>
                     <th scope="col">Status</th>
-                    <th scope="col">CV Attachment</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" className="text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {console.log(listCandidatures[0].isActive._store.validated)} */}
                   {listCandidatures.map((cv, indx) => {
                     return (
                       <tr key={cv.id}>
@@ -142,12 +136,11 @@ function Freelancers_Candidatures_List() {
                         <td>
                           {" "}
                           <span className="mb-0 text-sm text-center">
-                            {cv.type}
+                            {cv.poste}
                           </span>
                         </td>
                         <td>
                           <span className="mb-0 text-sm text-center">
-                            {/* {console.log(cv.isActive._store)} */}
                             {cv.isActive ? (
                               <Badge color="" className="badge-dot">
                                 <i className="bg-success" />
@@ -162,18 +155,12 @@ function Freelancers_Candidatures_List() {
                           </span>
                         </td>
                         <td>
-                          {" "}
-                          <span className="mb-0 text-sm text-center">
-                            {cv.name}
-                          </span>
-                        </td>
-                        <td>
                           <Button
                             className="mr-3"
                             variant="info"
                             variant="contained"
                             color="info"
-                            onClick={() => GetFreelancerById(cv.id)}
+                            onClick={() => GetFreelancerById(cv.profilId)}
                           >
                             Details
                           </Button>
@@ -182,8 +169,8 @@ function Freelancers_Candidatures_List() {
                               variant="contained"
                               color="secondary"
                               onClick={() => {
-                                handleProfilStatus(cv.id),
-                                  handleAcceptCandidat(cv.id);
+                                handleAcceptCandidat(cv.userId),
+                                  handleProfilStatus(cv.userId);
                               }}
                             >
                               Refuse
@@ -193,8 +180,8 @@ function Freelancers_Candidatures_List() {
                               variant="contained"
                               color="primary"
                               onClick={() => {
-                                handleProfilStatus(cv.id),
-                                  handleAcceptCandidat(cv.id);
+                                handleAcceptCandidat(cv.userId),
+                                  handleProfilStatus(cv.userId);
                               }}
                             >
                               Accept
