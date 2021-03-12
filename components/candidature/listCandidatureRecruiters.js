@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_HOST, API_ENTREPRISES_PATH } from "../../API";
+import { API_HOST, API_ENTREPRISES_PATH, API_LIST_ENTREPRISES_PATH } from "../../API";
 import Api from "../../pages/api";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -57,7 +57,7 @@ function Recruiters_Candidatures_List() {
   //Update Profil status
   function handleProfilStatus(id) {
     const newcv = listCandidatures.map((cv) => {
-      if (cv.id === id) {
+      if (cv.userId === id) {
         const updatedItem = {
           ...cv,
           isActive: !cv.isActive,
@@ -78,10 +78,10 @@ function Recruiters_Candidatures_List() {
 
   //List table of Pending Candidature
   useEffect(() => {
-    let URL = API_HOST + API_ENTREPRISES_PATH;
+    let URL = API_HOST + API_LIST_ENTREPRISES_PATH;
     axios
       .get(URL)
-      .then((response) => response.data["hydra:member"])
+      .then((response) => response.data)
       .then((data) => setListCandidatures(data))
       .catch((error) => console.log(error.response));
     //console.log(listCandidatures)
@@ -115,8 +115,8 @@ function Recruiters_Candidatures_List() {
                   <tr>
                     <th scope="col">Campany Name</th>
                     <th scope="col">Professional Email</th>
-                    <th scope="col">Category</th>
                     <th scope="col">Manager Name</th>
+                    <th scope="col">Manager Poste</th>
                     <th scope="col">Status</th>
                     <th scope="col" className="text-center">
                       Action
@@ -141,13 +141,13 @@ function Recruiters_Candidatures_List() {
                         <td>
                           {" "}
                           <span className="mb-0 text-sm text-center">
-                            {cv.type}
+                            {cv.name}
                           </span>
                         </td>
                         <td>
                           {" "}
                           <span className="mb-0 text-sm text-center">
-                            {cv.name}
+                            {cv.poste}
                           </span>
                         </td>
                         <td>
@@ -175,13 +175,14 @@ function Recruiters_Candidatures_List() {
                           >
                             Details
                           </Button>
+                          {console.log(cv)}
                           {cv.isActive ? (
                             <Button
                               variant="contained"
                               color="secondary"
                               onClick={() => {
-                                handleProfilStatus(cv.id),
-                                  handleAcceptCandidat(cv.id);
+                                handleProfilStatus(cv.userId),
+                                handleAcceptCandidat(cv.userId);
                               }}
                             >
                               Refuse
@@ -191,8 +192,8 @@ function Recruiters_Candidatures_List() {
                               variant="contained"
                               color="primary"
                               onClick={() => {
-                                handleProfilStatus(cv.id),
-                                  handleAcceptCandidat(cv.id);
+                                handleProfilStatus(cv.userId),
+                                handleAcceptCandidat(cv.userId);
                               }}
                             >
                               Accept

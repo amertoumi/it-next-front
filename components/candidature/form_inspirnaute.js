@@ -42,7 +42,7 @@ export default function Inspirenaute_Form() {
       .catch((error) => console.log(error.response));
   }, []);
 
-  function handleSubmit(event) {
+/*   function handleSubmit(event) {
     event.preventDefault();
     const dataUser = { username, email, password, isActive };
     const dataProfil = {
@@ -65,7 +65,7 @@ export default function Inspirenaute_Form() {
 
     Api.CreateNewProfil(dataProfil);
     Api.CreateNewUser(dataUser);
-  }
+  } */
 
   function handleSubmission() {
     var formdata = new FormData();

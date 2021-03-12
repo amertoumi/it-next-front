@@ -7,6 +7,9 @@ export const API_USERS_PATH = '/api/users';
 export const API_TYPE_MISSION_PATH = '/api/type_missions';
 export const API_TYPE_SKILLS_PATH = '/api/type_skills';
 export const API_PROFILS_PATH = '/api/profils' ;
-export const API_ENTREPRISES_PATH = '/api/entreprises' ;
+export const API_ENTREPRISES_PATH = '/api/entreprises';
+export const API_CREATE_ENTREPRISE_PATH = '/api/create/entreprise';
 export const API_ACTIVATE_USER_PATH = '/api/user/activate' ;
-export const API_LIST_PROFILS_PATH = '/api/user/listbyprofil' ;
+export const API_LIST_PROFILS_PATH = '/api/user/listbyprofil';
+export const API_LIST_ENTREPRISES_PATH = '/api/entreprises/details';
+

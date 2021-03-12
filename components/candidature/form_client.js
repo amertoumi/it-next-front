@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Container, Row, Col } from "reactstrap";
 import Icon from "@material-ui/core/Icon";
-import Api from "../../pages/api";
+import {API_HOST, API_CREATE_ENTREPRISE_PATH} from "../../API";
 import {
   Divider,
   FormControl,
@@ -16,11 +16,9 @@ import {
 } from "@material-ui/core";
 
 export default function Client_Form() {
-  const [isActive, setIsActive] = React.useState(false);
-  const [type, setType] = React.useState("Recruteur");
-  const [name, setName] = React.useState("");
+  const [managerName, setManagerName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
-  const [username, setUserName] = React.useState("");
+  const [entrepriseName, setentrepriseName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [country, setCountry] = React.useState("");
@@ -61,19 +59,16 @@ export default function Client_Form() {
   const handle__Embauche_Ing = (event) => {
     setHireIng(event.target.value);
   };
-
+/* 
   function handleSubmit(event) {
     event.preventDefault();
-    const dataUser = { username, email, password, isActive };
+    const dataUser = { entrepriseName, email, password, isActive };
     const dataEntreprise = {
       isActive,
       type,
-      username,
-      email,
-      name,
-      lastName,
-      country,
-      domain,
+      entrepriseName,managerName
+managerName
+managerName
       phoneNumber,
       poste,
       recruitEmployee,
@@ -88,24 +83,52 @@ export default function Client_Form() {
     console.log(dataEntreprise);
     Api.CreateNewEntreprise(dataEntreprise);
     Api.CreateNewUser(dataUser);
-  }
+  } */
 
+  function handleSubmission() { 
+    var formdata = new FormData();
+
+    formdata.append("managerName", managerName);
+    formdata.append("userName", entrepriseName);
+    formdata.append("email", email);
+    formdata.append("lastName", lastName);
+    formdata.append("phoneNumber", phoneNumber);
+    formdata.append("domain", domain);
+    formdata.append("password", password);
+    formdata.append("poste", poste);
+    formdata.append("country", country);
+    formdata.append("recruitEmployee", recruitEmployee);
+    formdata.append("independent", independent);
+    formdata.append("likeIndependent", likeIndependent);
+    formdata.append("remoteConsultant", remoteConsultant);
+    formdata.append("expandTeam", expandTeam);
+    formdata.append("newProject", newProject);
+    formdata.append("selfEmployed", selfEmployed);
+    formdata.append("hireIng", hireIng);
+    
+    var urlApi= API_HOST+API_CREATE_ENTREPRISE_PATH
+    var requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+      
+    };
+//    if(formdata){
+      fetch(urlApi, requestOptions)
+      .then((response) => response)
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+/*    }
+     else {
+      console.log((error=>console.log(error)));
+    } */
+      
+   
+  }
   return (
     <Container>
       <h1 className="text-center mt-5 mb-3">Inscription Recruteur</h1>
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-        <input
-          id="isActive"
-          type="hidden"
-          value={isActive}
-          onInput={(e) => setIsActive()}
-        />
-        <input
-          id="type"
-          type="hidden"
-          value={type}
-          onInput={(e) => setType()}
-        />
+      <form noValidate autoComplete="off" onSubmit={handleSubmission}>
         <Row>
           <h2>User Account</h2>
         </Row>
@@ -113,12 +136,12 @@ export default function Client_Form() {
         <Row>
           <Col>
             <TextField
-              id="username"
+              id="entrepriseName"
               label="Entreprise Name"
               type="search"
-              value={username}
+              value={entrepriseName}
               required
-              onInput={(e) => setUserName(e.target.value)}
+              onInput={(e) => setentrepriseName(e.target.value)}
             />
           </Col>
           <Col>
@@ -153,8 +176,8 @@ export default function Client_Form() {
               id="name"
               label="Name"
               type="search"
-              value={name}
-              onInput={(e) => setName(e.target.value)}
+              value={managerName}
+              onInput={(e) => setManagerName(e.target.value)}
             />
           </Col>
           <Col>

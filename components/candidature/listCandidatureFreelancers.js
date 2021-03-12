@@ -76,6 +76,8 @@ function Freelancers_Candidatures_List() {
     Api.ActivateUser(id);
   }
 
+
+
   //List table of Pending Candidature
   useEffect(() => {
     let URL = API_HOST + API_LIST_PROFILS_PATH;
@@ -141,6 +143,7 @@ function Freelancers_Candidatures_List() {
                         </td>
                         <td>
                           <span className="mb-0 text-sm text-center">
+                          {console.log(cv)}
                             {cv.isActive ? (
                               <Badge color="" className="badge-dot">
                                 <i className="bg-success" />
@@ -170,7 +173,7 @@ function Freelancers_Candidatures_List() {
                               color="secondary"
                               onClick={() => {
                                 handleAcceptCandidat(cv.userId),
-                                  handleProfilStatus(cv.userId);
+                                handleProfilStatus(cv.userId);
                               }}
                             >
                               Refuse
@@ -181,7 +184,7 @@ function Freelancers_Candidatures_List() {
                               color="primary"
                               onClick={() => {
                                 handleAcceptCandidat(cv.userId),
-                                  handleProfilStatus(cv.userId);
+                                handleProfilStatus(cv.userId);
                               }}
                             >
                               Accept
