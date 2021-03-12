@@ -1,13 +1,10 @@
-import React from 'react';
-import { I18nextProvider } from "react-i18next";
-import "antd/dist/antd.css";
-import Router from "../components/landingPage/router/index";
-import i18n from "../components/landingPage/translation.js";
+import dynamic from 'next/dynamic'
 
-const home = () => {
+const HomePage = dynamic(() => import('../components/landingPage/src/index'))
+
+export default function HOME() {
   return (
-    <h1>home page</h1>
-  );
+    <HomePage />
+);
 };
 
-export default home;
