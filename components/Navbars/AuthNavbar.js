@@ -13,12 +13,12 @@ import {
   Col,
 } from "reactstrap";
 
-function AdminNavbar() {
+function AuthNavbar() {
   return (
     <>
-      <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
+      <Navbar className="navbar-top navbar-horizontal navbar-dark bg-dark" expand="md">
         <Container className="px-4">
-          <Link href="/admin/dashboard">
+          <Link href="/home">
             <span>
               <NavbarBrand href="#pablo">
                 <img
@@ -60,7 +60,7 @@ function AdminNavbar() {
                 </Link>
               </NavItem> */}
               <NavItem>
-                <Link href="/auth/register">
+                <Link href="/inscription">
                   <NavLink href="#pablo" className="nav-link-icon">
                     <i className="ni ni-circle-08" />
                     <span className="nav-link-inner--text">Register</span>
@@ -91,4 +91,4 @@ function AdminNavbar() {
   );
 }
 
-export default AdminNavbar;
+export default AuthNavbar;

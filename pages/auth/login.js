@@ -23,18 +23,18 @@ function Login() {
   const [error, setError] = React.useState("");
   const [is_auth, setIs_auth] = React.useState(false);
   const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = async(data, event) => {
+  const onSubmit = async (data, event) => {
     event.preventDefault();
-    
+
     try {
       await api.auth_api(data);
       setError("");
       setIs_auth(true);
-      
-    } 
-    catch(error) {
+
+    }
+    catch (error) {
       setError(
-          "informations is invalid"
+        "informations is invalid"
       );
       setIs_auth(false);
     }
@@ -43,14 +43,15 @@ function Login() {
 
   return (
     <>
-      <Col lg="5" md="7">
-        <Card className="bg-secondary shadow border-0">
-          <CardHeader className="bg-transparent pb-5">
+      <Col className="mt-5">
+        <Card className="shadow border-0  pt-5 pb-3">
+          <CardHeader className="bg-transparent">
+            <div className="text-center text-muted mb-4">
+              <h4> You are Welcome</h4>
+              <h4> Login</h4>
+            </div>
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
-            <div className="text-center text-muted mb-4">
-              <small> Sign in with credentials</small>
-            </div>
             <form role="form" onSubmit={handleSubmit(onSubmit)}>
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
@@ -103,7 +104,7 @@ function Login() {
               </FormGroup>
               <div className="custom-control custom-control-alternative custom-checkbox">
                 <input
-                  className="custom-control-input"
+                  className="custom-control-input "
                   id=" customCheckLogin"
                   type="checkbox"
                 />
@@ -115,7 +116,7 @@ function Login() {
                 </label>
               </div>
               <div className="text-center">
-                <button className="my-4" color="primary" type="submit">
+                <button className="my-4" class="btn btn-success" type="submit">
                   Sign in
                 </button>
               </div>
@@ -138,7 +139,7 @@ function Login() {
               href="#pablo"
               onClick={(e) => e.preventDefault()}
             >
-              <small>Create new account</small>
+              {/* <small>Create new account</small> */}
             </a>
           </Col>
         </Row>

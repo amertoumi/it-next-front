@@ -18,42 +18,42 @@ function Auth(props) {
   }, []);
   return (
     <>
-      <div className="main-content">
-        <AuthNavbar />
-        <div className="header bg-gradient-info py-7 py-lg-8">
-          <Container>
-            <div className="header-body text-center mb-7">
-              <Row className="justify-content-center">
-                <Col lg="5" md="6">
+      <AuthNavbar />
+      <Container>
+        <Row className="d-flex justify-content-between" >
+          <Col className="col-lg-6 mt-7">
+            <div className="header bg-gradient-info py-7 py-lg-8">
+
+              <div className="header-body text-center mb-4">
+                <div className="justify-content-center">
+
                   <h1 className="text-white">Welcome on Inspire Talent Platform !</h1>
-                  <p className="text-lead text-light">
-                    Use these awesome forms to login or create new account.
-                  </p>
-                </Col>
-              </Row>
+
+                </div>
+              </div>
+
+              <div className="separator separator-bottom separator-skew zindex-100">
+                <svg
+                  xmlns="#"
+                  preserveAspectRatio="none"
+                  version="1.1"
+                  viewBox="0 0 2560 100"
+                  x="0"
+                  y="0"
+                >
+                  <polygon
+                    className="fill-default"
+                    points="2560 0 2560 100 0 100"
+                  />
+                </svg>
+              </div>
             </div>
-          </Container>
-          <div className="separator separator-bottom separator-skew zindex-100">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="none"
-              version="1.1"
-              viewBox="0 0 2560 100"
-              x="0"
-              y="0"
-            >
-              <polygon
-                className="fill-default"
-                points="2560 0 2560 100 0 100"
-              />
-            </svg>
-          </div>
-        </div>
-        {/* Page content */}
-        <Container className="mt--8 pb-5">
-          <Row className="justify-content-center">{props.children}</Row>
+          </Col >
+          <Col >
+            {props.children}
+          </Col>
+        </Row>
         </Container>
-      </div>
       <AuthFooter />
     </>
   );

@@ -16,7 +16,8 @@ export default function PageChange(props) {
           />
         </div>
         <h4 className="title text-white">
-          Loading page contents for: {props.path}
+        Loading...
+         {/* Loading page contents for:  {props.path} */}
         </h4>
       </div>
     </div>
