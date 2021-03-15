@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Api from '../../pages/api';
+import Api from "../../pages/api";
 
 // reactstrap components
 import {
@@ -18,7 +18,7 @@ import {
   Nav,
   Container,
   Media,
-  Button
+  Button,
 } from "reactstrap";
 
 function AdminNavbar({ brandText }) {
@@ -60,9 +60,6 @@ function AdminNavbar({ brandText }) {
                   </Media>
                 </Media>
               </DropdownToggle>
-             {/*  <Button
-              onClick={()=>Api.logout()}
-              >Logout</Button> */}
               <DropdownMenu className="dropdown-menu-arrow" right>
                 <DropdownItem className="noti-title" header tag="div">
                   <h6 className="text-overflow m-0">Welcome!</h6>
@@ -94,7 +91,9 @@ function AdminNavbar({ brandText }) {
                 <DropdownItem divider />
                 <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                   <i className="ni ni-user-run" />
-                  <span>Logout</span>
+                  <span>
+                    <Button onClick={() => Api.logout()}>Logout</Button>
+                  </span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

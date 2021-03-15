@@ -88,10 +88,10 @@ function Candidatures_List() {
     setValue(index);
   };
 
-  const transitionDuration = {
+/*   const transitionDuration = {
     enter: theme.transitions.duration.enteringScreen,
     exit: theme.transitions.duration.leavingScreen,
-  };
+  }; */
 
 
   //List table of Pending Candidature

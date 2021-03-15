@@ -10,6 +10,7 @@ import {
   API_ACTIVATE_USER_PATH
 } from "../API";
 import Router from 'next/router';
+import jwtDecode from 'jwt-decode';
 
 //Login
 function auth_api(data) {
@@ -22,9 +23,19 @@ function auth_api(data) {
       window.localStorage.setItem("authToken", token);
       // Prévient axios qu'on a un header par défault sur toutes les futures requettes http
       axios.defaults.headers["Authorization"] = "Bearer  " + token;
-      Router.push('/admin/dashboard');
+      
+      const {roles: role} = jwtDecode(token)
+      //console.log(jwtDecode(token))
+       if(role[0] === "ROLE_USER" ){
+        Router.push('/user/panel');
+      }
+      else Router.push('/admin/dashboard')
+         
+      //console.log(jwtDecode(token))
       return true;
+      
     });
+    
 }
 
 //Logout
@@ -33,6 +44,7 @@ function logout() {
   //remove Token from localStorage
   window.localStorage.removeItem("authToken");
   delete axios.defaults.headers["Authorization"];
+  Router.push('/home');
 }
 
 // Create New skill

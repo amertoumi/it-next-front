@@ -8,7 +8,9 @@ import "assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/nextjs-argon-dashboard.scss";
 import 'bootstrap-css-only/css/bootstrap.min.css';
+import AuthAPI from '../services/authApi';
 
+//AuthAPI.setup();
 
 Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
@@ -28,7 +30,13 @@ Router.events.on("routeChangeError", () => {
 });
 
 export default class MyApp extends App {
+  
+  // first of all verif connexion
+/*   componentDidMount() {
+    AuthAPI.setup();
+  } */
     componentDidMount() {
+    AuthAPI.setup();
     let comment = document.createComment('Platform Loading...');
     document.insertBefore(comment, document.documentElement);
   } 
@@ -61,7 +69,7 @@ export default class MyApp extends App {
         </Head>
         <Layout>
             <Component {...pageProps} />
-          </Layout>    
+        </Layout>    
       </React.Fragment>
     );
   }

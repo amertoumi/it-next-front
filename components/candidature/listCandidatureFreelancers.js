@@ -143,7 +143,6 @@ function Freelancers_Candidatures_List() {
                         </td>
                         <td>
                           <span className="mb-0 text-sm text-center">
-                          {console.log(cv)}
                             {cv.isActive ? (
                               <Badge color="" className="badge-dot">
                                 <i className="bg-success" />
