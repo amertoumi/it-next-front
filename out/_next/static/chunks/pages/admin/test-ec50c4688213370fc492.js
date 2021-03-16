@@ -1,1 +1,0 @@
-_N_E=(window.webpackJsonp_N_E=window.webpackJsonp_N_E||[]).push([[22],{"/87M":function(n,t,o){"use strict";o.r(t);var i=o("nKUr"),_=o("i6E2"),e=function(n){return Object(i.jsx)("h1",{children:"test component"})};e.layout=_.a,t.default=e},fas1:function(n,t,o){(window.__NEXT_P=window.__NEXT_P||[]).push(["/admin/test",function(){return o("/87M")}])}},[["fas1",2,1,0,4,3,5]]]);

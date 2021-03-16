@@ -30,17 +30,12 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/test",
-    name: "Test",
-    icon: "ni ni-circle-08 text-pink",
-    layout: "/admin",
-  },
-  {
-    path: "/test",
+    path: "/notifications",
     name: "Notifications",
     icon: "ni ni-bell-55 text-blue",
     layout: "/admin",
   },
   
 ];
+
 export default routes;

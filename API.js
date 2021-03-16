@@ -12,4 +12,4 @@ export const API_CREATE_ENTREPRISE_PATH = '/api/create/entreprise';
 export const API_ACTIVATE_USER_PATH = '/api/user/activate' ;
 export const API_LIST_PROFILS_PATH = '/api/user/listbyprofil';
 export const API_LIST_ENTREPRISES_PATH = '/api/entreprises/details';
-
+export const API_UPLOAD_FORM_FILE='/api/file/manager';

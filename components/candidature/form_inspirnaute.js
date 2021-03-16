@@ -1,13 +1,13 @@
 import React from "react";
 import axios from "axios";
-import { API_HOST, API_SKILLS_PATH } from "../../API";
-import Api from "../../pages/api";
+import { API_HOST, API_SKILLS_PATH, API_UPLOAD_FORM_FILE } from "../../API";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Container, Row, Col } from "reactstrap";
-import { Input, Divider } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import Swal from "sweetalert2";
 
 export default function Inspirenaute_Form() {
   const [isActive, setIsActive] = React.useState(false);
@@ -29,7 +29,6 @@ export default function Inspirenaute_Form() {
   const [nbrAnneeExp, setNbrAnneeExp] = React.useState();
   const [listSkills, setSkills] = React.useState([]);
   const [selectedFile, setSelectedFile] = React.useState(null);
-  const [error, setError] = React.useState("");
 
   // get list of skills
   React.useEffect(() => {
@@ -42,36 +41,29 @@ export default function Inspirenaute_Form() {
       .catch((error) => console.log(error.response));
   }, []);
 
-/*   function handleSubmit(event) {
+  function SuccessAccus() {
+    Swal.fire({
+      title: "Success!",
+      text: "Thanks :) Your registration is Done, we will return you asap!!",
+      icon: "success",
+      confirmButtonText: "Cool",
+    });
+  }
+  function ErrorAccus() {
+    Swal.fire({
+      title: "Error !!",
+      text:
+        "Oups :/ There is an error in your inserted data, do you want to try again",
+      icon: "error",
+      confirmButtonText: "Try Again",
+    });
+  }
+
+  function handleSubmission(event) {
     event.preventDefault();
-    const dataUser = { username, email, password, isActive };
-    const dataProfil = {
-      isActive,
-      category,
-      username,
-      email,
-      name,
-      lastname,
-      country,
-      city,
-      address,
-      phone,
-      poste,
-      mySkills,
-      otherSkills,
-      tarif,
-      nbrAnneeExp,
-    };
-
-    Api.CreateNewProfil(dataProfil);
-    Api.CreateNewUser(dataUser);
-  } */
-
-  function handleSubmission() {
     var formdata = new FormData();
     formdata.append("File", selectedFile);
     formdata.append("type", "cv");
-    //formdata.append("isActive",  false);
     formdata.append("username", name);
     formdata.append("lastname", lastname);
     formdata.append("name", name);
@@ -85,9 +77,8 @@ export default function Inspirenaute_Form() {
     formdata.append("nbr_annee_exp", nbrAnneeExp);
     formdata.append("tarif", tarif);
     formdata.append("category", category);
-    //formdata.append("mySkills", mySkills);
     formdata.append("otherSkills", otherSkills);
-
+    var url = API_HOST + API_UPLOAD_FORM_FILE;
     var requestOptions = {
       method: "POST",
       body: formdata,
@@ -95,26 +86,19 @@ export default function Inspirenaute_Form() {
     };
 
     if (selectedFile) {
-      fetch("http://localhost:8000/api/file/manager", requestOptions)
-        .then((response) => response)
-        .then((result) => console.log(result))
-        .catch((error) => console.log("error", error));
+      fetch(url, requestOptions).then((response) => response);
+      SuccessAccus();
     } else {
-      console.log("Please select a file");
+      ErrorAccus();
     }
   }
 
   return (
     <Container>
       <h1 className="text-center mt-5 mb-3">Inscription Inspirnaute</h1>
-      <form
-        noValidate
-        autoComplete="off"
-        /* onSubmit={handleSubmit}*/
-        onSubmit={handleSubmission}
-      >
+      <form noValidate autoComplete="off" onSubmit={handleSubmission}>
         <Row>
-          <h2>User Account</h2>
+          <h5>User Account</h5>
         </Row>
         <Divider variant="middle" className="mb-2" />
         <Row>
@@ -151,7 +135,7 @@ export default function Inspirenaute_Form() {
         </Row>
 
         <Row>
-          <h2 className="mt-4">Personal Informations</h2>
+          <h5 className="mt-4">Personal Informations</h5>
         </Row>
         <Divider variant="middle" className="mb-2" />
         <Row>
@@ -216,7 +200,7 @@ export default function Inspirenaute_Form() {
           </Col>
         </Row>
         <Row>
-          <h2 className="mt-4">Skills</h2>
+          <h5 className="mt-4">Skills</h5>
         </Row>
         <Divider variant="middle" className="mb-2" />
         <Row>

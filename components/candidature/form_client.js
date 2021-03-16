@@ -14,6 +14,7 @@ import {
   FormControlLabel,
   FormLabel,
 } from "@material-ui/core";
+import Swal from 'sweetalert2';
 
 export default function Client_Form() {
   const [managerName, setManagerName] = React.useState("");
@@ -59,35 +60,29 @@ export default function Client_Form() {
   const handle__Embauche_Ing = (event) => {
     setHireIng(event.target.value);
   };
-/* 
-  function handleSubmit(event) {
+
+  function SuccessAccus() {
+    Swal.fire({
+      title: 'Success!',
+      text: 'Thanks :) Your registration is Done, we will return you asap!!',
+      icon: 'success',
+      confirmButtonText: 'Cool'
+    })
+  }
+  
+  function ErrorAccus() {
+    Swal.fire({
+      title: 'Error !!',
+      text: 'Oups :/ There is an error in your inserted data, do you want to try again',
+      icon: 'error',
+      confirmButtonText: 'Try Again'
+    })
+  }
+
+  function handleSubmission(event) { 
     event.preventDefault();
-    const dataUser = { entrepriseName, email, password, isActive };
-    const dataEntreprise = {
-      isActive,
-      type,
-      entrepriseName,managerName
-managerName
-managerName
-      phoneNumber,
-      poste,
-      recruitEmployee,
-      independent,
-      likeIndependent,
-      remoteConsultant,
-      selfEmployed,
-      expandTeam,
-      newProject,
-      hireIng,
-    };
-    console.log(dataEntreprise);
-    Api.CreateNewEntreprise(dataEntreprise);
-    Api.CreateNewUser(dataUser);
-  } */
 
-  function handleSubmission() { 
     var formdata = new FormData();
-
     formdata.append("managerName", managerName);
     formdata.append("userName", entrepriseName);
     formdata.append("email", email);
@@ -113,16 +108,13 @@ managerName
       redirect: "follow",
       
     };
-//    if(formdata){
+    try {
       fetch(urlApi, requestOptions)
       .then((response) => response)
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-/*    }
-     else {
-      console.log((error=>console.log(error)));
-    } */
-      
+      SuccessAccus();
+    } catch (error) {
+      ErrorAccus()
+    }  
    
   }
   return (
@@ -130,7 +122,7 @@ managerName
       <h1 className="text-center mt-5 mb-3">Inscription Recruteur</h1>
       <form noValidate autoComplete="off" onSubmit={handleSubmission}>
         <Row>
-          <h2>User Account</h2>
+          <h5>User Account</h5>
         </Row>
         <Divider variant="middle" className="mb-2" />
         <Row>
@@ -167,7 +159,7 @@ managerName
         </Row>
 
         <Row>
-          <h2 className="mt-4">Personal Informations</h2>
+          <h5 className="mt-4">Personal Informations</h5>
         </Row>
         <Divider variant="middle" className="mb-2" />
         <Row>
@@ -242,7 +234,7 @@ managerName
           </Col>
         </Row>
         <Row>
-          <h2 className="mt-4">What are you looking for</h2>
+          <h5 className="mt-4">What are you looking for</h5>
         </Row>
         <Divider variant="middle" className="mb-2" />
         <Row>
@@ -299,7 +291,7 @@ managerName
           <Col className="ml-3">
             <Row>
               <Row>
-                <h2 className="mt-4">You have already worked with </h2>
+                <h5 className="mt-4">You have already worked with </h5>
               </Row>
               <Divider variant="middle" className="mb-2" />
             </Row>
@@ -374,7 +366,7 @@ managerName
           </Col>
           <Col>
             <Row>
-              <h2 className="mt-4">You wish :</h2>
+              <h5 className="mt-4">You wish :</h5>
             </Row>
             <Row>
               <FormControl component="fieldset" className="mt-3">

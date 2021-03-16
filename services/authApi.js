@@ -2,16 +2,16 @@ import React from 'react';
 import axios from "axios";
 import jwtDecode from 'jwt-decode';
 import {
-    API_HOST,
-    API_AUTH_PATH
+  API_HOST,
+  API_AUTH_PATH,
   } from "../API";
 import Router from 'next/router';
 
-function authenticate(credentials) {
+function authenticate(data) {
     var URL = API_HOST + API_AUTH_PATH;
 
     return axios
-      .post(URL, credentials)
+      .post(URL, data)
       .then((response) => response.data.token)
       .then(token => {
 
@@ -20,8 +20,15 @@ function authenticate(credentials) {
         // Prévient axios qu'on a un header par défault sur toutes les futures requettes http
         setAxiosToken(token);
         
-        //Router.push('/admin/dashboard');
-        
+        const {roles: role} = jwtDecode(token)
+      //console.log(jwtDecode(token))
+       if(role[0] === "ROLE_ADMIN"){
+        Router.push('/admin/dashboard');
+      }
+      else Router.push('/user/panel')
+         
+      //console.log(jwtDecode(token))
+      return true;
       })     
       
   }
@@ -59,7 +66,6 @@ function setup(){
         logout();
     }
     
-    //3. give token to axios
 }
 
 function isAutheticated() {

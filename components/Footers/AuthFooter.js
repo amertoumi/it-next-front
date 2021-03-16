@@ -1,12 +1,15 @@
 /*eslint-disable*/
 import React from "react";
-
+import dynamic from 'next/dynamic'
 // reactstrap components
 import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap";
+const BEFORE_FOOTER =dynamic(()=>import('../Footers/BeforeFooter'));
 
 function Login() {
   return (
-    <div className="footer mt-5">
+    <React.Fragment>
+      <BEFORE_FOOTER />
+      <div className="footer">
       <footer>
         <Container>
           <Row className="align-items-center justify-content-xl-between">
@@ -62,6 +65,8 @@ function Login() {
         </Container>
       </footer>
     </div>
+    </React.Fragment>
+    
   );
 }
 

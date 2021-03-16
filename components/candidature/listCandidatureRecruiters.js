@@ -118,9 +118,7 @@ function Recruiters_Candidatures_List() {
                     <th scope="col">Manager Name</th>
                     <th scope="col">Manager Poste</th>
                     <th scope="col">Status</th>
-                    <th scope="col" className="text-center">
-                      Action
-                    </th>
+                    <th scope="col"><span className="ml-6">Action</span></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -171,11 +169,10 @@ function Recruiters_Candidatures_List() {
                             variant="info"
                             variant="contained"
                             color="info"
-                            onClick={() => GetFreelancerById(cv.id)}
+                            onClick={() => GetFreelancerById(cv.entrepriseId)}
                           >
                             Details
                           </Button>
-                          {console.log(cv)}
                           {cv.isActive ? (
                             <Button
                               variant="contained"
@@ -274,83 +271,126 @@ function Recruiters_Candidatures_List() {
         >
           <Fade in={open} style={{ height: "80%", width: "500px" }}>
             <div className={classes.paper}>
-              <h1 className="text-center">
+              <h2 className="text-center">
                 {" "}
                 Candidature : {profilDetails.type}
-              </h1>
+              </h2>
               <hr />
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Campany Name: </h3>
+                  <h5 id="transition-modal-title">Campany Name: </h5>
                 </Col>
                 <Col>{profilDetails.username}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Campany Domain: </h3>
+                  <h5 id="transition-modal-title">Campany Domain: </h5>
                 </Col>
                 <Col>{profilDetails.domain}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Profesional email: </h3>
+                  <h5 id="transition-modal-title">Profesional email: </h5>
                 </Col>
                 <Col>{profilDetails.email}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Manager Name: </h3>
+                  <h5 id="transition-modal-title">Manager Name: </h5>
                 </Col>
                 <Col>{profilDetails.name}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Manager Poste: </h3>
+                  <h5 id="transition-modal-title">Manager Poste: </h5>
                 </Col>
                 <Col>{profilDetails.poste}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Phone Number: </h3>
+                  <h5 id="transition-modal-title">Phone Number: </h5>
                 </Col>
                 <Col>{profilDetails.phoneNumber}</Col>
               </Row>
               <hr />
               <Row>
+                <div className="text-center ml-8 mb-3">
                 <span
-                  style={{ fontSize: "20px", textDecoration: "underline" }}
-                  className="mb-2"
+                  style={{ fontSize: "20px", textDecoration: "underline"}}
+                  
                 >
-                  Questions Part:
+                  Questions Part
                 </span>
+                </div>
               </Row>
               <Row>
-                <Col>
-                  <h3 id="transition-modal-title">
-                    * Are you working with independent :{" "}
-                  </h3>
+                <Col className="col-lg-9 mb-2">
+                  <h6 id="transition-modal-title">
+                    * You look to recruit one employee or several employees :
+                  </h6>
+                </Col>
+                <Col>{profilDetails.recruitEmployee === "true" ? "Yes" : "No"}</Col>
+              </Row>
+              <Row>
+                <Col className="col-lg-9 mb-2">
+                  <h6 id="transition-modal-title">
+                    * You look for self-employed or several self-employed :
+                  </h6>
+                </Col>
+                <Col>{profilDetails.selfEmployed === "true" ? "Yes" : "No"}</Col>
+              </Row>
+              <Row>
+                <Col className="col-lg-9 mb-2">
+                  <h6 id="transition-modal-title">
+                    * Are you working with independent :
+                  </h6>
                 </Col>
                 <Col>{profilDetails.independent === "true" ? "Yes" : "No"}</Col>
               </Row>
               <Row>
-                <Col>
-                  <h3 id="transition-modal-title">
-                    * You Like works with independent :{" "}
-                  </h3>
+                <Col className="col-lg-9 mb-2">
+                  <h6 id="transition-modal-title">
+                    * Are you Like working with independent :
+                  </h6>
+                </Col>
+                <Col>{profilDetails.likeIndependent === "true" ? "Yes" : "No"}</Col>
+              </Row>
+              <Row>
+                <Col className="col-lg-9 mb-2">
+                  <h6 id="transition-modal-title">
+                    * Are you working with remote consultants :
+                  </h6>
+                </Col>
+                <Col>{profilDetails.remoteConsultant === "true" ? "Yes" : "No"}</Col>
+              </Row>
+              <Row>
+                <Col className="col-lg-9 mb-2">
+                  <h6 id="transition-modal-title">
+                    * Expand an engineering team or develop an already existing project :
+                  </h6>
                 </Col>
                 <Col>
-                  {profilDetails.likeIndependent === "true" ? "Yes" : "No"}
+                  {profilDetails.expandTeam === "true" ? "Yes" : "No"}
                 </Col>
               </Row>
               <Row>
-                <Col>
-                  <h3 id="transition-modal-title">
-                    {" "}
-                    * You Like works with Remote consultant:{" "}
-                  </h3>
+                <Col className="col-lg-9 mb-2">
+                  <h6 id="transition-modal-title">
+                    * You wish to start a new project :
+                  </h6>
                 </Col>
                 <Col>
-                  {profilDetails.remoteConsultant === "true" ? "Yes" : "No"}
+                  {profilDetails.newProject === "true" ? "Yes" : "No"}
+                </Col>
+              </Row>
+              <Row>
+                <Col className="col-lg-9 mb-2">
+                  <h6 id="transition-modal-title">
+                    * You want to make your first hire of an engineer:
+                  </h6>
+                </Col>
+                <Col>
+                  {profilDetails.hireIng === "true" ? "Yes" : "No"}
                 </Col>
               </Row>
             </div>

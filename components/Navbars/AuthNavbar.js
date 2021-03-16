@@ -51,14 +51,14 @@ function AuthNavbar() {
               </Row>
             </div>
             <Nav className="ml-auto" navbar>
-              {/* <NavItem>
-                <Link href="/admin/dashboard">
+              <NavItem>
+                <Link href="/Home">
                   <NavLink href="#pablo" className="nav-link-icon">
-                    <i className="ni ni-planet" />
-                    <span className="nav-link-inner--text">Dashboard</span>
+                    <i className="ni ni-shop" />
+                    <span className="nav-link-inner--text">Home</span>
                   </NavLink>
                 </Link>
-              </NavItem> */}
+              </NavItem>
               <NavItem>
                 <Link href="/inscription">
                   <NavLink href="#pablo" className="nav-link-icon">

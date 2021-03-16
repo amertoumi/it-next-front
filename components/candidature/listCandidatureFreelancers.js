@@ -117,7 +117,7 @@ function Freelancers_Candidatures_List() {
                     <th scope="col">Email</th>
                     <th scope="col">Poste</th>
                     <th scope="col">Status</th>
-                    <th scope="col" className="text-center">Action</th>
+                    <th scope="col"><span className="ml-6">Action</span></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -142,16 +142,18 @@ function Freelancers_Candidatures_List() {
                           </span>
                         </td>
                         <td>
-                          <span className="mb-0 text-sm text-center">
+                          <span className="text-center">
                             {cv.isActive ? (
                               <Badge color="" className="badge-dot">
-                                <i className="bg-success" />
-                                Accepted
+                                <p><i className="bg-success" />
+                                Accepted</p>
                               </Badge>
                             ) : (
                               <Badge color="" className="badge-dot mr-4">
+                                <p>
                                 <i className="bg-warning" />
                                 Pending
+                                </p>
                               </Badge>
                             )}
                           </span>
@@ -271,73 +273,73 @@ function Freelancers_Candidatures_List() {
               <hr />
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Name: </h3>
+                  <h5 id="transition-modal-title">Name: </h5>
                 </Col>
                 <Col>{profilDetails.username}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Last Name: </h3>
+                  <h5 id="transition-modal-title">Last Name: </h5>
                 </Col>
                 <Col>{profilDetails.lastname}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Phone Number: </h3>
+                  <h5 id="transition-modal-title">Phone Number: </h5>
                 </Col>
                 <Col>{profilDetails.phone}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Email: </h3>
+                  <h5 id="transition-modal-title">Email: </h5>
                 </Col>
                 <Col>{profilDetails.email}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">country: </h3>
+                  <h5 id="transition-modal-title">country: </h5>
                 </Col>
                 <Col>{profilDetails.country}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">City: </h3>
+                  <h5 id="transition-modal-title">City: </h5>
                 </Col>
                 <Col>{profilDetails.city}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Address: </h3>
+                  <h5 id="transition-modal-title">Address: </h5>
                 </Col>
                 <Col>{profilDetails.address}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Poste : </h3>
+                  <h5 id="transition-modal-title">Poste : </h5>
                 </Col>
                 <Col>{profilDetails.poste}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Experience Years : </h3>
+                  <h5 id="transition-modal-title">Experience Years : </h5>
                 </Col>
                 <Col>{profilDetails.nbrAnneeExp}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Daily Pricing : </h3>
+                  <h5 id="transition-modal-title">Daily Pricing : </h5>
                 </Col>
                 <Col>{profilDetails.tarif}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Skills : </h3>
+                  <h5 id="transition-modal-title">Skills : </h5>
                 </Col>
                 <Col>{profilDetails.mySkills}</Col>
               </Row>
               <Row>
                 <Col>
-                  <h3 id="transition-modal-title">Other Skills : </h3>
+                  <h5 id="transition-modal-title">Other Skills : </h5>
                 </Col>
                 <Col>{profilDetails.otherSkills} </Col>
               </Row>

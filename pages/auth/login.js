@@ -2,13 +2,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 // reactstrap components
 import {
-  Button,
   Card,
   CardHeader,
   CardBody,
   FormGroup,
-  Form,
-  Input,
   InputGroupAddon,
   InputGroupText,
   InputGroup,
@@ -17,7 +14,8 @@ import {
 } from "reactstrap";
 // layout for this page
 import Auth from "layouts/Auth.js";
-import api from "../api";
+//import api from "../api";
+import API from "../../services/authApi";
 
 function Login() {
   const [error, setError] = React.useState("");
@@ -27,7 +25,8 @@ function Login() {
     event.preventDefault();
 
     try {
-      await api.auth_api(data);
+      //await api.auth_api(data);
+      await API.authenticate(data);
       setError("");
       setIs_auth(true);
 
