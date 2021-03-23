@@ -1,4 +1,6 @@
 import React from "react";
+import jwtDecode from 'jwt-decode';
+import axios from 'axios';
 
 // reactstrap components
 import {
@@ -15,14 +17,18 @@ import {
 } from "reactstrap";
 // layout for this page
 import Admin from "layouts/Admin.js";
-// core components
-import UserHeader from "components/Headers/UserHeader.js";
+import authApi from '../../services/authApi';
+import dynamic from 'next/dynamic'
 
-function Profile() {
+const ProfilHeader = dynamic(() => import('../../components/Headers/ProfilHeader'));
+
+ function Profile() {
+
   return (
     <>
-      <UserHeader />
+      <ProfilHeader />
       {/* Page content */}
+      {console.log(authApi.isAutheticated)}
       <Container className="mt--7" fluid>
         <Row>
           <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">

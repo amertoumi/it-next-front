@@ -7,7 +7,8 @@ import {
   API_USERS_PATH,
   API_PROFILS_PATH,
   API_ENTREPRISES_PATH,
-  API_ACTIVATE_USER_PATH
+  API_ACTIVATE_USER_PATH,
+  API_DETAILS_USER
 } from "../API";
 import Router from 'next/router';
 import jwtDecode from 'jwt-decode';
@@ -157,12 +158,25 @@ function ActivateUser(id) {
   .then((response)=> response);
 }
 
+//Get user details when is connected
+function DetailsCurrentUser(id) {
+  var URL = API_HOST + API_DETAILS_USER +'/'+id
+  var config = {
+    method: 'get',
+    url: URL,
+    headers: { }
+  };
+  axios(config)
+  .then((response)=> console.log(response.data));
+}
+
 let URL = API_HOST + API_SKILLS_PATH;
       axios
       .get(URL)
       .then((response) => response.data["hydra:member"])
       .then((data) => setSkills(data))
       .catch((error) => error.response);
+
 
 export default {
   auth_api,
@@ -174,5 +188,6 @@ export default {
   CreateNewUser,
   CreateNewEntreprise,
   GetFreelancerById,
-  ActivateUser
+  ActivateUser,
+  DetailsCurrentUser
 };

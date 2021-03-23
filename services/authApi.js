@@ -21,7 +21,7 @@ function authenticate(data) {
         setAxiosToken(token);
         
         const {roles: role} = jwtDecode(token)
-      //console.log(jwtDecode(token))
+      
        if(role[0] === "ROLE_ADMIN"){
         Router.push('/admin/dashboard');
       }
@@ -87,5 +87,6 @@ function isAutheticated() {
     authenticate,
     logout,
     setup,
-    isAutheticated
+    isAutheticated,
+    setAxiosToken
   }
