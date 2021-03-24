@@ -6,8 +6,10 @@ import { Container } from "reactstrap";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-
 import routes from "routesUsers.js";
+import dynamic from 'next/dynamic'
+
+//const Sidebar = dynamic(() => import('../components/Sidebar/Sidebar'));
 
 function Admin(props) {
   // used for checking current route

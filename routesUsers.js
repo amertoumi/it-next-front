@@ -6,7 +6,7 @@ var routesUsers = [
       layout: "/user",
     },
     {
-      path: "/panel",
+      path: "/profil",
       name: "Profil",
       icon: "ni ni-single-02 text-yellow",
       layout: "/user",
@@ -43,7 +43,7 @@ var routesUsers = [
     },
     {
       path: "/panel",
-      name: "Ask Admin",
+      name: "Ask",
       icon: "ni ni-single-02 text-yellow",
       layout: "/user",
     }

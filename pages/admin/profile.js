@@ -1,6 +1,4 @@
 import React from "react";
-import jwtDecode from 'jwt-decode';
-import axios from 'axios';
 
 // reactstrap components
 import {

@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import {API_HOST, API_DETAILS_USER, API_UPLOAD_LOGO } from '../../API';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -22,31 +23,50 @@ const useStyles = makeStyles({
 });
 
 function ProfilHeader() {
-
+    const classes = useStyles();
+    const [CurrentUser, setCurrentUser] = React.useState([]);
+    const [selectedFile, setSelectedFile] = React.useState(null);
+       
     React.useEffect(()=>{
+        //console.log(id_Current_User)
         
         const token = window.localStorage.getItem("authToken");
         const infos = jwtDecode(token)
         const {id: id_Current_User} = jwtDecode(token)
-        console.log(id_Current_User)
-        /* authApi.setup();
-     const users = axios.get('http://localhost:8000/infos/profil')
-                        .then((res)=>console.log(res.data)) */
-      }, [])
-    
-      //Get user details when is connected
-/* const DetailsCurrentUser =(id) => {
-    var URL = API_HOST + API_DETAILS_USER +'/'+id
-    var config = {
-      method: 'get',
-      url: URL,
-      headers: { }
-    };
-    axios(config)
-    .then((response)=> console.log(response.data));
-} */
+        var URL = API_HOST + API_DETAILS_USER +id_Current_User
+        var config = {
+            method: 'get',
+            url: URL,
+            headers: { }
+          };
+          
+            axios(config)
+            .then((response) => response)
+            .then((response)=> setCurrentUser(response.data['details']))
+            .catch((error) => console.log(error.response));
+            
+          
+      }, []);
 
-  const classes = useStyles();
+    const UploadLogo =() =>{
+        var formdata = new FormData();
+        formdata.append("File", selectedFile);
+        formdata.append("type", "logo");
+
+    var url = API_HOST + API_UPLOAD_LOGO;
+    var requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+
+    if (selectedFile) {
+      fetch(url, requestOptions)
+      .then((response) => response);
+      
+    }
+    }
+  
   return (
     <>
       <div
@@ -61,12 +81,12 @@ function ProfilHeader() {
       >
         <span className="mask bg-gradient-default opacity-8" />
 
-        <Container fluid>
+            <Container fluid>
           <Row>
             <Col>
               <Card>
                 <CardActionArea>
-                  <Row className="pt-3 pb-3">
+                  <Row className="pt-3">
                     <Col>
                       <CardMedia>
                         <Col className="order-sm-1 ml-7" sm="3">
@@ -88,22 +108,56 @@ function ProfilHeader() {
                           </div>
                         </Col>
                       </CardMedia>
+                      
+                      <div className="pt-7">
+                                <label for="files" class="btn"><i class="fas fa-camera">
+                                    </i> Add picture</label>
+                                    <input 
+                                    type="file"
+                                    style={{visibility:'hidden'}}
+                                    ></input>
+                                {/* <input 
+                                type="file"
+                                name="file"
+                                id="file" 
+                                style={{visibility:'hidden'}}
+                                onChange={(e) => {
+                                    setSelectedFile(e.target.files[0]);
+                                }} /> */}
+                            </div>
+                            <div>
+                                <Button 
+                                type="submit"
+                                onClick={UploadLogo}
+                                > save</Button>
+                            </div>
                     </Col>
                     <Col className="pr-4">
                       <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          Lizard
+                        <Typography gutterBottom variant="h6" component="h2">
+                        {CurrentUser.name}{" "}{CurrentUser.lastName}
+                            {/* {CurrentUser? CurrentUser.details.email: 'ffffff'} */} 
                         </Typography>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          Front end developer
+                        <Typography gutterBottom variant="h8" component="h6">
+                            
+                    {CurrentUser.poste}{" "}({CurrentUser.nbrAnneeExp} years of experience)
                         </Typography>
                         <Typography
                           variant="body2"
                           color="textSecondary"
                           component="p"
                         >
-                          Lizards are a widespread group of squamate reptiles
+                          Landing place: {CurrentUser.country},{CurrentUser.city}
+                          
                         </Typography>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                            
+                          </Typography>
+                        
                       </CardContent>
                     </Col>
                   </Row>
@@ -115,12 +169,12 @@ function ProfilHeader() {
                 <Col>
                   <Card>
                     <CardActionArea>
-                      <Row className="pt-3 pb-3">
+                      <Row className="pt-3">
                         <Col>
                           <CardMedia>
                             <Col>
                               <CardMedia>
-                                <Col className="order-sm-1 ">
+                                <Col className="order-sm-1">
                                   <div className="mt-3">
                                     <Button>
                                       <i className="far fa-user mr-4 "></i>View
@@ -135,7 +189,7 @@ function ProfilHeader() {
                             <Col>
                               <CardMedia>
                                 <Col className="order-sm-1 ">
-                                  <div className="mb-3">
+                                  <div className="mb-2">
                                     <Button>
                                       <i className="fas fa-pen mr-4"></i>Edit Resume{" "}
                                       <i className="fas fa-arrow-alt-circle-right ml-3"></i>
@@ -177,7 +231,7 @@ function ProfilHeader() {
                               </Col>
                             </CardMedia>
                           </Col>
-                          <Col></Col>
+                          
                         </Col>
                       </Row>
                     </CardActionArea>

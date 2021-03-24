@@ -25,7 +25,7 @@ function authenticate(data) {
        if(role[0] === "ROLE_ADMIN"){
         Router.push('/admin/dashboard');
       }
-      else Router.push('/user/panel')
+      else Router.push('/user/profil')
          
       //console.log(jwtDecode(token))
       return true;
