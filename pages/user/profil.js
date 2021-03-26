@@ -1,5 +1,10 @@
+import React from 'react';
 import User from "layouts/User.js";
+import jwtDecode from "jwt-decode";
+import {API_HOST, API_UPDATE_PROFIL} from '../../API';
 import dynamic from "next/dynamic";
+import Swal from "sweetalert2";
+
 const ProfilHeader = dynamic(() =>
   import("../../components/Headers/ProfilHeader")
 );
@@ -15,7 +20,58 @@ import {
   Col,
 } from "reactstrap";
 
-const UserPanel = () => {
+
+function UserPanel() {
+  const token = window.localStorage.getItem("authToken");
+  const infos = jwtDecode(token);
+  const { id: id_Current_User } = jwtDecode(token);
+  const [description, setDescription]= React.useState("");
+  const [startAt, setStartAt]= React.useState("");
+  const [finishAt, setFinishAt] = React.useState("");
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [dayRate, setDayRate] = React.useState("");
+  
+  function SuccessAccus() {
+    Swal.fire({
+      title: "Success!!",
+      text: "Done, your data is inserted :)",
+      icon: "success",
+      confirmButtonText: "Cool",
+    });
+  }
+  function ErrorAccus() {
+    Swal.fire({
+      title: "Error !!",
+      text:
+        "Oups :/ Cannot add data",
+      icon: "error",
+      confirmButtonText: "Try Again",
+    });
+  }
+
+  // Add infos to profil table by current user
+  const SubmitData = () => {
+  var formdata = new FormData();
+  formdata.append("dispoStart", startAt);
+  formdata.append("dispoEnd", finishAt);
+  formdata.append("description", description);
+  //formdata.append("phoneNumber", phoneNumber);
+  //formdata.append("dayRate", dayRate);
+
+  var url = API_HOST + API_UPDATE_PROFIL+id_Current_User;
+  var requestOptions = {
+    method: "POST",
+    body: formdata,
+    redirect: "follow",
+  };
+
+   if (formdata) {
+    fetch(url, requestOptions).then((response) => response);
+    SuccessAccus();
+  } else {
+    ErrorAccus();
+  }
+};
   return (
     <>
       <ProfilHeader />
@@ -25,7 +81,15 @@ const UserPanel = () => {
             <Form>
               <FormGroup >
                 <Label for="exampleText">Who am I ?</Label>
-                <Input type="textarea" name="text" id="exampleText" rows="7"/>
+                <Input
+                required
+                type="textarea" 
+                name="description" 
+                id="description" 
+                rows="7"
+                value={description}
+                onInput={(e) => setDescription(e.target.value)}
+                />
               </FormGroup>
               <FormGroup>
                 <FormText color="muted">
@@ -35,19 +99,25 @@ const UserPanel = () => {
               <FormGroup>
                 <Label for="phoneNumber">Phone Number:</Label>
                 <Input
+                  required
                   type="text"
                   name="phone"
                   id="phoneNumber"
                   placeholder=""
+                  value={phoneNumber}
+                  onInput={(e) => setPhoneNumber(e.target.value)}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="phoneNumber">Day rate:</Label>
+                <Label for="dayRate">Day rate:</Label>
                 <Input
+                  required
                   type="text"
-                  name="phoneNumber"
-                  id="phoneNumber"
+                  name="dayRate"
+                  id="dayRate"
                   placeholder=""
+                  value={dayRate}
+                  onInput={(e) => setDayRate(e.target.value)}
                 />
               </FormGroup>
               <Row>
@@ -55,10 +125,13 @@ const UserPanel = () => {
                   <FormGroup>
                     <Label for="startAt">I Start at:</Label>
                     <Input
+                      required
                       type="text"
                       name="startAt"
                       id="startAt"
                       placeholder=""
+                      value={startAt}
+                      onInput={(e) => setStartAt(e.target.value)}
                     />
                   </FormGroup>
                 </Col>
@@ -70,12 +143,14 @@ const UserPanel = () => {
                       name="finishAt"
                       id="finishAt"
                       placeholder=""
+                      value={finishAt}
+                      onInput={(e) => setFinishAt(e.target.value)}
                     />
                   </FormGroup>
                 </Col>
               </Row>
 
-              <Button>Save</Button>
+              <Button onClick={SubmitData}>Save</Button>
             </Form>
           </Col>
           <Col>
