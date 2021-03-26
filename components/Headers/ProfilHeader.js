@@ -207,7 +207,7 @@ function ProfilHeader() {
                                 <Col className="order-sm-1 ">
                                   <div className="mb-3">
                                     <Button>
-                                      <i className="fas fa-pen mr-4"></i>Edit
+                                      <i className="fas fa-pen mr-4" href="/user/edit_cv"></i>Edit
                                       Resume{" "}
                                       <i className="fas fa-arrow-alt-circle-right ml-3"></i>
                                     </Button>
