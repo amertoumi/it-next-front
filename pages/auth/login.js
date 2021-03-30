@@ -115,7 +115,7 @@ function Login() {
                 </label>
               </div>
               <div className="text-center">
-                <button className="my-4" class="btn btn-success" type="submit">
+                <button className="my-4 btn btn-success" type="submit">
                   Sign in
                 </button>
               </div>

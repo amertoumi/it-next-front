@@ -16,3 +16,4 @@ export const API_UPLOAD_FORM_FILE='/api/file/manager';
 export const API_DETAILS_USER ='/details/user/';
 export const API_UPLOAD_LOGO = '/user/logo';
 export const API_UPDATE_PROFIL= '/update/profil/';
+export const API_UPDATE_PROFILHEADER = '/update/profilheader/';

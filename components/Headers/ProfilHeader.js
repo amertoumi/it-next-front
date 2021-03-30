@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { API_HOST, API_DETAILS_USER, API_UPLOAD_LOGO } from "../../API";
+import Link from 'next/link';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -64,11 +65,15 @@ function ProfilHeader() {
       .then((response) => setCurrentUser(response.data["details"]))
       .catch((error) => console.log(error.response));
   }, []);
+  
+
+  //console.log(CurrentUser)
 
   const UploadLogo = () => {
     var formdata = new FormData();
     formdata.append("File", selectedFile);
     formdata.append("type", "logo");
+    
 
     var url = API_HOST + API_UPLOAD_LOGO;
     var requestOptions = {
@@ -191,11 +196,13 @@ function ProfilHeader() {
                               <CardMedia>
                                 <Col className="order-sm-1">
                                   <div className="mt-3">
+                                    <Link href="/user/cv">
                                     <Button>
                                       <i className="far fa-user mr-4 "></i>View
                                       Resume{" "}
                                       <i className="fas fa-arrow-alt-circle-right ml-3"></i>
                                     </Button>
+                                    </Link>
                                   </div>
                                 </Col>
                               </CardMedia>
@@ -206,11 +213,13 @@ function ProfilHeader() {
                               <CardMedia>
                                 <Col className="order-sm-1 ">
                                   <div className="mb-3">
+                                    <Link href="/user/edit_cv">
                                     <Button>
-                                      <i className="fas fa-pen mr-4" href="/user/edit_cv"></i>Edit
+                                      <i className="fas fa-pen mr-4" ></i>Edit
                                       Resume{" "}
                                       <i className="fas fa-arrow-alt-circle-right ml-3"></i>
                                     </Button>
+                                    </Link>
                                   </div>
                                 </Col>
                               </CardMedia>

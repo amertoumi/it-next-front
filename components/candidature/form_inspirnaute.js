@@ -29,6 +29,8 @@ export default function Inspirenaute_Form() {
   const [nbrAnneeExp, setNbrAnneeExp] = React.useState();
   const [listSkills, setSkills] = React.useState([]);
   const [selectedFile, setSelectedFile] = React.useState(null);
+  
+  // Update skills array
 
   // get list of skills
   React.useEffect(() => {
@@ -76,6 +78,7 @@ export default function Inspirenaute_Form() {
     formdata.append("poste", poste);
     formdata.append("nbr_annee_exp", nbrAnneeExp);
     formdata.append("tarif", tarif);
+    formdata.append('mySkills', mySkills);
     formdata.append("category", category);
     formdata.append("otherSkills", otherSkills);
     var url = API_HOST + API_UPLOAD_FORM_FILE;
@@ -85,9 +88,12 @@ export default function Inspirenaute_Form() {
       redirect: "follow",
     };
 
+
     if (selectedFile) {
+      console.log(mySkills);
+      console.log(typeof mySkills);
       fetch(url, requestOptions).then((response) => response);
-      SuccessAccus();
+      //SuccessAccus();
     } else {
       ErrorAccus();
     }
@@ -109,7 +115,7 @@ export default function Inspirenaute_Form() {
               type="search"
               value={username}
               required
-              onInput={(e) => setUserName(e.target.value)}
+              onInput={(e) => setUserName(e.target.value, index)}
             />
           </Col>
           <Col>
@@ -239,7 +245,13 @@ export default function Inspirenaute_Form() {
               id="mySkills"
               size="small"
               options={listSkills.map((option) => option.name)}
-              onChange={(e, value) => setMySkills(value)}
+              /* onChange={(event, newValue) => {
+                setMySkills([
+                  ...mySkills,
+                  ...newValue.filter((option) => mySkills.indexOf(option) === -1),
+                ]); 
+              }}*/
+              onChange={(value) => setMySkills(parseInt(Object.keys(value)))}
               renderInput={(params) => (
                 <TextField
                   {...params}

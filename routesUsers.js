@@ -12,19 +12,19 @@ var routesUsers = [
       layout: "/user",
     },
     {
-      path: "/panel",
+      path: "/profil",
       name: "Constellation",
       icon: "ni ni-single-02 text-yellow",
       layout: "/user",
     },
     {
-      path: "/panel",
+      path: "/profil",
       name: "Quiz",
       icon: "ni ni-single-02 text-yellow",
       layout: "/user",
     },
     {
-      path: "/panel",
+      path: "/profil",
       name: "Missions",
       icon: "ni ni-single-02 text-yellow",
       layout: "/user",
@@ -36,13 +36,13 @@ var routesUsers = [
       layout: "/user",
     },
     {
-      path: "/panel",
+      path: "/profil",
       name: "Help",
       icon: "ni ni-single-02 text-yellow",
       layout: "/user",
     },
     {
-      path: "/panel",
+      path: "/profil",
       name: "Ask",
       icon: "ni ni-single-02 text-yellow",
       layout: "/user",
