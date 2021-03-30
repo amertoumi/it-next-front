@@ -8,12 +8,11 @@ const EditFormCv = dynamic(()=> import('../../components/Form/EditFormCv'));
 
 const EditCV = () => {
     return ( 
-        <Container>
+        <div>
             
-            <Container className="pt-5">
             <EditFormCv/>
-            </Container>
-        </Container>
+            
+        </div>
         
      );
 }

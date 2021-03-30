@@ -26,13 +26,28 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
-  input: {
-    display: "none",
+  inputText: {
+    color: "white"
+  },
+  disabledInput: {
+    "& .MuiInputBase-root.Mui-disabled": {
+      color: "white",
+    }
+  },
+  labelInput: {
+      color: "#8E89B3"
+  },
+  ViewResumeButton: {
+    width: '180px',
+    height: '35px',
+    background: '#259879 0% 0% no-repeat padding-box',
+    color: 'white',
+    borderRadius: '30px',
+    opacity: 1
+    
   }
 }));
-const bgHeaderBlock ={
-    backgroundColor: "#202460",
-}
+
 function EditFormCv () {
 
   const classes = useStyles();
@@ -60,11 +75,6 @@ function EditFormCv () {
   const allSkillsArray = skills.map(function (obj) {
     return obj.name;
   });
-
-    console.log("all skills array")
-    console.log(allSkillsArray)
-    console.log("Profil skills")
-    console.log(skillsProfil)
 
   function SuccessAccus() {
     Swal.fire({
@@ -146,30 +156,40 @@ function EditFormCv () {
 
   if (typeof window !== "undefined") {
     return (
-      <Container>
-        <Container className="pt-7">
-            <React.Fragment style={bgHeaderBlock}>
-            <Row className="container-fluid">
+        <>
+      <div
+        className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+        style={{
+          minHeight: "600px",
+          backgroundImage:
+            "url(" + require("assets/img/theme/profile-cover.jpg") + ")",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+      >
+        <span className="mask bg-gradient-default opacity-8" />
+      
+      <Container fluid>
+            <Row className="mt-5">
             <Col>
               <Link href="/user/profil">
-                <Button variant="outlinned">
-                  <ArrowBackIosIcon />
-                  PROFILE / EDIT RESUME
+                <Button variant="outlinned" >
+                  <ArrowBackIosIcon style={{color:"white"}}/>
+                  <span style={{color:"white"}}>PROFILE / EDIT RESUME</span>
                 </Button>
               </Link>
             </Col>
             <Col className="d-flex justify-content-end">
+              <Link href="/user/cv">
               <Button
-                variant="contained"
-                color="primary"
-                className="mb-3 mr-5"
-                style={{ backgroundColor: "green", color: "white" }}
+                className={classes.ViewResumeButton}
               >
                 View Resume
               </Button>
+              </Link>
             </Col>
           </Row>
-          <Row className="container-fluid">
+          <Row >
             <Col className="col-sm-4 mt-5">
               <Row>
                 <img
@@ -187,7 +207,7 @@ function EditFormCv () {
                   id="icon-button-file"
                   type="file"
                 />
-                <label htmlFor="icon-button-file">
+                <label htmlFor="icon-button-file" className={classes.labelInput}>
                   <IconButton
                     color="primary"
                     aria-label="upload picture"
@@ -231,38 +251,50 @@ function EditFormCv () {
               </Row>
               <form className={classes.root} noValidate autoComplete="off">
                 <Row>
-                  <Col>
-                    <label>Name</label>
+                  <Col >
+                  <div>
+                  <label className={classes.labelInput} >Name</label>
+                  </div>
+                    <div>
                     <TextField
+                      className={classes.disabledInput}
                       id="outlined-basic"
                       label=""
                       variant="outlined"
                       value={cv.name || null}
                       disabled={disable}
                       size="small"
-                      inputProps={{ className: classes.textColor }}
                       onChange={(e) => {
                         e.preventDefault(),
                           setCV({ ...cv, name: e.target.value });
                       }}
+                      
                     />
-                    <label>Current Position</label>
+                    </div>
+                    <div>
+                    <label className={classes.labelInput}>Current Position</label>
+                    </div>
+                    <div>
                     <TextField
+                      className={classes.disabledInput}
                       id="outlined-basic"
                       label=""
                       variant="outlined"
                       value={cv.poste || null}
                       disabled={disable}
                       size="small"
-                      inputProps={{ className: classes.textColor }}
                       onChange={(e) => {
                         e.preventDefault(),
                           setCV({ ...cv, poste: e.target.value });
                       }}
                     />
-
-                    <label>Years of experiences</label>
+                    </div>
+                    <div>
+                    <label className={classes.labelInput}>Years of experiences</label>
+                    </div>
+                    <div>
                     <TextField
+                      className={classes.disabledInput}
                       id="outlined-basic"
                       label=""
                       variant="outlined"
@@ -275,8 +307,13 @@ function EditFormCv () {
                           setCV({ ...cv, nbrAnneeExp: e.target.value });
                       }}
                     />
-                    <label>Landing Place</label>
+                    </div>
+                    <div>
+                    <label className={classes.labelInput}>Landing Place</label>
+                    </div>
+                    <div>
                     <TextField
+                    className={classes.disabledInput}
                       id="outlined-basic"
                       label=""
                       variant="outlined"
@@ -289,10 +326,15 @@ function EditFormCv () {
                           setCV({ ...cv, country: e.target.value });
                       }}
                     />
+                    </div>
                   </Col>
                   <Col>
-                    <label>Phone</label>
+                  <div>
+                    <label className={classes.labelInput}>Phone</label>
+                    </div>
+                    <div>
                     <TextField
+                    className={classes.disabledInput}
                       id="outlined-basic"
                       label=""
                       variant="outlined"
@@ -305,8 +347,13 @@ function EditFormCv () {
                           setCV({ ...cv, phone: e.target.value });
                       }}
                     />
-                    <label>Email</label>
+                    </div>
+                    <div>
+                    <label className={classes.labelInput}>Email</label>
+                    </div>
+                    <div>
                     <TextField
+                    className={classes.disabledInput}
                       id="outlined-basic"
                       label=""
                       variant="outlined"
@@ -319,8 +366,13 @@ function EditFormCv () {
                           setCV({ ...cv, email: e.target.value });
                       }}
                     />
-                    <label>Link</label>
+                    </div>
+                    <div>
+                    <label className={classes.labelInput}>Link</label>
+                    </div>
+                    <div>
                     <TextField
+                    className={classes.disabledInput}
                       id="outlined-basic"
                       label=""
                       variant="outlined"
@@ -333,26 +385,15 @@ function EditFormCv () {
                           setCV({ ...cv, link: e.target.value });
                       }}
                     />
+                    </div>
                   </Col>
                 </Row>
               </form>
             </Col>
-          </Row>
-            </React.Fragment>
-
-          <Row className="d-flex flex-column mt-3">
-              <Col>
-                <h3>Skills</h3>
-                <Divider variant="middle" />
-              </Col>
-              <Col>
-              <div>skills to be here....</div>
-            </Col>
-              
-              
-          </Row>
-        </Container>
+          </Row> 
       </Container>
+      </div>
+    </>
     );
   } else null;
 
