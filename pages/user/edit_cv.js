@@ -3,15 +3,15 @@ import User from "layouts/User.js";
 import dynamic from 'next/dynamic';
 import { Container } from "reactstrap";
 
-const EditFormCv = dynamic(()=> import('../../components/Form/EditFormCv'));
-
+const EditHeaderCv = dynamic(()=> import('../../components/Form/EditHeaderCv'));
+const WorkExp_Education = dynamic(()=> import ('../../components/Form/WorkExp_Education'));
 
 const EditCV = () => {
     return ( 
         <div>
             
-            <EditFormCv/>
-            
+            <EditHeaderCv/>
+            <WorkExp_Education/>
         </div>
         
      );

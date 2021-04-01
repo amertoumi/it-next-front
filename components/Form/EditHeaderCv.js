@@ -16,6 +16,8 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import EditIcon from "@material-ui/icons/Edit";
 import { makeStyles } from "@material-ui/core/styles";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import SaveIcon from '@material-ui/icons/Save';
+import CancelIcon from '@material-ui/icons/Cancel';
 import Swal from "sweetalert2";
 
 const MiddleEditBlock = dynamic(() => import("./MiddleEditBlock"));
@@ -34,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
       color: "white",
     }
   },
+  input: {
+    display: 'none',
+  },
   labelInput: {
       color: "#8E89B3"
   },
@@ -45,14 +50,24 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '30px',
     opacity: 1
     
+  },
+  RoundedButton : {
+      borderRadius:' 50%'
   }
 }));
 
-function EditFormCv () {
+const defaultProps = {
+  bgcolor: 'background.paper',
+  borderColor: 'text.primary',
+  m: 1,
+  border: 1,
+  style: { width: '5rem', height: '5rem' },
+};
+function EditHeaderCv () {
 
   const classes = useStyles();
   const token = window.localStorage.getItem("authToken");
-  const infos = jwtDecode(token);
+  //const infos = jwtDecode(token);
   const { id: id_Current_User } = jwtDecode(token);
   const [disable, setDisable] = React.useState(true);
   const [skills, setSkills] = React.useState([]);
@@ -190,7 +205,7 @@ function EditFormCv () {
             </Col>
           </Row>
           <Row >
-            <Col className="col-sm-4 mt-5">
+            <Col className="col-sm-4 mt-5 pl-5">
               <Row>
                 <img
                   alt="..."
@@ -206,7 +221,7 @@ function EditFormCv () {
                   className={classes.input}
                   id="icon-button-file"
                   type="file"
-                />
+                /> 
                 <label htmlFor="icon-button-file" className={classes.labelInput}>
                   <IconButton
                     color="primary"
@@ -225,7 +240,8 @@ function EditFormCv () {
                   <Button
                     variant="contained"
                     color="primary"
-                    className="mb-3 mr-5"
+                    size="small"
+                    className="mb-3 mr-5 ml-4"
                     onClick={Edithandler}
                   >
                     {disable ? (
@@ -234,17 +250,21 @@ function EditFormCv () {
                         Edit
                       </>
                     ) : (
-                      "Cancel"
+                        <>
+                        <CancelIcon className="mr-2"/>
+                      Cancel
+                      </>
                     )}
                   </Button>
                   {!disable ? (
                     <Button
                       className="mb-3"
                       variant="contained"
+                      size="small"
                       style={{ backgroundColor: "green", color: "white" }}
                       onClick={SubmitCV}
                     >
-                      Save
+                      <SaveIcon className="mr-2"/>Save
                     </Button>
                   ) : null}
                 </Col>
@@ -399,4 +419,4 @@ function EditFormCv () {
 
 }
 
-export default EditFormCv;
+export default EditHeaderCv;

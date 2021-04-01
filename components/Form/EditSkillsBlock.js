@@ -6,36 +6,31 @@ import axios from "axios";
 import Checkbox from '@material-ui/core/Checkbox';
 import { Container, Row, Col } from "reactstrap";
 
-const  EditSkillsList= () => {
+const  EditSkillsBlock= () => {
     const [checked, setChecked] = React.useState(true);
     const handleChange = (event) => {
         setChecked(event.target.checked);
       };
     
+      function getAllSkills(){
+        axios.get('https://gist.github.com/amertoumi/7db06046b98c8927f4e61bf88880065f')
+        .then((res)=>console.log(res.data))
+        .catch((error) => error.response);
+      }
+
       //list profil skills from db
       useEffect(() => {
     
-        var URL = API_HOST + API_DETAILS_USER + id_Current_User;
-        var config = {
-          method: "get",
-          url: URL,
-          headers: {},
-        };
-    
-        axios(config)
-          .then((response) => response)
-          .then((response) => setCV(response.data["details"]))
-  
-          .catch((error) => error.response)
+        getAllSkills();
           
       }, []);
     return ( 
         <React.Fragment>
             <Container>
-
+                <div>test</div>
             </Container>
         </React.Fragment>
      );
 }
  
-export default EditSkillsList;
+export default EditSkillsBlock;
