@@ -3,7 +3,6 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
-import Divider from '@material-ui/core/Divider';
 import { Container, Row, Col } from "reactstrap";
 import {
   API_HOST,
@@ -20,7 +19,6 @@ import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Swal from "sweetalert2";
 
-const MiddleEditBlock = dynamic(() => import("./MiddleEditBlock"));
 
 const useStyles = makeStyles((theme) => ({
   root: {
