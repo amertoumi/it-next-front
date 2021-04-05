@@ -1,12 +1,7 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from 'react';
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import {
-  API_HOST,
-  API_WORK_BY_PROFIL_PATH,
-  API_REMOVE_WORK_EXP_PATH,
-  API_UPDATE_WORk_PATH
-} from "../../API";
+import {API_HOST, API_EDUCATION_BY_PROFIL, API_REMOVE_EDUCATION_PATH, API_UPDATE_EDUCATION_PATH } from '../../API';
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
 import { Row, Col } from "reactstrap";
@@ -22,6 +17,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
 import EditIcon from "@material-ui/icons/Edit";
 import { format } from 'date-fns';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -69,28 +65,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function WorkExpBlock() {
-  const classes = useStyles();
-  const [work, setWork] = React.useState([]);
-  const token = window.localStorage.getItem("authToken");
-  const { id: id_Current_User } = jwtDecode(token);
-  const [disable, setDisable] = React.useState(true);
+const EducationsBlock = () => {
+    const classes = useStyles();
+    const [education, setEducation] = React.useState([]);
+    const token = window.localStorage.getItem("authToken");
+    const { id: id_Current_User } = jwtDecode(token);
+    const [disable, setDisable] = React.useState(true);
+    const Edithandler = (event) => {
+        setDisable(!disable);
+      };
+    //Get All Educations
+    useEffect(() => {
+        var URL = API_HOST + API_EDUCATION_BY_PROFIL + id_Current_User;
+        axios
+          .get(URL)
+          .then((response) => setEducation(response.data));
+      }, [education]);
 
-  const Edithandler = (event) => {
-    setDisable(!disable);
-  };
-
-  useEffect(() => {
-    var URL = API_HOST + API_WORK_BY_PROFIL_PATH + id_Current_User;
-    axios
-      .get(URL)
-
-      .then((response) => setWork(response.data));
-  }, [work]);
-
-  //Remove work experience by ID
-  const removeWorkExp = (id) => {
-    var URL = API_HOST + API_REMOVE_WORK_EXP_PATH + id;
+      //Remove Education by ID
+  const removeEducation = (id) => {
+    var URL = API_HOST + API_REMOVE_EDUCATION_PATH + id;
     axios(URL, {
       method: "DELETE",
       headers: {},
@@ -99,21 +93,22 @@ export default function WorkExpBlock() {
       .catch((error) => console.log(error.message));
   };
 
-  //Update work experience
-  const UpdateWorkExp = (id,index) => {
+  //Update Education
+  const UpdateEducation = (id,index) => {
     var formdata = new FormData();
-    formdata.append("position", work[index].poste);
-    formdata.append("entreprise", work[index].entreprise);
-    formdata.append("fromDate", work[index].fromDateFormat);
-    formdata.append("toDate", work[index].toDateFormat);
-    formdata.append("description", work[index].description);
+    formdata.append("school", education[index].school);
+    formdata.append("degree", education[index].degree);
+    formdata.append("fromDateEdu", education[index].fromDateFormat);
+    formdata.append("toDateEdu", education[index].toDateFormat);
+    formdata.append("descriptionEdu", education[index].descriptionEdu);
 
-    var url = API_HOST + API_UPDATE_WORk_PATH + id;
+    var url = API_HOST + API_UPDATE_EDUCATION_PATH + id;
     var requestOptions = {
       method: "POST",
       body: formdata,
       redirect: "follow",
     };
+    
     
     fetch(url, requestOptions)
     .then((response) => console.log(response));
@@ -123,13 +118,16 @@ export default function WorkExpBlock() {
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  
-  
-  return (
-    <div className={classes.root}>
-      {work.map((exp, index) => {
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+
+    return ( 
+        <div className={classes.root}>
+      {education.map((edu, index) => {
         return (
-          <Accordion key={exp.id} className={classes.accordion}>
+          <Accordion key={edu.id} className={classes.accordion}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1c-content"
@@ -138,12 +136,12 @@ export default function WorkExpBlock() {
               <div>
                 <Typography className={classes.heading}>
                   <span>
-                    <b>{capitalizeFirstLetter(exp.poste)}</b>
-                  </span>{" "}FOR{" "}
+                    <b>{capitalizeFirstLetter(edu.degree)}</b>
+                  </span>{" "}Degree{" "}on {" "}
                   
                   <span>
-                    <b>{capitalizeFirstLetter(exp.entreprise)}</b>
-                  </span>{" "}
+                    <b>{capitalizeFirstLetter(edu.school)}</b>
+                  </span>{" "} School
                   
                 </Typography>
               </div>
@@ -155,7 +153,7 @@ export default function WorkExpBlock() {
                   <div className="d-flex">
                     <Col>
                       <div>
-                        <label className={classes.labelInput}>Position:</label>
+                        <label className={classes.labelInput}>School:</label>
                       </div>
                       <div>
                         <TextField
@@ -163,19 +161,19 @@ export default function WorkExpBlock() {
                           id="outlined-basic"
                           label=""
                           variant="outlined"
-                          value={exp.poste || null}
+                          value={edu.school || null}
                           disabled={disable}
                           size="small"
                           onChange={(e) => {
-                            let item = [...work]
-                            item[index]= {...work[index], poste:e.target.value}
-                            setWork(item)
+                            let item = [...education]
+                            item[index]= {...education[index], school:e.target.value}
+                            setEducation(item)
                             
                           }}
                         />
                       </div>
                       <div>
-                        <label className={classes.labelInput}>Company:</label>
+                        <label className={classes.labelInput}>Degree:</label>
                       </div>
                       <div>
                         <TextField
@@ -183,13 +181,13 @@ export default function WorkExpBlock() {
                           id="outlined-basic"
                           label=""
                           variant="outlined"
-                          value={exp.entreprise || null}
+                          value={edu.degree || null}
                           disabled={disable}
                           size="small"
                           onChange={(e) => {
-                            let item = [...work]
-                            item[index]= {...work[index], entreprise:e.target.value}
-                            setWork(item)
+                            let item = [...education]
+                            item[index]= {...education[index], degree:e.target.value}
+                            setEducation(item)
                             
                           }}
                         />
@@ -205,13 +203,13 @@ export default function WorkExpBlock() {
                           id="outlined-basic"
                           label=""
                           variant="outlined"
-                          value={exp.fromDateFormat || null}
+                          value={edu.fromDateFormat || null}
                           disabled={disable}
                           size="small"
                           onChange={(e) => {
-                            let item = [...work]
-                            item[index]= {...work[index], fromDateFormat:e.target.value}
-                            setWork(item)
+                            let item = [...education]
+                            item[index]= {...education[index], fromDateFormat:e.target.value}
+                            setEducation(item)
                             
                           }}
                         />
@@ -225,13 +223,13 @@ export default function WorkExpBlock() {
                           id="outlined-basic"
                           label=""
                           variant="outlined"
-                          value={exp.toDateFormat || null}
+                          value={edu.toDateFormat || null}
                           disabled={disable}
                           size="small"
                           onChange={(e) => {
-                            let item = [...work]
-                            item[index]= {...work[index], toDateFormat:e.target.value}
-                            setWork(item)
+                            let item = [...education]
+                            item[index]= {...education[index], toDateFormat:e.target.value}
+                            setEducation(item)
                             
                           }}
                         />
@@ -250,13 +248,13 @@ export default function WorkExpBlock() {
                         id="outlined-basic"
                         label=""
                         variant="outlined"
-                        value={exp.description || null}
+                        value={edu.descriptionEdu || null}
                         disabled={disable}
                         fullWidth
                         onChange={(e) => {
-                          let item = [...work]
-                          item[index]= {...work[index], description:e.target.value}
-                          setWork(item)
+                          let item = [...education]
+                          item[index]= {...education[index], descriptionEdu:e.target.value}
+                          setEducation(item)
                           
                         }}
                       />
@@ -267,22 +265,25 @@ export default function WorkExpBlock() {
             </AccordionDetails>
             <Divider />
             <AccordionActions>
-              <Col>
+              <div className="d-flex">
+              <div className="col-4">
                 <Button
                   size="small"
                   style={{ color: "#E94545" }}
-                  onClick={() => removeWorkExp(exp.id)}
+                  onClick={() => removeEducation(edu.id)}
                 >
                   <DeleteIcon />
                   Remove
                 </Button>
-              </Col>
-              <Col>
+              </div>
+              
+              <div className="col-8 mr-5">
+              <Row>
                 <Button
                   variant="contained"
                   color="primary"
                   size="small"
-                  className="mr-2 ml-4"
+                  className="mr-2 ml-3"
                   onClick={Edithandler}
                 >
                   {disable ? (
@@ -302,17 +303,21 @@ export default function WorkExpBlock() {
                     variant="contained"
                     size="small"
                     style={{ backgroundColor: "green", color: "white" }}
-                    onClick={() => UpdateWorkExp(exp.id,index)}
+                    onClick={() => UpdateEducation(edu.id,index)}
                   >
                     <SaveIcon className="mr-2" />
                     Save
                   </Button>
                 ) : null}
-              </Col>
+                </Row>
+              </div>
+              </div>
             </AccordionActions>
           </Accordion>
         );
       })}
     </div>
-  );
+     );
 }
+ 
+export default EducationsBlock;

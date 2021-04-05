@@ -3,7 +3,8 @@ import React from "react";
 import dynamic from 'next/dynamic';
 import jwtDecode from "jwt-decode";
 import axios from "axios";
-import {API_HOST, API_ADD_WORK_EXP_PATH, API_REMOVE_WORK_EXP_PATH } from "../../API";
+import moment from 'moment';
+import {API_HOST, API_ADD_WORK_EXP_PATH, API_ADD_EDUCATION_PATH } from "../../API";
 import { Container, Row, Col } from "reactstrap";
 import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,8 +17,10 @@ import {
   KeyboardDatePicker,
   
 } from '@material-ui/pickers';
+
 const WorkExpBlock = dynamic(()=>import('./workExperienceBlock'));
 const EditSkillsBlock= dynamic(()=>import('./EditSkillsBlock'));
+const EDUCATIONSBLOCK = dynamic(() => import ('./EducationsBlock'));
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -33,23 +36,33 @@ const WorkExp_Education = () => {
     const { id: id_Current_User } = jwtDecode(token);
     const [fromDate, setFromDate] = React.useState(Date.now());
     const [toDate, setToDate] = React.useState(Date.now());
+    const [fromDateEdu, setFromDateEdu] = React.useState(Date.now());
+    const [toDateEdu, setToDateEdu] = React.useState(Date.now());
     const [workExp, setWorkExp] = React.useState({
         poste: "",
         company: "",
         description:""
       });
+    const [education, setEducation] = React.useState({
+      school:"",
+      degree:"",
+      descriptionEdu:""
+    })
 
    const handleFromDateChange = (date) => {
-    console.log(date);
     setFromDate(date);
   }; 
-  const clearFields =()=>{
-    setWorkExp({poste:"",company:"", description:""});
-  }
-   const handleToDateChange = (date) => {
+  const handleToDateChange = (date) => {
     setToDate(date);
-  }; 
-
+  };
+  const handleFromDateEduChange = (date) => {
+    setFromDateEdu(date);
+  };
+  const handleToDateEduChange = (date) => {
+    setToDateEdu(date);
+  };
+ 
+  //Add New work experience
   const SubmitWorkExp = () => {
     var formdata = new FormData();
     formdata.append("position", workExp.poste);
@@ -66,12 +79,31 @@ const WorkExp_Education = () => {
     };
     fetch(url, requestOptions)
     .then((response) => console.log(response));
-    clearFields();
+    
   }
+
+    //Add New education or training
+    const SubmitNewEducation = () => {
+      var formdata = new FormData();
+      formdata.append("school", education.school);
+      formdata.append("degree", education.degree);
+      formdata.append("fromDateEdu", fromDate.toISOString());
+      formdata.append("toDateEdu", toDate.toISOString());
+      formdata.append("descriptionEdu", education.descriptionEdu);
+  
+      var url = API_HOST + API_ADD_EDUCATION_PATH + id_Current_User;
+      var requestOptions = {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+      };
+      fetch(url, requestOptions)
+      .then((response) => console.log(response));
+    }
 
   return (
     <Container>
-      <form onSubmit={SubmitWorkExp}>
+      
       <div className="d-flex ">
         <Col className="col-7">
           <div className="mt-5 mb-5">
@@ -89,7 +121,8 @@ const WorkExp_Education = () => {
                   variant="contained"
                   size="small"
                   style={{ backgroundColor: "green", color: "white" }}
-                  type="sumbit" 
+                  type="sumbit"
+                  onClick={SubmitWorkExp}
                 >
                   Save
                 </Button>
@@ -165,7 +198,7 @@ const WorkExp_Education = () => {
                 label="To:"
                 format="MM/dd/yyyy"
                 value={toDate}
-                 onChange={handleToDateChange} 
+                onChange={handleToDateChange} 
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
                 }}
@@ -222,7 +255,7 @@ const WorkExp_Education = () => {
                   variant="contained"
                   size="small"
                   style={{ backgroundColor: "green", color: "white" }}
-                  /* onClick={SubmitCV} */
+                 onClick={SubmitNewEducation} 
                 >
                   Save
                 </Button>
@@ -240,13 +273,13 @@ const WorkExp_Education = () => {
                 label=""
                 variant="outlined"
                 placeholder="Enter your school name"
-                /* value={workExp.description || null} */
+                value={education.school || null} 
                 size="small"
                 fullWidth
-                /* onChange={(e) => {
+                onChange={(e) => {
                     e.preventDefault(),
-                      setCV({ ...workExp, description: e.target.value });
-                  }} */
+                      setEducation({ ...education, school: e.target.value });
+                  }} 
               />
             </div>
             <div>
@@ -259,9 +292,13 @@ const WorkExp_Education = () => {
                 label=""
                 variant="outlined"
                 placeholder="Enter your degree"
-                /* value={position} */
+                value={education.degree || null} 
                 size="small"
                 fullWidth
+                onChange={(e) => {
+                  e.preventDefault(),
+                    setEducation({ ...education, degree: e.target.value });
+                }}
               />
             </div>
             <div>
@@ -277,8 +314,8 @@ const WorkExp_Education = () => {
                 id="date-picker-dialog"
                 label="From:"
                 format="MM/dd/yyyy"
-                /* value={selectedDate} 
-                onChange={handleDateChange}*/
+                value={fromDateEdu}
+                onChange={handleFromDateEduChange}
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
                 }}
@@ -290,8 +327,8 @@ const WorkExp_Education = () => {
                 id="date-picker-dialog"
                 label="To:"
                 format="MM/dd/yyyy"
-                /* value={selectedDate} 
-                onChange={handleDateChange}*/
+                value={toDateEdu}
+                onChange={handleToDateEduChange}
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
                 }}
@@ -310,19 +347,25 @@ const WorkExp_Education = () => {
                 id="outlined-basic"
                 label=""
                 variant="outlined"
-                /* value={position} */
+                value={education.descriptionEdu || null} 
                 placeholder="Write about education degree or training..."
                 fullWidth
                 multiline={true}
                 rows={5}
+                onChange={(e) => {
+                  e.preventDefault(),
+                    setEducation({ ...education, descriptionEdu: e.target.value });
+                }}
               />
           </div>
           <Divider variant="middle" />
-          
+          <div>
+            <EDUCATIONSBLOCK />
+          </div>
           </div>
         </Col>
       </div>
-      </form>
+      
     </Container>
   );
 };
