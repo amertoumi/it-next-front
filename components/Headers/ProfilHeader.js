@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { API_HOST, API_DETAILS_USER, API_UPLOAD_LOGO } from "../../API";
-import Link from 'next/link';
+import Link from "next/link";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -10,11 +10,10 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Swal from "sweetalert2";
-// reactstrap components
 import { Container, Row, Col } from "reactstrap";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
-//import '../../CustomStyles.css';
+import ls from "local-storage";
 
 const useStyles = makeStyles({
   root: {
@@ -22,14 +21,18 @@ const useStyles = makeStyles({
   },
   media: {
     height: 140,
+  },
+  textWhite: {
+    color: 'white',
   }
-  
 });
 
 function ProfilHeader() {
   const classes = useStyles();
   const [CurrentUser, setCurrentUser] = React.useState([]);
   const [selectedFile, setSelectedFile] = React.useState(null);
+  const token = ls.get("authToken");
+
   function SuccessAccus() {
     Swal.fire({
       title: "Success!",
@@ -41,19 +44,18 @@ function ProfilHeader() {
   function ErrorAccus() {
     Swal.fire({
       title: "Error !!",
-      text:
-        "Oups :/ Cannot upload logo",
+      text: "Oups :/ Cannot upload logo",
       icon: "error",
       confirmButtonText: "Try Again",
     });
   }
   React.useEffect(() => {
-    //console.log(id_Current_User)
-
-    const token = window.localStorage.getItem("authToken");
-    const infos = jwtDecode(token);
-    const { id: id_Current_User } = jwtDecode(token);
+    const token = ls.get("authToken");
+    //const { id: id_Current_User } = jwtDecode(token);
+    const dcd = jwtDecode(token);
+    const id_Current_User = dcd.id;
     var URL = API_HOST + API_DETAILS_USER + id_Current_User;
+
     var config = {
       method: "get",
       url: URL,
@@ -65,15 +67,11 @@ function ProfilHeader() {
       .then((response) => setCurrentUser(response.data["details"]))
       .catch((error) => console.log(error.response));
   }, []);
-  
-
-  //console.log(CurrentUser)
 
   const UploadLogo = () => {
     var formdata = new FormData();
     formdata.append("File", selectedFile);
     formdata.append("type", "logo");
-    
 
     var url = API_HOST + API_UPLOAD_LOGO;
     var requestOptions = {
@@ -106,90 +104,84 @@ function ProfilHeader() {
 
         <Container fluid>
           <Row>
-            <Col>
-              <Card>
-                <CardActionArea>
-                  <Row className="pt-3">
-                    <Col>
-                      <CardMedia>
-                        <Col className="order-sm-1 ml-7" sm="3">
-                          <div className="card-profile-image">
-                            <a
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              <div className="mt-5">
-                                <img
-                                  alt="..."
-                                  className="rounded-circle"
-                                  height="140px"
-                                  width="140px"
-                                  src={require("assets/img/theme/team-4-800x800.jpg")}
-                                />
-                              </div>
-                            </a>
-                          </div>
-                        </Col>
-                      </CardMedia>
-
-                      <Row className="pt-7" style={{width:'101px  '}}>
-                      
-                        <label 
-                        for="files"
-                        type="files" 
-                        className="btn ml-3"
-                        onClick={UploadLogo}
+            <div className="d-flex">
+              <div className="d-flex justify-content-between">
+                <div>
+                  <Col className="" sm="3">
+                    <div >
+                      <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                        <div className="mt-5">
+                          <img
+                            alt="..."
+                            className="rounded-circle"
+                            height="140px"
+                            width="140px"
+                            src={require("assets/img/theme/team-4-800x800.jpg")}
+                          />
+                        </div>
+                      </a>
+                    </div>
+                  </Col>
+                </div>
+                <div>
+                  <Col>
+                    <CardContent >
+                      <Typography gutterBottom variant="h5" component="h2" className={classes.textWhite} >
+                        {CurrentUser.name} {CurrentUser.lastName}
+                      </Typography>
+                      <Typography gutterBottom variant="h6" component="h2" className={classes.textWhite}>
+                        {CurrentUser.poste}
+                      </Typography>
+                      <Typography gutterBottom variant="h8" component="h6" className={classes.textWhite}>
+                        ({CurrentUser.nbrAnneeExp} years of experience)
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                        className={classes.textWhite}
+                      >
+                        Place: {CurrentUser.country},{CurrentUser.city}
+                      </Typography>
+                    </CardContent>
+                    <div >
+                        <div>
+                        <label
+                          for="files"
+                          type="files"
+                          className="btn ml-3"
+                          onClick={UploadLogo}
+                          className={classes.textWhite}
                         >
-                        <i className="fas fa-save"></i>   
+                          <i className="fas fa-save"></i>
                         </label>
-                        <label htmlFor="file" style={{ padding:"5px 10px"}}>
-                        <i class="fas fa-camera"></i>
-                        </label>
-                        <input 
-                        id="file" 
-                        type="file"
-                        name="file"
-                        style={{visibility:"hidden"}} 
-                        onChange={(e) => {
-                          setSelectedFile(e.target.files[0]);
-                        }}
-                        >
-                        </input>
-                      
-                      </Row>
-                    </Col>
-                    <Col className="pr-4">
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {CurrentUser.name} {CurrentUser.lastName}
+                        <label htmlFor="file" >
                           
-                        </Typography>
-                        <Typography gutterBottom variant="h6" component="h2">
-                          {CurrentUser.poste}
-                        </Typography>
-                        <Typography gutterBottom variant="h8" component="h6">
-                          ({CurrentUser.nbrAnneeExp} years
-                          of experience)
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          component="p"
-                        >
-                          Place: {CurrentUser.country},{CurrentUser.city}
-                        </Typography>
-                      </CardContent>
-                    </Col>
-                  </Row>
-                </CardActionArea>
-              </Card>
-            </Col>
-            <Col>
-              <Row className="text-center d-flex justify-content-end">
+                          <i class="far fa-camera" className={classes.textWhite}></i>
+                        </label>
+                        <input
+                          id="file"
+                          type="file"
+                          name="file"
+                          style={{ visibility: "hidden" }}
+                          onChange={(e) => {
+                            setSelectedFile(e.target.files[0]);
+                          }}
+                        ></input>
+                        
+                          <div className={classes.textWhite}>Change your picture</div>
+                        
+                        </div>
+                        
+                      </div>
+                  </Col>
+                </div>
+              </div>
+              <div>
                 <Col>
                   <Card>
                     <CardActionArea>
-                      <Row className="pt-3">
+                      <Row>
                         <Col>
                           <CardMedia>
                             <Col>
@@ -197,28 +189,28 @@ function ProfilHeader() {
                                 <Col className="order-sm-1">
                                   <div className="mt-3">
                                     <Link href="/user/cv">
-                                    <Button>
-                                      <i className="far fa-user mr-4 "></i>View
-                                      Resume{" "}
-                                      <i className="fas fa-arrow-alt-circle-right ml-3"></i>
-                                    </Button>
+                                      <Button>
+                                        <i className="far fa-user mr-4 "></i>
+                                        View Resume{" "}
+                                        <i className="fas fa-arrow-alt-circle-right ml-3"></i>
+                                      </Button>
                                     </Link>
                                   </div>
                                 </Col>
                               </CardMedia>
                             </Col>
                             <hr></hr>
-                            
+
                             <Col>
                               <CardMedia>
                                 <Col className="order-sm-1 ">
                                   <div className="mb-3">
                                     <Link href="/user/edit_cv">
-                                    <Button>
-                                      <i className="fas fa-pen mr-4" ></i>Edit
-                                      Resume{" "}
-                                      <i className="fas fa-arrow-alt-circle-right ml-3"></i>
-                                    </Button>
+                                      <Button>
+                                        <i className="fas fa-pen mr-4"></i>Edit
+                                        Resume{" "}
+                                        <i className="fas fa-arrow-alt-circle-right ml-3"></i>
+                                      </Button>
                                     </Link>
                                   </div>
                                 </Col>
@@ -230,14 +222,16 @@ function ProfilHeader() {
                     </CardActionArea>
                   </Card>
                 </Col>
+              </div>
+              <div>
                 <Col>
                   <Card>
                     <CardActionArea>
                       <Row>
-                        <Col className="pt-3">
+                        <Col>
                           <Col>
                             <CardMedia>
-                              <Col className="order-sm-1 pr-4">
+                              <Col className="">
                                 <div>
                                   <p>
                                     Complete your profile
@@ -262,8 +256,8 @@ function ProfilHeader() {
                     </CardActionArea>
                   </Card>
                 </Col>
-              </Row>
-            </Col>
+              </div>
+            </div>
           </Row>
         </Container>
       </div>

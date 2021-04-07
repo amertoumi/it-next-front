@@ -90,10 +90,9 @@ export default function Inspirenaute_Form() {
 
 
     if (selectedFile) {
-      console.log(mySkills);
-      console.log(typeof mySkills);
-      fetch(url, requestOptions).then((response) => response);
-      //SuccessAccus();
+      fetch(url, requestOptions)
+      .then((response) => response);
+      SuccessAccus();
     } else {
       ErrorAccus();
     }
@@ -245,13 +244,12 @@ export default function Inspirenaute_Form() {
               id="mySkills"
               size="small"
               options={listSkills.map((option) => option.name)}
-              /* onChange={(event, newValue) => {
+              onChange={(event, newValue) => {
                 setMySkills([
                   ...mySkills,
                   ...newValue.filter((option) => mySkills.indexOf(option) === -1),
                 ]); 
-              }}*/
-              onChange={(value) => setMySkills(parseInt(Object.keys(value)))}
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -280,9 +278,9 @@ export default function Inspirenaute_Form() {
                 type="file"
                 name="file"
                 id="file"
-                /* inputProps={{
+                inputProps={{
                 accept: "application/pdf,application/vnd.ms-excel",
-              }} */
+              }}
                 onChange={(e) => {
                   setSelectedFile(e.target.files[0]);
                 }}

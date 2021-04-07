@@ -6,6 +6,7 @@ import {
   API_AUTH_PATH,
   } from "../API";
 import Router from 'next/router';
+import ls from 'local-storage';
 
 function authenticate(data) {
     var URL = API_HOST + API_AUTH_PATH;
@@ -16,7 +17,7 @@ function authenticate(data) {
       .then(token => {
 
         // stockage de token dans localStorage
-        window.localStorage.setItem("authToken", token);
+        ls.set("authToken", token);
         // Prévient axios qu'on a un header par défault sur toutes les futures requettes http
         setAxiosToken(token);
         
@@ -37,7 +38,8 @@ function authenticate(data) {
 
 function logout() {
     //remove Token from localStorage
-    window.localStorage.removeItem("authToken");
+    //window.localStorage.removeItem("authToken");
+    ls.remove("authToken");
     delete axios.defaults.headers["Authorization"];
     Router.push('/home');
   }
@@ -49,7 +51,7 @@ function setAxiosToken(token){
 
 function setup(){
     // 1. verif is token exist or not
-    const token = window.localStorage.getItem("authToken");
+    const token = ls.get("authToken");
     //2. if token valide
     
     if(token) {
@@ -69,7 +71,7 @@ function setup(){
 }
 
 function isAutheticated() {
-    const token = window.localStorage.getItem("authToken");
+    const token = ls.get("authToken");
     //2. if token valide
     if(token) {
         const {exp: expiration} = jwtDecode(token)

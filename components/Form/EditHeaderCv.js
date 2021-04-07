@@ -3,7 +3,6 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
-import Divider from '@material-ui/core/Divider';
 import { Container, Row, Col } from "reactstrap";
 import {
   API_HOST,
@@ -16,9 +15,10 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import EditIcon from "@material-ui/icons/Edit";
 import { makeStyles } from "@material-ui/core/styles";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import SaveIcon from '@material-ui/icons/Save';
+import CancelIcon from '@material-ui/icons/Cancel';
 import Swal from "sweetalert2";
-
-const MiddleEditBlock = dynamic(() => import("./MiddleEditBlock"));
+import ls from 'local-storage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,18 +26,39 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  inputText: {
+    color: "white"
+  },
+  disabledInput: {
+    "& .MuiInputBase-root.Mui-disabled": {
+      color: "white",
+    }
+  },
   input: {
-    display: "none",
+    display: 'none',
+  },
+  labelInput: {
+      color: "#8E89B3"
+  },
+  ViewResumeButton: {
+    width: '180px',
+    height: '35px',
+    background: '#259879 0% 0% no-repeat padding-box',
+    color: 'white',
+    borderRadius: '30px',
+    opacity: 1
+    
+  },
+  RoundedButton : {
+      borderRadius:' 50%'
   }
 }));
-const bgHeaderBlock ={
-    backgroundColor: "#202460",
-}
-function EditFormCv () {
+
+function EditHeaderCv () {
 
   const classes = useStyles();
-  const token = window.localStorage.getItem("authToken");
-  const infos = jwtDecode(token);
+  const token = ls.get("authToken");
+  //const infos = jwtDecode(token);
   const { id: id_Current_User } = jwtDecode(token);
   const [disable, setDisable] = React.useState(true);
   const [skills, setSkills] = React.useState([]);
@@ -60,11 +81,6 @@ function EditFormCv () {
   const allSkillsArray = skills.map(function (obj) {
     return obj.name;
   });
-
-    console.log("all skills array")
-    console.log(allSkillsArray)
-    console.log("Profil skills")
-    console.log(skillsProfil)
 
   function SuccessAccus() {
     Swal.fire({
@@ -144,33 +160,42 @@ function EditFormCv () {
     }
   };
 
-  if (typeof window !== "undefined") {
     return (
-      <Container>
-        <Container className="pt-7">
-            <React.Fragment style={bgHeaderBlock}>
-            <Row className="container-fluid">
+        <>
+      <div
+        className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+        style={{
+          minHeight: "600px",
+          backgroundImage:
+            "url(" + require("assets/img/theme/profile-cover.jpg") + ")",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+      >
+        <span className="mask bg-gradient-default opacity-8" />
+      
+      <Container fluid>
+            <Row className="mt-5">
             <Col>
               <Link href="/user/profil">
-                <Button variant="outlinned">
-                  <ArrowBackIosIcon />
-                  PROFILE / EDIT RESUME
+                <Button variant="outlinned" >
+                  <ArrowBackIosIcon style={{color:"white"}}/>
+                  <span style={{color:"white"}}>PROFILE / EDIT RESUME</span>
                 </Button>
               </Link>
             </Col>
             <Col className="d-flex justify-content-end">
+              <Link href="/user/cv">
               <Button
-                variant="contained"
-                color="primary"
-                className="mb-3 mr-5"
-                style={{ backgroundColor: "green", color: "white" }}
+                className={classes.ViewResumeButton}
               >
                 View Resume
               </Button>
+              </Link>
             </Col>
           </Row>
-          <Row className="container-fluid">
-            <Col className="col-sm-4 mt-5">
+          <Row >
+            <Col className="col-sm-4 mt-5 pl-5">
               <Row>
                 <img
                   alt="..."
@@ -186,8 +211,8 @@ function EditFormCv () {
                   className={classes.input}
                   id="icon-button-file"
                   type="file"
-                />
-                <label htmlFor="icon-button-file">
+                /> 
+                <label htmlFor="icon-button-file" className={classes.labelInput}>
                   <IconButton
                     color="primary"
                     aria-label="upload picture"
@@ -205,7 +230,8 @@ function EditFormCv () {
                   <Button
                     variant="contained"
                     color="primary"
-                    className="mb-3 mr-5"
+                    size="small"
+                    className="mb-3 mr-5 ml-4"
                     onClick={Edithandler}
                   >
                     {disable ? (
@@ -214,56 +240,72 @@ function EditFormCv () {
                         Edit
                       </>
                     ) : (
-                      "Cancel"
+                        <>
+                        <CancelIcon className="mr-2"/>
+                      Cancel
+                      </>
                     )}
                   </Button>
                   {!disable ? (
                     <Button
                       className="mb-3"
                       variant="contained"
+                      size="small"
                       style={{ backgroundColor: "green", color: "white" }}
                       onClick={SubmitCV}
                     >
-                      Save
+                      <SaveIcon className="mr-2"/>Save
                     </Button>
                   ) : null}
                 </Col>
               </Row>
               <form className={classes.root} noValidate autoComplete="off">
                 <Row>
-                  <Col>
-                    <label>Name</label>
+                  <Col >
+                  <div>
+                  <label className={classes.labelInput} >Name</label>
+                  </div>
+                    <div>
                     <TextField
-                      id="outlined-basic"
+                      className={classes.disabledInput}
+                      id="name"
                       label=""
                       variant="outlined"
                       value={cv.name || null}
                       disabled={disable}
                       size="small"
-                      inputProps={{ className: classes.textColor }}
                       onChange={(e) => {
                         e.preventDefault(),
                           setCV({ ...cv, name: e.target.value });
                       }}
+                      
                     />
-                    <label>Current Position</label>
+                    </div>
+                    <div>
+                    <label className={classes.labelInput}>Current Position</label>
+                    </div>
+                    <div>
                     <TextField
-                      id="outlined-basic"
+                      className={classes.disabledInput}
+                      id="currentpost"
                       label=""
                       variant="outlined"
                       value={cv.poste || null}
                       disabled={disable}
                       size="small"
-                      inputProps={{ className: classes.textColor }}
                       onChange={(e) => {
                         e.preventDefault(),
                           setCV({ ...cv, poste: e.target.value });
                       }}
                     />
-
-                    <label>Years of experiences</label>
+                    </div>
+                    <div>
+                    <label className={classes.labelInput}>Years of experiences</label>
+                    </div>
+                    <div>
                     <TextField
-                      id="outlined-basic"
+                      className={classes.disabledInput}
+                      id="years"
                       label=""
                       variant="outlined"
                       value={cv.nbrAnneeExp || null}
@@ -275,9 +317,14 @@ function EditFormCv () {
                           setCV({ ...cv, nbrAnneeExp: e.target.value });
                       }}
                     />
-                    <label>Landing Place</label>
+                    </div>
+                    <div>
+                    <label className={classes.labelInput}>Landing Place</label>
+                    </div>
+                    <div>
                     <TextField
-                      id="outlined-basic"
+                    className={classes.disabledInput}
+                      id="place"
                       label=""
                       variant="outlined"
                       value={cv.country || null}
@@ -289,11 +336,16 @@ function EditFormCv () {
                           setCV({ ...cv, country: e.target.value });
                       }}
                     />
+                    </div>
                   </Col>
                   <Col>
-                    <label>Phone</label>
+                  <div>
+                    <label className={classes.labelInput}>Phone</label>
+                    </div>
+                    <div>
                     <TextField
-                      id="outlined-basic"
+                    className={classes.disabledInput}
+                      id="phone"
                       label=""
                       variant="outlined"
                       value={cv.phone || null}
@@ -305,9 +357,14 @@ function EditFormCv () {
                           setCV({ ...cv, phone: e.target.value });
                       }}
                     />
-                    <label>Email</label>
+                    </div>
+                    <div>
+                    <label className={classes.labelInput}>Email</label>
+                    </div>
+                    <div>
                     <TextField
-                      id="outlined-basic"
+                    className={classes.disabledInput}
+                      id="email"
                       label=""
                       variant="outlined"
                       value={cv.email || null}
@@ -319,9 +376,14 @@ function EditFormCv () {
                           setCV({ ...cv, email: e.target.value });
                       }}
                     />
-                    <label>Link</label>
+                    </div>
+                    <div>
+                    <label className={classes.labelInput}>Link</label>
+                    </div>
+                    <div>
                     <TextField
-                      id="outlined-basic"
+                    className={classes.disabledInput}
+                      id="link"
                       label=""
                       variant="outlined"
                       value={cv.link || null}
@@ -333,29 +395,17 @@ function EditFormCv () {
                           setCV({ ...cv, link: e.target.value });
                       }}
                     />
+                    </div>
                   </Col>
                 </Row>
               </form>
             </Col>
-          </Row>
-            </React.Fragment>
-
-          <Row className="d-flex flex-column mt-3">
-              <Col>
-                <h3>Skills</h3>
-                <Divider variant="middle" />
-              </Col>
-              <Col>
-              <div>skills to be here....</div>
-            </Col>
-              
-              
-          </Row>
-        </Container>
+          </Row> 
       </Container>
+      </div>
+    </>
     );
-  } else null;
-
 }
 
-export default EditFormCv;
+
+export default EditHeaderCv;
