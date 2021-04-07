@@ -65,7 +65,7 @@ function ProfilHeader() {
       .then((response) => setCurrentUser(response.data["details"]))
       .catch((error) => console.log(error.response));
   }, []);
-  
+
 
   //console.log(CurrentUser)
 
@@ -73,7 +73,7 @@ function ProfilHeader() {
     var formdata = new FormData();
     formdata.append("File", selectedFile);
     formdata.append("type", "logo");
-    
+
 
     var url = API_HOST + API_UPLOAD_LOGO;
     var requestOptions = {
@@ -162,7 +162,7 @@ function ProfilHeader() {
                       <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                           {CurrentUser.name} {CurrentUser.lastName}
-                          
+
                         </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                           {CurrentUser.poste}
@@ -196,7 +196,7 @@ function ProfilHeader() {
                               <CardMedia>
                                 <Col className="order-sm-1">
                                   <div className="mt-3">
-                                    <Link href="/user/cv">
+                                    <Link href="/user/view_cv">
                                     <Button>
                                       <i className="far fa-user mr-4 "></i>View
                                       Resume{" "}
@@ -213,13 +213,11 @@ function ProfilHeader() {
                               <CardMedia>
                                 <Col className="order-sm-1 ">
                                   <div className="mb-3">
-                                    <Link href="/user/edit_cv">
                                     <Button>
-                                      <i className="fas fa-pen mr-4" ></i>Edit
+                                      <i className="fas fa-pen mr-4" href="/user/edit_cv"></i>Edit
                                       Resume{" "}
                                       <i className="fas fa-arrow-alt-circle-right ml-3"></i>
                                     </Button>
-                                    </Link>
                                   </div>
                                 </Col>
                               </CardMedia>
