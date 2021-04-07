@@ -12,6 +12,7 @@ import {
 } from "../API";
 import Router from 'next/router';
 import jwtDecode from 'jwt-decode';
+import ls from 'local-storage';
 
 //Login
 function auth_api(data) {
@@ -21,7 +22,7 @@ function auth_api(data) {
     .then((response) => response.data.token)
     .then((token) => {
       // stockage de token dans localStorage
-      window.localStorage.setItem("authToken", token);
+      ls.set("authToken", token);
       // Prévient axios qu'on a un header par défault sur toutes les futures requettes http
       axios.defaults.headers["Authorization"] = "Bearer  " + token;
       
@@ -43,7 +44,8 @@ function auth_api(data) {
 
 function logout() {
   //remove Token from localStorage
-  window.localStorage.removeItem("authToken");
+  //window.localStorage.removeItem("authToken");
+  ls.remove("authToken");
   delete axios.defaults.headers["Authorization"];
   Router.push('/home');
 }

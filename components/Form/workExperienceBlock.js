@@ -22,6 +22,7 @@ import Divider from "@material-ui/core/Divider";
 import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
 import EditIcon from "@material-ui/icons/Edit";
+import ls from 'local-storage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
 export default function WorkExpBlock() {
   const classes = useStyles();
   const [work, setWork] = React.useState([]);
-  const token = window.localStorage.getItem("authToken");
+  const token = ls.get("authToken");
   const { id: id_Current_User } = jwtDecode(token);
   const [disable, setDisable] = React.useState(true);
   const [sizeWork, setSizeWork] = React.useState();

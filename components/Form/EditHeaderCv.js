@@ -18,7 +18,7 @@ import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Swal from "sweetalert2";
-
+import ls from 'local-storage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,17 +54,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const defaultProps = {
-  bgcolor: 'background.paper',
-  borderColor: 'text.primary',
-  m: 1,
-  border: 1,
-  style: { width: '5rem', height: '5rem' },
-};
 function EditHeaderCv () {
 
   const classes = useStyles();
-  const token = window.localStorage.getItem("authToken");
+  const token = ls.get("authToken");
   //const infos = jwtDecode(token);
   const { id: id_Current_User } = jwtDecode(token);
   const [disable, setDisable] = React.useState(true);
@@ -167,7 +160,6 @@ function EditHeaderCv () {
     }
   };
 
-  if (typeof window !== "undefined") {
     return (
         <>
       <div
@@ -413,8 +405,7 @@ function EditHeaderCv () {
       </div>
     </>
     );
-  } else null;
-
 }
+
 
 export default EditHeaderCv;

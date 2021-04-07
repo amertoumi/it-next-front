@@ -18,6 +18,7 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import EditIcon from "@material-ui/icons/Edit";
 import { format } from 'date-fns';
 import { TextFields } from '@material-ui/icons';
+import ls from 'local-storage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 const EducationsBlock = () => {
     const classes = useStyles();
     const [education, setEducation] = React.useState([]);
-    const token = window.localStorage.getItem("authToken");
+    const token = ls.get("authToken");
     const { id: id_Current_User } = jwtDecode(token);
     const [disable, setDisable] = React.useState(true);
     const Edithandler = (event) => {

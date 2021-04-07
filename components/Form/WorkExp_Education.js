@@ -17,6 +17,7 @@ import {
   KeyboardDatePicker,
   
 } from '@material-ui/pickers';
+import ls from 'local-storage';
 
 const WorkExpBlock = dynamic(()=>import('./workExperienceBlock'));
 const EditSkillsBlock= dynamic(()=>import('./EditSkillsBlock'));
@@ -41,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 const WorkExp_Education = () => {
     const classes = useStyles();
-    const token = window.localStorage.getItem("authToken");
+    const token = ls.get("authToken");
     const [work, setWork] = React.useState([]);
     const { id: id_Current_User } = jwtDecode(token);
     const [fromDate, setFromDate] = React.useState(Date.now());
@@ -78,6 +79,7 @@ const fetchWork = ()  =>{
     .get(URL)
     .then((response) => setWork(response.data));
 }
+console.log(work);
 
 useEffect(() => {
   fetchWork({});

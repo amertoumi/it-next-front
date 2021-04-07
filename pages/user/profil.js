@@ -4,10 +4,8 @@ import jwtDecode from "jwt-decode";
 import {API_HOST, API_UPDATE_PROFIL} from '../../API';
 import dynamic from "next/dynamic";
 import Swal from "sweetalert2";
-
-const ProfilHeader = dynamic(() =>
-  import("../../components/Headers/ProfilHeader")
-);
+import ls from 'local-storage';
+const ProfilHeader = dynamic(() =>import("../../components/Headers/ProfilHeader"));
 import {
   Container,
   Button,
@@ -21,8 +19,10 @@ import {
 } from "reactstrap";
 
 function UserPanel() {
-  const token = window.localStorage.getItem("authToken");
-  const { id: id_Current_User } = jwtDecode(token);
+  const token = ls.get("authToken");
+  //const { id: id_Current_User } = token && jwtDecode(token);
+  const decoded = jwtDecode(token);
+  const id_Current_User= decoded.id;
   const [description, setDescription]= React.useState("");
   const [startAt, setStartAt]= React.useState("");
   const [finishAt, setFinishAt] = React.useState("");
@@ -174,10 +174,10 @@ function UserPanel() {
 };
 
 UserPanel.getInitialProps = async (ctx) => {
-  //const token =  window.localStorage.getItem("authToken");
-  const nossr = {ssr: false}
-  return { nossr }
-}
+  const tok =  "authToken";
+  return { res:tok }
+} 
+
 
 UserPanel.layout = User;
 

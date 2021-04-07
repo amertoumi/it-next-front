@@ -8,6 +8,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from "@material-ui/core/styles";
+import ls from 'local-storage';
 
 const useStyles = makeStyles((theme) => ({
   btnSave : {
@@ -23,12 +24,12 @@ const useStyles = makeStyles((theme) => ({
 
 const EditSkillsBlock = () => {
   const classes = useStyles();
-  const token = window.localStorage.getItem("authToken");
+  const token = ls.get("authToken");
   const { id: id_Current_User } = jwtDecode(token);
   const [typeSkills, setTypeskills] = useState([]);
   const [listSkills, setListSkills] = useState([]);
   const [checked, setChecked] = useState();
-  
+
   //list profil skills from db && type skills
   useEffect(() => {
     var URL = API_HOST + API_STATUS_Skills_PATH + id_Current_User
