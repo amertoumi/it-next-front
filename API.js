@@ -22,8 +22,11 @@ export const API_ADD_WORK_EXP_PATH = '/profil/add/work/';
 export const API_REMOVE_WORK_EXP_PATH = '/profil/remove/work/';
 export const API_WORK_BY_PROFIL_PATH = '/profil/all/work/';
 export const API_UPDATE_WORk_PATH = "/profil/update/work/";
+export const API_UPDATE_SKILLS = "/skills/update/";
 
 export const API_ADD_EDUCATION_PATH = "/profil/add/education/";
 export const API_EDUCATION_BY_PROFIL = "/profil/all/education/";
 export const API_REMOVE_EDUCATION_PATH = "/profil/remove/education/";
 export const API_UPDATE_EDUCATION_PATH = "/profil/update/education/";
+
+export const API_STATUS_Skills_PATH = "/skills/status/profil/";

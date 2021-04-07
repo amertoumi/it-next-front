@@ -17,6 +17,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
 import EditIcon from "@material-ui/icons/Edit";
 import { format } from 'date-fns';
+import { TextFields } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,14 +74,14 @@ const EducationsBlock = () => {
     const [disable, setDisable] = React.useState(true);
     const Edithandler = (event) => {
         setDisable(!disable);
-      };
+    };
     //Get All Educations
     useEffect(() => {
         var URL = API_HOST + API_EDUCATION_BY_PROFIL + id_Current_User;
         axios
           .get(URL)
           .then((response) => setEducation(response.data));
-      }, [education]);
+      }, []);
 
       //Remove Education by ID
   const removeEducation = (id) => {
@@ -127,11 +128,12 @@ const EducationsBlock = () => {
         <div className={classes.root}>
       {education.map((edu, index) => {
         return (
-          <Accordion key={edu.id} className={classes.accordion}>
+          <Accordion className={classes.accordion} key={index}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1c-content"
               id="panel1c-header"
+              key={index}
             >
               <div>
                 <Typography className={classes.heading}>
@@ -146,7 +148,7 @@ const EducationsBlock = () => {
                 </Typography>
               </div>
             </AccordionSummary>
-            <AccordionDetails className={classes.details}>
+            <AccordionDetails className={classes.details} key={index}>
               <div>
                 <Divider className="mb-2" />
                 <Row>
@@ -157,8 +159,8 @@ const EducationsBlock = () => {
                       </div>
                       <div>
                         <TextField
+                          key={edu.index}
                           className={classes.disabledInput}
-                          id="outlined-basic"
                           label=""
                           variant="outlined"
                           value={edu.school || null}
@@ -176,9 +178,8 @@ const EducationsBlock = () => {
                         <label className={classes.labelInput}>Degree:</label>
                       </div>
                       <div>
-                        <TextField
+                        <TextFields
                           className={classes.disabledInput}
-                          id="outlined-basic"
                           label=""
                           variant="outlined"
                           value={edu.degree || null}
@@ -200,7 +201,6 @@ const EducationsBlock = () => {
                       <div> 
                         <TextField
                           className={classes.disabledInput}
-                          id="outlined-basic"
                           label=""
                           variant="outlined"
                           value={edu.fromDateFormat || null}
@@ -220,7 +220,6 @@ const EducationsBlock = () => {
                       <div>
                         <TextField
                           className={classes.disabledInput}
-                          id="outlined-basic"
                           label=""
                           variant="outlined"
                           value={edu.toDateFormat || null}
@@ -245,7 +244,6 @@ const EducationsBlock = () => {
                     <div>
                       <TextField
                         className={classes.disabledInput}
-                        id="outlined-basic"
                         label=""
                         variant="outlined"
                         value={edu.descriptionEdu || null}

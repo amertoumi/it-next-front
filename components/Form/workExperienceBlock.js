@@ -5,8 +5,9 @@ import {
   API_HOST,
   API_WORK_BY_PROFIL_PATH,
   API_REMOVE_WORK_EXP_PATH,
-  API_UPDATE_WORk_PATH
+  API_UPDATE_WORk_PATH,
 } from "../../API";
+import workexpApi from './workexpApi';
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
 import { Row, Col } from "reactstrap";
@@ -21,7 +22,7 @@ import Divider from "@material-ui/core/Divider";
 import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
 import EditIcon from "@material-ui/icons/Edit";
-import { format } from 'date-fns';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -67,6 +68,15 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiInputBase-root.Mui-disabled": {},
     marginBottom: "10px",
   },
+  btnSkills : {
+    color: '#0F1447',
+    backgroundColor: 'white',
+    width: '120px',
+    height: '44px',
+    border: '2px solid #0F1447',
+    borderRadius: '30px',
+    opacity: 1,
+  }
 }));
 
 export default function WorkExpBlock() {
@@ -75,18 +85,21 @@ export default function WorkExpBlock() {
   const token = window.localStorage.getItem("authToken");
   const { id: id_Current_User } = jwtDecode(token);
   const [disable, setDisable] = React.useState(true);
-
+  const [sizeWork, setSizeWork] = React.useState();
+  const [state, setState] = React.useState(true);
   const Edithandler = (event) => {
     setDisable(!disable);
   };
+ console.log(workexpApi)
+  const fetchWork = () => {
+    var URL = API_HOST + API_WORK_BY_PROFIL_PATH + id_Current_User;
+    axios.get(URL).then((response) => setWork(response.data));
+  };
 
   useEffect(() => {
-    var URL = API_HOST + API_WORK_BY_PROFIL_PATH + id_Current_User;
-    axios
-      .get(URL)
+    fetchWork();
+  }, []);
 
-      .then((response) => setWork(response.data));
-  }, [work]);
 
   //Remove work experience by ID
   const removeWorkExp = (id) => {
@@ -100,7 +113,7 @@ export default function WorkExpBlock() {
   };
 
   //Update work experience
-  const UpdateWorkExp = (id,index) => {
+  const UpdateWorkExp = (id, index) => {
     var formdata = new FormData();
     formdata.append("position", work[index].poste);
     formdata.append("entreprise", work[index].entreprise);
@@ -114,17 +127,15 @@ export default function WorkExpBlock() {
       body: formdata,
       redirect: "follow",
     };
-    
-    fetch(url, requestOptions)
-    .then((response) => console.log(response));
+
+    fetch(url, requestOptions).then((response) => console.log(response));
     setDisable(true);
   };
-  
+
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  
-  
+
   return (
     <div className={classes.root}>
       {work.map((exp, index) => {
@@ -139,12 +150,11 @@ export default function WorkExpBlock() {
                 <Typography className={classes.heading}>
                   <span>
                     <b>{capitalizeFirstLetter(exp.poste)}</b>
-                  </span>{" "}FOR{" "}
-                  
+                  </span>{" "}
+                  FOR{" "}
                   <span>
                     <b>{capitalizeFirstLetter(exp.entreprise)}</b>
                   </span>{" "}
-                  
                 </Typography>
               </div>
             </AccordionSummary>
@@ -160,17 +170,18 @@ export default function WorkExpBlock() {
                       <div>
                         <TextField
                           className={classes.disabledInput}
-                          id="outlined-basic"
                           label=""
                           variant="outlined"
                           value={exp.poste || null}
                           disabled={disable}
                           size="small"
                           onChange={(e) => {
-                            let item = [...work]
-                            item[index]= {...work[index], poste:e.target.value}
-                            setWork(item)
-                            
+                            let item = [...work];
+                            item[index] = {
+                              ...work[index],
+                              poste: e.target.value,
+                            };
+                            setWork(item);
                           }}
                         />
                       </div>
@@ -180,17 +191,18 @@ export default function WorkExpBlock() {
                       <div>
                         <TextField
                           className={classes.disabledInput}
-                          id="outlined-basic"
                           label=""
                           variant="outlined"
                           value={exp.entreprise || null}
                           disabled={disable}
                           size="small"
                           onChange={(e) => {
-                            let item = [...work]
-                            item[index]= {...work[index], entreprise:e.target.value}
-                            setWork(item)
-                            
+                            let item = [...work];
+                            item[index] = {
+                              ...work[index],
+                              entreprise: e.target.value,
+                            };
+                            setWork(item);
                           }}
                         />
                       </div>
@@ -199,20 +211,21 @@ export default function WorkExpBlock() {
                       <div>
                         <label className={classes.labelInput}>From:</label>
                       </div>
-                      <div> 
+                      <div>
                         <TextField
                           className={classes.disabledInput}
-                          id="outlined-basic"
                           label=""
                           variant="outlined"
                           value={exp.fromDateFormat || null}
                           disabled={disable}
                           size="small"
                           onChange={(e) => {
-                            let item = [...work]
-                            item[index]= {...work[index], fromDateFormat:e.target.value}
-                            setWork(item)
-                            
+                            let item = [...work];
+                            item[index] = {
+                              ...work[index],
+                              fromDateFormat: e.target.value,
+                            };
+                            setWork(item);
                           }}
                         />
                       </div>
@@ -222,17 +235,18 @@ export default function WorkExpBlock() {
                       <div>
                         <TextField
                           className={classes.disabledInput}
-                          id="outlined-basic"
                           label=""
                           variant="outlined"
                           value={exp.toDateFormat || null}
                           disabled={disable}
                           size="small"
                           onChange={(e) => {
-                            let item = [...work]
-                            item[index]= {...work[index], toDateFormat:e.target.value}
-                            setWork(item)
-                            
+                            let item = [...work];
+                            item[index] = {
+                              ...work[index],
+                              toDateFormat: e.target.value,
+                            };
+                            setWork(item);
                           }}
                         />
                       </div>
@@ -247,17 +261,18 @@ export default function WorkExpBlock() {
                     <div>
                       <TextField
                         className={classes.disabledInput}
-                        id="outlined-basic"
                         label=""
                         variant="outlined"
                         value={exp.description || null}
                         disabled={disable}
                         fullWidth
                         onChange={(e) => {
-                          let item = [...work]
-                          item[index]= {...work[index], description:e.target.value}
-                          setWork(item)
-                          
+                          let item = [...work];
+                          item[index] = {
+                            ...work[index],
+                            description: e.target.value,
+                          };
+                          setWork(item);
                         }}
                       />
                     </div>
@@ -269,6 +284,7 @@ export default function WorkExpBlock() {
             <AccordionActions>
               <Col>
                 <Button
+                  
                   size="small"
                   style={{ color: "#E94545" }}
                   onClick={() => removeWorkExp(exp.id)}
@@ -302,7 +318,7 @@ export default function WorkExpBlock() {
                     variant="contained"
                     size="small"
                     style={{ backgroundColor: "green", color: "white" }}
-                    onClick={() => UpdateWorkExp(exp.id,index)}
+                    onClick={() => UpdateWorkExp(exp.id, index)}
                   >
                     <SaveIcon className="mr-2" />
                     Save

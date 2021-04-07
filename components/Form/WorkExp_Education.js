@@ -1,10 +1,10 @@
 import 'date-fns';
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import dynamic from 'next/dynamic';
 import jwtDecode from "jwt-decode";
-import axios from "axios";
 import moment from 'moment';
-import {API_HOST, API_ADD_WORK_EXP_PATH, API_ADD_EDUCATION_PATH } from "../../API";
+import {API_HOST, API_ADD_WORK_EXP_PATH, API_ADD_EDUCATION_PATH, API_WORK_BY_PROFIL_PATH } from "../../API";
 import { Container, Row, Col } from "reactstrap";
 import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,12 +27,22 @@ const useStyles = makeStyles(theme => ({
       "& .MuiTextField-root": {
         margin: theme.spacing(1)
       }
+    },
+    btnSave : {
+      color: '#0F1447',
+      backgroundColor: 'white',
+      width: '120px',
+      height: '35px',
+      border: '2px solid #0F1447',
+      borderRadius: '30px',
+      opacity: 1,
     }
 }));
 
 const WorkExp_Education = () => {
     const classes = useStyles();
     const token = window.localStorage.getItem("authToken");
+    const [work, setWork] = React.useState([]);
     const { id: id_Current_User } = jwtDecode(token);
     const [fromDate, setFromDate] = React.useState(Date.now());
     const [toDate, setToDate] = React.useState(Date.now());
@@ -61,7 +71,18 @@ const WorkExp_Education = () => {
   const handleToDateEduChange = (date) => {
     setToDateEdu(date);
   };
- 
+//fetch Work Experience
+const fetchWork = ()  =>{
+    var URL = API_HOST + API_WORK_BY_PROFIL_PATH + id_Current_User;
+  axios
+    .get(URL)
+    .then((response) => setWork(response.data));
+}
+
+useEffect(() => {
+  fetchWork({});
+}, []);
+
   //Add New work experience
   const SubmitWorkExp = () => {
     var formdata = new FormData();
@@ -79,7 +100,6 @@ const WorkExp_Education = () => {
     };
     fetch(url, requestOptions)
     .then((response) => console.log(response));
-    
   }
 
     //Add New education or training
@@ -87,8 +107,8 @@ const WorkExp_Education = () => {
       var formdata = new FormData();
       formdata.append("school", education.school);
       formdata.append("degree", education.degree);
-      formdata.append("fromDateEdu", fromDate.toISOString());
-      formdata.append("toDateEdu", toDate.toISOString());
+      formdata.append("fromDateEdu", fromDateEdu.toISOString());
+      formdata.append("toDateEdu", toDateEdu.toISOString());
       formdata.append("descriptionEdu", education.descriptionEdu);
   
       var url = API_HOST + API_ADD_EDUCATION_PATH + id_Current_User;
@@ -116,16 +136,18 @@ const WorkExp_Education = () => {
                 <h6>Add a new experience</h6>
               </Col>
               <Col className="d-fle justify-content-end">
+                <div className="d-flex flex-row-reverse mr-3">
                 <Button
-                  className="mb-3 ml-5"
+                  className={classes.btnSave}
                   variant="contained"
                   size="small"
-                  style={{ backgroundColor: "green", color: "white" }}
                   type="sumbit"
                   onClick={SubmitWorkExp}
                 >
                   Save
                 </Button>
+                </div>
+                
               </Col>
             </Row>
           </div>
@@ -136,7 +158,7 @@ const WorkExp_Education = () => {
             <div>
               <TextField
                 className="pr-3 mb-3 mt-2"
-                id="outlined-basic"
+                id="position"
                 label=""
                 variant="outlined"
                 placeholder="Enter your position"
@@ -155,7 +177,7 @@ const WorkExp_Education = () => {
             <div>
               <TextField
                 className="pr-3 mb-3 mt-2"
-                id="outlined-basic"
+                
                 label=""
                 variant="outlined"
                 placeholder="Enter the name of the company"
@@ -194,7 +216,7 @@ const WorkExp_Education = () => {
                 id="toDate"
                 name="toDate"
                 margin="normal"
-                id="date-picker-dialog"
+                
                 label="To:"
                 format="MM/dd/yyyy"
                 value={toDate}
@@ -215,7 +237,7 @@ const WorkExp_Education = () => {
             <div>
             <TextField
                 className="pr-3 mb-4 mt-2"
-                id="outlined-basic"
+                
                 label=""
                 variant="outlined"
                 value={workExp.description || null}
@@ -250,15 +272,17 @@ const WorkExp_Education = () => {
                 <h6>Add a new education or training</h6>
               </Col>
               <Col className="d-fle justify-content-end">
-                <Button
-                  className="mb-3 ml-5"
-                  variant="contained"
-                  size="small"
-                  style={{ backgroundColor: "green", color: "white" }}
-                 onClick={SubmitNewEducation} 
-                >
-                  Save
-                </Button>
+                <div className="d-flex flex-row-reverse mr-3">
+                  <Button
+                    className={classes.btnSave}
+                    variant="contained"
+                    size="small"
+                    onClick={SubmitNewEducation} 
+                  >
+                    Save
+                  </Button>
+                </div>
+                
               </Col>
             </Row>
           </div>
@@ -269,7 +293,7 @@ const WorkExp_Education = () => {
             <div>
               <TextField
                 className="pr-3 mb-3 mt-2"
-                id="outlined-basic"
+                
                 label=""
                 variant="outlined"
                 placeholder="Enter your school name"
@@ -288,7 +312,7 @@ const WorkExp_Education = () => {
             <div>
               <TextField
                 className="pr-3 mb-3 mt-2"
-                id="outlined-basic"
+                
                 label=""
                 variant="outlined"
                 placeholder="Enter your degree"
@@ -311,7 +335,7 @@ const WorkExp_Education = () => {
             <div className="pr-3 mb-3 mt-2 ml-3">
             <KeyboardDatePicker
                 margin="normal"
-                id="date-picker-dialog"
+                id="fromDateEdu"
                 label="From:"
                 format="MM/dd/yyyy"
                 value={fromDateEdu}
@@ -324,7 +348,7 @@ const WorkExp_Education = () => {
             <div className="pr-3 mb-3 mt-2 ml-3">
             <KeyboardDatePicker
                 margin="normal"
-                id="date-picker-dialog"
+                id="todateEdu"
                 label="To:"
                 format="MM/dd/yyyy"
                 value={toDateEdu}
@@ -344,7 +368,7 @@ const WorkExp_Education = () => {
             <div>
             <TextField
                 className="pr-3 mb-4 mt-2"
-                id="outlined-basic"
+                id="descr"
                 label=""
                 variant="outlined"
                 value={education.descriptionEdu || null} 

@@ -20,17 +20,15 @@ import {
   Col,
 } from "reactstrap";
 
-
 function UserPanel() {
   const token = window.localStorage.getItem("authToken");
-  const infos = jwtDecode(token);
   const { id: id_Current_User } = jwtDecode(token);
   const [description, setDescription]= React.useState("");
   const [startAt, setStartAt]= React.useState("");
   const [finishAt, setFinishAt] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
   const [dayRate, setDayRate] = React.useState("");
-  
+
   function SuccessAccus() {
     Swal.fire({
       title: "Success!!",
@@ -174,6 +172,12 @@ function UserPanel() {
     </>
   );
 };
+
+UserPanel.getInitialProps = async (ctx) => {
+  //const token =  window.localStorage.getItem("authToken");
+  const nossr = {ssr: false}
+  return { nossr }
+}
 
 UserPanel.layout = User;
 

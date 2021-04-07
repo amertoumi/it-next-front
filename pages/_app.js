@@ -31,10 +31,6 @@ Router.events.on("routeChangeError", () => {
 
 export default class MyApp extends App {
   
-  // first of all verif connexion
-/*   componentDidMount() {
-    AuthAPI.setup();
-  } */
     componentDidMount() {
     AuthAPI.setup();
     let comment = document.createComment('Platform Loading...');

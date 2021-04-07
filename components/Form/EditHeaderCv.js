@@ -276,7 +276,7 @@ function EditHeaderCv () {
                     <div>
                     <TextField
                       className={classes.disabledInput}
-                      id="outlined-basic"
+                      id="name"
                       label=""
                       variant="outlined"
                       value={cv.name || null}
@@ -295,7 +295,7 @@ function EditHeaderCv () {
                     <div>
                     <TextField
                       className={classes.disabledInput}
-                      id="outlined-basic"
+                      id="currentpost"
                       label=""
                       variant="outlined"
                       value={cv.poste || null}
@@ -313,7 +313,7 @@ function EditHeaderCv () {
                     <div>
                     <TextField
                       className={classes.disabledInput}
-                      id="outlined-basic"
+                      id="years"
                       label=""
                       variant="outlined"
                       value={cv.nbrAnneeExp || null}
@@ -332,7 +332,7 @@ function EditHeaderCv () {
                     <div>
                     <TextField
                     className={classes.disabledInput}
-                      id="outlined-basic"
+                      id="place"
                       label=""
                       variant="outlined"
                       value={cv.country || null}
@@ -353,7 +353,7 @@ function EditHeaderCv () {
                     <div>
                     <TextField
                     className={classes.disabledInput}
-                      id="outlined-basic"
+                      id="phone"
                       label=""
                       variant="outlined"
                       value={cv.phone || null}
@@ -372,7 +372,7 @@ function EditHeaderCv () {
                     <div>
                     <TextField
                     className={classes.disabledInput}
-                      id="outlined-basic"
+                      id="email"
                       label=""
                       variant="outlined"
                       value={cv.email || null}
@@ -391,7 +391,7 @@ function EditHeaderCv () {
                     <div>
                     <TextField
                     className={classes.disabledInput}
-                      id="outlined-basic"
+                      id="link"
                       label=""
                       variant="outlined"
                       value={cv.link || null}
