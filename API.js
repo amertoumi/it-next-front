@@ -17,3 +17,6 @@ export const API_DETAILS_USER ='/details/user/';
 export const API_UPLOAD_LOGO = '/user/logo';
 export const API_UPDATE_PROFIL= '/update/profil/';
 export const API_UPDATE_PROFILHEADER = '/update/profilheader/';
+export const API_UPLOAD_FILE= '/api/upload/video';
+export const API_LAST_FILE= '/api/get/last/file/';
+export const API_delete_VIDEO= '/api/delete/video/';
