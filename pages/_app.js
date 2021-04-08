@@ -7,7 +7,13 @@ import "assets/scss/nextjs-argon-dashboard.scss";
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import AuthAPI from '../services/authApi';
 //import {AppWrapper} from '../ContextAPI/UserContext';
-
+function SafeHydrate({ children }) {
+  return (
+    <div suppressHydrationWarning>
+      {typeof window === 'undefined' ? null : children}
+    </div>
+  )
+}
 export default class MyApp extends App {
   
     componentDidMount() {
@@ -32,11 +38,11 @@ export default class MyApp extends App {
           <title> Inspire Talent</title>
           <script src=""></script>
         </Head>
-        
+        <SafeHydrate>
         <Layout>
             <Component {...pageProps} />
         </Layout> 
-        
+        </SafeHydrate>
       </React.Fragment>
     );
   }
