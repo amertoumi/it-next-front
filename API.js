@@ -33,3 +33,4 @@ export const API_REMOVE_EDUCATION_PATH = "/profil/remove/education/";
 export const API_UPDATE_EDUCATION_PATH = "/profil/update/education/";
 
 export const API_STATUS_Skills_PATH = "/skills/status/profil/";
+export const API_PROFIL_DETAILS = '/api/profil/details/';

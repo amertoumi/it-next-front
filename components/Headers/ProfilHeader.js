@@ -68,6 +68,9 @@ function ProfilHeader() {
       .catch((error) => console.log(error.response));
   }, []);
 
+
+  //console.log(CurrentUser)
+
   const UploadLogo = () => {
     var formdata = new FormData();
     formdata.append("File", selectedFile);
@@ -188,12 +191,12 @@ function ProfilHeader() {
                               <CardMedia>
                                 <Col className="order-sm-1">
                                   <div className="mt-3">
-                                    <Link href="/user/cv">
-                                      <Button>
-                                        <i className="far fa-user mr-4 "></i>
-                                        View Resume{" "}
-                                        <i className="fas fa-arrow-alt-circle-right ml-3"></i>
-                                      </Button>
+                                    <Link href="/user/view_cv">
+                                    <Button>
+                                      <i className="far fa-user mr-4 "></i>View
+                                      Resume{" "}
+                                      <i className="fas fa-arrow-alt-circle-right ml-3"></i>
+                                    </Button>
                                     </Link>
                                   </div>
                                 </Col>

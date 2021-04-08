@@ -185,7 +185,7 @@ function EditHeaderCv () {
               </Link>
             </Col>
             <Col className="d-flex justify-content-end">
-              <Link href="/user/cv">
+              <Link href="/user/view_cv">
               <Button
                 className={classes.ViewResumeButton}
               >
