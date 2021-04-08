@@ -25,6 +25,8 @@ function authenticate(data) {
       
        if(role[0] === "ROLE_ADMIN"){
         Router.push('/admin/dashboard');
+      }else if (role[0]=== "ROLE_RECRUITER"){
+        Router.push('/recruiter/profil');
       }
       else Router.push('/user/profil')
          

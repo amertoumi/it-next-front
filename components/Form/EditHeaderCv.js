@@ -58,7 +58,6 @@ function EditHeaderCv () {
 
   const classes = useStyles();
   const token = ls.get("authToken");
-  //const infos = jwtDecode(token);
   const { id: id_Current_User } = jwtDecode(token);
   const [disable, setDisable] = React.useState(true);
   const [skills, setSkills] = React.useState([]);
