@@ -1,0 +1,43 @@
+#t1 {
+  top: 361px;
+  left: 452px;
+  height: 162px;
+  text-align: center;
+  font: normal normal 900 90px/162px Roboto;
+  letter-spacing: 0.94px;
+  color: #ffffff;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+#t2 {
+  top: 492px;
+  left: 381px;
+  height: 162px;
+  text-align: center;
+  font: normal normal 900 100px/162px Roboto;
+  letter-spacing: 0.94px;
+  color: #ffd94a;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+#desc {
+  top: 699px;
+  left: 466px;
+  height: 86px;
+  text-align: center;
+  font: normal normal 300 25px/37px Roboto;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 0.75;
+}
+
+#scroll {
+  top: 915px;
+  left: 945px;
+  text-align: center;
+  width: 30px;
+  height: 43px;
+  opacity: 1;
+}

@@ -6,20 +6,13 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/nextjs-argon-dashboard.scss";
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import AuthAPI from '../services/authApi';
-//import {AppWrapper} from '../ContextAPI/UserContext';
-function SafeHydrate({ children }) {
-  return (
-    <div suppressHydrationWarning>
-      {typeof window === 'undefined' ? null : children}
-    </div>
-  )
-}
+
+import {Provider as AuthProvider, Provider} from '../Context/Auth/AuthContext';
+
 export default class MyApp extends App {
   
     componentDidMount() {
-    AuthAPI.setup();
-    //let comment = document.createComment('Platform Loading...');
-    //document.insertBefore(comment, document.documentElement);
+    // AuthAPI.setup();
   } 
 
   render() {
@@ -29,6 +22,7 @@ export default class MyApp extends App {
     const Layout = Component.layout || (({ children }) => <>{children}</>);
 
     return (
+      
       <React.Fragment>
         <Head>
           <meta
@@ -38,11 +32,11 @@ export default class MyApp extends App {
           <title> Inspire Talent</title>
           <script src=""></script>
         </Head>
-        <SafeHydrate>
+        <AuthProvider>
         <Layout>
             <Component {...pageProps} />
         </Layout> 
-        </SafeHydrate>
+        </AuthProvider>
       </React.Fragment>
     );
   }

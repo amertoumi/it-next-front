@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import User from "layouts/User.js";
-import jwtDecode from "jwt-decode";
 import {
   API_HOST,
   API_LAST_FILE,
@@ -28,8 +27,7 @@ import {
   Col,
 } from "reactstrap";
 import { MDBContainer, MDBIframe } from "mdbreact";
-import { replace } from "formik";
-import axios from "axios";
+import {Axios} from '../../services/authApi';
 
 const custom_file_upload = {
   display: "inline-block",
@@ -115,19 +113,15 @@ var show = false;
 
 function UserPanel(props) {
 
-  const token = ls.get("authToken");
-  //const token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MTcwMjU2MzIsImV4cCI6MTYxNzAyOTIzMiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiTWFoZGkiLCJpZCI6Mn0.pPDGgsJwep_Kwx8f5UrWsDlhpOAWIW7TjHsAaBDAy7KidnRyJiqNUW8g0wBiUKUol8OUtqGeP7O2La9nLRdt38nwlQ3HIQoZfa0oBfcV5lnYhnFiKWuQMm78Bvc_49wTX8kG8_t3IQwHtjNarw9MaEzeki86YUDiaf8J8E4FrsWRD3PugIQEaUIv1frE3wLJzTnMbYXLefcBWFIAASXZjAGaXGZ94gLp5F5RH7nDlxsFv_k0lA7Lph-RffpHknLWk1U_21WG8TS40p8ZhxxgPJSsWNz15UioY_dOlKXeLo1E1MW89nRS0mx8eX77szveTwWSvJ1JQG4yv98m95P4K2lwdF3mrilYiMU4pl84tFrAmAPIn4FcG4A6awB_k_eDQlZwr4BZw2CH8dWmxdonGZYNP6w9i-SL2ZTDOVerutcbwQXq481LLqqAL93tvroU_mHROYUfSqVDJFSsuRKeYnjnLb4gHjN_IDP-M7AxVytXr8c_sqFeASWpigKiANjTP0fwhmmhUjf434taIddivIpEhg9kg8S6pi1Q9bIaBT7ZCXEKxQK8TnHut1ThTKI7I6mD9p4cC0wPoZgMB9aVEv6A_VPkyu6AkUZQqjZQUb5YPC7rCN38JJU7XAhzljH3JEiGZHw8IC0p6FcHO3DZP4Kksf5OjoRl1xWsM2jM2kY";
-  const { id: id_curent_user } = jwtDecode(token);
-  const [vd, setVideo] = React.useState();
-  var video = API_HOST + "/videos/" + props.data[0].name;
-  React.useEffect(()=> {
-        axios.get(API_HOST + API_LAST_FILE + "video" + "/" + id_curent_user)
-        .then((response) => console.log(response.data))
-    })
-  if (typeof props.data[0].name === "undefined") {
+  const token = ls.get("token");
+  const id_curent_user = ls.get("currentUser");
+
+  var video = API_HOST + "/videos/" + props.data[0]?.name;
+
+  if (typeof props.data[0]?.name === "undefined") {
     show = false;
   } else {
-    var video_id = props.data[0].id;
+    var video_id = props.data[0]?.id;
     show = true;
   }
   // This function gets called at build time
@@ -138,7 +132,7 @@ function UserPanel(props) {
   const [dayRate, setDayRate] = React.useState("");
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const UploadVideo = () => {
+/*   const UploadVideo = () => {
     console.log(selectedFile);
     var formData = new FormData();
     formData.append("video", selectedFile);
@@ -156,11 +150,11 @@ function UserPanel(props) {
       fetch(url, requestOptions).then((response) => console.log(response));
       SuccessAccus();
       setSelectedFile(null);
-      router.push("/user/profil");
+      //router.push("/user/profil");
     } else {
       ErrorAccus();
     }
-  };
+  }; */
 
   const getFile = (file) => {
     setSelectedFile(file);
@@ -189,13 +183,12 @@ function UserPanel(props) {
   }
 
   // Add infos to profil table by current user
-  const SubmitData = () => {
+/*   const SubmitData = () => {
+    const id_Current_User = ls.get("currentUser");
     var formdata = new FormData();
     formdata.append("dispoStart", startAt);
     formdata.append("dispoEnd", finishAt);
     formdata.append("description", description);
-    //formdata.append("phoneNumber", phoneNumber);
-    //formdata.append("dayRate", dayRate);
 
     var url = API_HOST + API_UPDATE_PROFIL + id_Current_User;
     var requestOptions = {
@@ -210,8 +203,8 @@ function UserPanel(props) {
     } else {
       ErrorAccus();
     }
-  };
-  const onClick = async () => {
+  }; */
+/*   const onClick = async () => {
     try {
       const res = await fetch(API_HOST + "/api/delete/video/" + video_id, {
         method: "DELETE",
@@ -223,7 +216,7 @@ function UserPanel(props) {
     } catch (error) {
       console.error(error);
     }
-  };
+  }; */
   return (
     <>
       <ProfilHeader />
@@ -302,10 +295,10 @@ function UserPanel(props) {
                 </Col>
               </Row>
 
-              <Button onClick={SubmitData}>Save</Button>
+              <Button /* onClick={SubmitData} */>Save</Button>
             </Form>
           </Col>
-          <Col>
+         {/*  <Col>
             <Label style={record_text}>Record video</Label>
             <div style={div_video}>
               {show ? (
@@ -390,7 +383,7 @@ function UserPanel(props) {
                 want).
               </p>
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </>
@@ -398,17 +391,17 @@ function UserPanel(props) {
 
 }
 
-UserPanel.getInitialProps = async function () {
-   const token = window.localStorage.getItem("authToken");
-  //const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MTcwMjU2MzIsImV4cCI6MTYxNzAyOTIzMiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiTWFoZGkiLCJpZCI6Mn0.pPDGgsJwep_Kwx8f5UrWsDlhpOAWIW7TjHsAaBDAy7KidnRyJiqNUW8g0wBiUKUol8OUtqGeP7O2La9nLRdt38nwlQ3HIQoZfa0oBfcV5lnYhnFiKWuQMm78Bvc_49wTX8kG8_t3IQwHtjNarw9MaEzeki86YUDiaf8J8E4FrsWRD3PugIQEaUIv1frE3wLJzTnMbYXLefcBWFIAASXZjAGaXGZ94gLp5F5RH7nDlxsFv_k0lA7Lph-RffpHknLWk1U_21WG8TS40p8ZhxxgPJSsWNz15UioY_dOlKXeLo1E1MW89nRS0mx8eX77szveTwWSvJ1JQG4yv98m95P4K2lwdF3mrilYiMU4pl84tFrAmAPIn4FcG4A6awB_k_eDQlZwr4BZw2CH8dWmxdonGZYNP6w9i-SL2ZTDOVerutcbwQXq481LLqqAL93tvroU_mHROYUfSqVDJFSsuRKeYnjnLb4gHjN_IDP-M7AxVytXr8c_sqFeASWpigKiANjTP0fwhmmhUjf434taIddivIpEhg9kg8S6pi1Q9bIaBT7ZCXEKxQK8TnHut1ThTKI7I6mD9p4cC0wPoZgMB9aVEv6A_VPkyu6AkUZQqjZQUb5YPC7rCN38JJU7XAhzljH3JEiGZHw8IC0p6FcHO3DZP4Kksf5OjoRl1xWsM2jM2kY";
-  const { id: id_curent_user } = jwtDecode(token);
+/* UserPanel.getInitialProps = async function () {
+   const token = ls.get("token");
+  const id_curent_user = ls.get("currentUser");
+  
   const res = await fetch(
     API_HOST + API_LAST_FILE + "video" + "/" + id_curent_user
   );
   const data = await res.json();
   return { data };
-};
+}; */
+
 UserPanel.layout = User;
 
 export default UserPanel;

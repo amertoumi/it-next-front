@@ -86,11 +86,17 @@ function isAutheticated() {
     return false;
 }
 
+const token = ls.get('token')
+export const Axios =  axios.create({
+    //timeout: 1000,
+    headers: {'Authorization': 'Bearer '+ token}
+  });
 
   export default {
     authenticate,
     logout,
     setup,
     isAutheticated,
-    setAxiosToken
+    setAxiosToken,
+    
   }

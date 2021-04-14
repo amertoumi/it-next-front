@@ -194,7 +194,7 @@ export default function WorkExpBlock() {
                           className={classes.disabledInput}
                           label=""
                           variant="outlined"
-                          value={exp.entreprise || null}
+                          value={exp.entreprise || ''}
                           disabled={disable}
                           size="small"
                           onChange={(e) => {
@@ -217,7 +217,7 @@ export default function WorkExpBlock() {
                           className={classes.disabledInput}
                           label=""
                           variant="outlined"
-                          value={exp.fromDateFormat || null}
+                          value={exp.fromDateFormat || ''}
                           disabled={disable}
                           size="small"
                           onChange={(e) => {
@@ -238,7 +238,7 @@ export default function WorkExpBlock() {
                           className={classes.disabledInput}
                           label=""
                           variant="outlined"
-                          value={exp.toDateFormat || null}
+                          value={exp.toDateFormat || ''}
                           disabled={disable}
                           size="small"
                           onChange={(e) => {
@@ -264,7 +264,7 @@ export default function WorkExpBlock() {
                         className={classes.disabledInput}
                         label=""
                         variant="outlined"
-                        value={exp.description || null}
+                        value={exp.description || ''}
                         disabled={disable}
                         fullWidth
                         onChange={(e) => {

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {Axios} from "../../services/authApi";
 import { Container, Form, Button, FormGroup, Label, Input } from "reactstrap";
 import { API_HOST, API_TYPE_SKILLS_PATH } from "../../API";
 import Api from "../../pages/api";
 
 const NewSkill = () => {
+  const [type_skills, setType_Skills] = useState([]);
   const [skillFields, setSkillFields] = useState({
     name: "",
     type: "",
@@ -16,14 +18,17 @@ const NewSkill = () => {
   };
 
   //list type skills
-  const [type_skills, setType_Skills] = useState([]);
-  useEffect(() => {
+  function getSkillsType(){
     let URL = API_HOST + API_TYPE_SKILLS_PATH;
-    axios
+    Axios
       .get(URL)
       .then((response) => response.data["hydra:member"])
       .then((data) => setType_Skills(data))
       .catch((error) => console.log(error.response));
+  }
+
+  useEffect(() => {
+    getSkillsType();
   }, []);
 
   const [error, setError] = useState("");

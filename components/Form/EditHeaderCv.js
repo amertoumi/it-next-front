@@ -270,7 +270,7 @@ function EditHeaderCv () {
                       id="name"
                       label=""
                       variant="outlined"
-                      value={cv.name || null}
+                      value={cv.name || ''}
                       disabled={disable}
                       size="small"
                       onChange={(e) => {
@@ -289,7 +289,7 @@ function EditHeaderCv () {
                       id="currentpost"
                       label=""
                       variant="outlined"
-                      value={cv.poste || null}
+                      value={cv.poste || ''}
                       disabled={disable}
                       size="small"
                       onChange={(e) => {
@@ -307,7 +307,7 @@ function EditHeaderCv () {
                       id="years"
                       label=""
                       variant="outlined"
-                      value={cv.nbrAnneeExp || null}
+                      value={cv.nbrAnneeExp || ''}
                       disabled={disable}
                       size="small"
                       inputProps={{ className: classes.textColor }}
@@ -326,7 +326,7 @@ function EditHeaderCv () {
                       id="place"
                       label=""
                       variant="outlined"
-                      value={cv.country || null}
+                      value={cv.country || ''}
                       disabled={disable}
                       size="small"
                       inputProps={{ className: classes.textColor }}
@@ -347,7 +347,7 @@ function EditHeaderCv () {
                       id="phone"
                       label=""
                       variant="outlined"
-                      value={cv.phone || null}
+                      value={cv.phone || ''}
                       disabled={disable}
                       size="small"
                       inputProps={{ className: classes.textColor }}
@@ -366,7 +366,7 @@ function EditHeaderCv () {
                       id="email"
                       label=""
                       variant="outlined"
-                      value={cv.email || null}
+                      value={cv.email || ''}
                       disabled={disable}
                       size="small"
                       inputProps={{ className: classes.textColor }}
@@ -385,7 +385,7 @@ function EditHeaderCv () {
                       id="link"
                       label=""
                       variant="outlined"
-                      value={cv.link || null}
+                      value={cv.link || ''}
                       disabled={disable}
                       size="small"
                       inputProps={{ className: classes.textColor }}

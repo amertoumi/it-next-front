@@ -88,13 +88,7 @@ function Candidatures_List() {
     setValue(index);
   };
 
-/*   const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
-  }; */
-
-
-  //List table of Pending Candidature
+//List table of Pending Candidature
   useEffect(() => {
     let URL = API_HOST + API_PROFILS_PATH;
     axios

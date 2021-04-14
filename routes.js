@@ -6,14 +6,14 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/profile",
-    name: "User Profile",
+    path: "/inspirnautes",
+    name: "Inspire Profils",
     icon: "ni ni-single-02 text-yellow",
     layout: "/admin",
   },
   {
-    path: "/profile",
-    name: "Entreprises",
+    path: "/recruiters",
+    name: "Recruiters Profils",
     icon: "ni ni-briefcase-24 text-braon",
     layout: "/admin",
   },
@@ -27,6 +27,12 @@ var routes = [
     path: "/skills",
     name: "Skills",
     icon: "ni ni-paper-diploma text-green",
+    layout: "/admin",
+  },
+  {
+    path: "/homecontent",
+    name: "Content Home Page",
+    icon: "fa fa-cog text-red",
     layout: "/admin",
   },
   {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import {Axios} from "../../services/authApi";
 import { API_HOST, API_ENTREPRISES_PATH, API_LIST_ENTREPRISES_PATH } from "../../API";
 import Api from "../../pages/api";
 import Button from "@material-ui/core/Button";
@@ -54,7 +54,7 @@ function Recruiters_Candidatures_List() {
     setOpen(false);
   };
 
-  //Update Profil status
+//Update Profil status
   function handleProfilStatus(id) {
     const newcv = listCandidatures.map((cv) => {
       if (cv.userId === id) {
@@ -76,29 +76,33 @@ function Recruiters_Candidatures_List() {
     Api.ActivateUser(id);
   }
 
-  //List table of Pending Candidature
-  useEffect(() => {
-    let URL = API_HOST + API_LIST_ENTREPRISES_PATH;
-    axios
-      .get(URL)
+  //Get All Entreprise Candidatures
+  function getAllEntrepriseCandidatures(){
+    var URL = API_HOST + API_LIST_ENTREPRISES_PATH;
+    Axios.get(URL)
       .then((response) => response.data)
       .then((data) => setListCandidatures(data))
       .catch((error) => console.log(error.response));
-    //console.log(listCandidatures)
+  }
+
+  // Get Entreprise By ID
+    async function GetEntrepriseById(id) {
+      var URL = API_HOST + API_ENTREPRISES_PATH + "/" + id;
+      try {
+        dataProfil = await Axios.get(URL)
+          .then((response) => response.data)
+          .then((data) => setProfilDetails(data))
+          .then(setOpen(true));
+      } catch (error) {
+        return error.message;
+      }
+    }
+
+  useEffect(() => {
+    getAllEntrepriseCandidatures();
+
   }, []);
 
-  // Get Freelancer By ID
-  async function GetFreelancerById(id) {
-    var URL = API_HOST + API_ENTREPRISES_PATH + "/" + id;
-    try {
-      dataProfil = await axios(URL)
-        .then((response) => response.data)
-        .then((data) => setProfilDetails(data))
-        .then(setOpen(true));
-    } catch (error) {
-      return error.message;
-    }
-  }
 
   return (
     <>
@@ -169,7 +173,7 @@ function Recruiters_Candidatures_List() {
                             variant="info"
                             variant="contained"
                             color="info"
-                            onClick={() => GetFreelancerById(cv.entrepriseId)}
+                            onClick={() => GetEntrepriseById(cv.entrepriseId)}
                           >
                             Details
                           </Button>

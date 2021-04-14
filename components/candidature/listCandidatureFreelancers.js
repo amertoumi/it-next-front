@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {Axios} from "../../services/authApi";
 import { API_HOST, API_PROFILS_PATH, API_LIST_PROFILS_PATH } from "../../API";
 import Api from "../../pages/api";
 import Button from "@material-ui/core/Button";
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// core components
+
 function Freelancers_Candidatures_List() {
   const [listCandidatures, setListCandidatures] = useState([]);
   const [profilDetails, setProfilDetails] = useState({});
@@ -76,23 +77,11 @@ function Freelancers_Candidatures_List() {
     Api.ActivateUser(id);
   }
 
-
-
-  //List table of Pending Candidature
-  useEffect(() => {
-    let URL = API_HOST + API_LIST_PROFILS_PATH;
-    axios
-      .get(URL)
-      .then((response) => response.data)
-      .then((response) => setListCandidatures(response))
-      .catch((error) => console.log(error.response));
-  }, []);
-
   // Get Freelancer By ID
   async function GetFreelancerById(id) {
     var URL = API_HOST + API_PROFILS_PATH + "/" + id;
     try {
-      dataProfil = await axios(URL)
+      dataProfil = await Axios.get(URL)
         .then((response) => response.data)
         .then((data) => setProfilDetails(data))
         .then(setOpen(true));
@@ -100,6 +89,21 @@ function Freelancers_Candidatures_List() {
       return error.message;
     }
   }
+
+  //Get all Inspirnaute Candidatures
+  function getAllInspirnauteCandidature(){
+    var URL = API_HOST + API_LIST_PROFILS_PATH;
+    Axios.get(URL)
+      .then((response) => response.data)
+      .then((response) => setListCandidatures(response))
+      .catch((error) => console.log(error.response));
+  }
+
+  useEffect(() => {
+    getAllInspirnauteCandidature();
+    
+  }, []);
+
 
   return (
     <>

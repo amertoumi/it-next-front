@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useContext}from "react";
 import { useForm } from "react-hook-form";
 // reactstrap components
 import {
@@ -16,28 +16,32 @@ import {
 import Auth from "layouts/Auth.js";
 //import api from "../api";
 import API from "../../services/authApi";
+import {Context as AuthContext} from '../../Context/Auth/AuthContext';
+
 
 function Login() {
   const [error, setError] = React.useState("");
   const [is_auth, setIs_auth] = React.useState(false);
   const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = async (data, event) => {
-    event.preventDefault();
+  const {signin}=useContext(AuthContext)
+  const onSubmit = (data,event)=>{console.log(data);event.preventDefault();signin(data);}
+  // async (data, event) => {
+  //   event.preventDefault();
 
-    try {
-      //await api.auth_api(data);
-      await API.authenticate(data);
-      setError("");
-      setIs_auth(true);
+  //   try {
+  //     //await api.auth_api(data);
+  //     await API.authenticate(data);
+  //     setError("");
+  //     setIs_auth(true);
 
-    }
-    catch (error) {
-      setError(
-        "informations is invalid"
-      );
-      setIs_auth(false);
-    }
-  };
+  //   }
+  //   catch (error) {
+  //     setError(
+  //       "informations is invalid"
+  //     );
+  //     setIs_auth(false);
+  //   }
+  // };
 
 
   return (

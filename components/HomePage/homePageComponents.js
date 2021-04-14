@@ -26,7 +26,7 @@ export default class HomePageComponents extends React.Component {
     };
     return (
       <React.Fragment>
-        <WELCOME />
+        {/* <WELCOME /> */}
         <Row className="mt-5">
           <Col className={"mt-7 wow slideInLeft"} data-wow-duration="2s" data-wow-delay="0.2s">
             <h3>Be Recruiter on Inspire Talent </h3>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import {Axios} from "../../services/authApi";
 import { Container, Card, Col, Table, Button,} from "react-bootstrap";
 import Admin from "layouts/Admin.js";
 import NewSkill from "../../components/Skills/newSkill";
@@ -15,14 +15,18 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 function SkillsList() {
   const [skills, setSkills] = useState([]);
   const [error, setError] = useState("");
+
+  function getSkills(){
+    var URL = API_HOST + API_SKILLS_PATH;
+    Axios
+    .get(URL)
+    .then((response) => response.data["hydra:member"])
+    .then((data) => setSkills(data))
+    .catch((error) => console.log(error.response));
+  }
+  
   useEffect(() => {
-    let URL = API_HOST + API_SKILLS_PATH;
-      axios
-      .get(URL)
-      .then((response) => response.data["hydra:member"])
-      .then((data) => setSkills(data))
-      .catch((error) => console.log(error.response));
-    
+    getSkills(); 
   }, []);
 
   

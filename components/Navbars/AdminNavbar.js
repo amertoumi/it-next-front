@@ -1,6 +1,7 @@
-import React from "react";
+import React ,{useContext} from "react";
 import Link from "next/link";
 import Api from "../../pages/api";
+import {Context as AuthContext} from '../../Context/Auth/AuthContext';
 
 // reactstrap components
 import {
@@ -22,6 +23,8 @@ import {
 } from "reactstrap";
 
 function AdminNavbar({ brandText }) {
+  const {signout} = useContext(AuthContext);
+
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -92,7 +95,7 @@ function AdminNavbar({ brandText }) {
                 <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                   <i className="ni ni-user-run" />
                   <span>
-                    <Button onClick={() => Api.logout()}>Logout</Button>
+                    <Button onClick={() => signout()}>Logout</Button>
                   </span>
                 </DropdownItem>
               </DropdownMenu>

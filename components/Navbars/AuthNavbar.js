@@ -16,7 +16,7 @@ import {
 function AuthNavbar() {
   return (
     <>
-      <Navbar className="navbar-top navbar-horizontal navbar-dark bg-dark" expand="md">
+      <Navbar className="navbar-top navbar-horizontal navbar-dark " expand="md">
         <Container className="px-4">
           <Link href="/home">
             <span>
@@ -52,18 +52,34 @@ function AuthNavbar() {
             </div>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Link href="/Home">
+                <Link href="#">
                   <NavLink href="#pablo" className="nav-link-icon">
-                    <i className="ni ni-shop" />
-                    <span className="nav-link-inner--text">Home</span>
+                   {/*  <i className="ni ni-shop" /> */}
+                    <span className="nav-link-inner--text">Comment en recrute</span>
                   </NavLink>
                 </Link>
               </NavItem>
               <NavItem>
                 <Link href="/inscription">
                   <NavLink href="#pablo" className="nav-link-icon">
-                    <i className="ni ni-circle-08" />
-                    <span className="nav-link-inner--text">Register</span>
+                    {/* <i className="ni ni-circle-08" /> */}
+                    <span className="nav-link-inner--text">Recruter un inspirnaute</span>
+                  </NavLink>
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link href="/inscription">
+                  <NavLink href="#pablo" className="nav-link-icon">
+                    {/* <i className="ni ni-circle-08" /> */}
+                    <span className="nav-link-inner--text">Devenir inspirnaute</span>
+                  </NavLink>
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link href="/inscription">
+                  <NavLink href="#pablo" className="nav-link-icon">
+                    {/* <i className="ni ni-circle-08" /> */}
+                    <span className="nav-link-inner--text">A propos</span>
                   </NavLink>
                 </Link>
               </NavItem>
@@ -75,14 +91,14 @@ function AuthNavbar() {
                   </NavLink>
                 </Link>
               </NavItem>
-              {/* <NavItem>
-                <Link href="/admin/profile">
+              <NavItem>
+                <Link href="#">
                   <NavLink href="#pablo" className="nav-link-icon">
-                    <i className="ni ni-single-02" />
-                    <span className="nav-link-inner--text">Profile</span>
+                    <i className="ni ni-world-2" />
+                    <span className="nav-link-inner--text">FR</span>
                   </NavLink>
                 </Link>
-              </NavItem> */}
+              </NavItem> 
             </Nav>
           </UncontrolledCollapse>
         </Container>
