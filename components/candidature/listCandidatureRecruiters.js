@@ -333,7 +333,7 @@ function Recruiters_Candidatures_List() {
                     * You look to recruit one employee or several employees :
                   </h6>
                 </Col>
-                <Col>{profilDetails.recruitEmployee === "true" ? "Yes" : "No"}</Col>
+                <Col>{profilDetails.recruitEmployee == true ? "Yes" : "No"}</Col>
               </Row>
               <Row>
                 <Col className="col-lg-9 mb-2">
@@ -341,7 +341,7 @@ function Recruiters_Candidatures_List() {
                     * You look for self-employed or several self-employed :
                   </h6>
                 </Col>
-                <Col>{profilDetails.selfEmployed === "true" ? "Yes" : "No"}</Col>
+                <Col>{profilDetails.selfEmployed == true ? "Yes" : "No"}</Col>
               </Row>
               <Row>
                 <Col className="col-lg-9 mb-2">
@@ -349,7 +349,7 @@ function Recruiters_Candidatures_List() {
                     * Are you working with independent :
                   </h6>
                 </Col>
-                <Col>{profilDetails.independent === "true" ? "Yes" : "No"}</Col>
+                <Col>{profilDetails.independent == true ? "Yes" : "No"}</Col>
               </Row>
               <Row>
                 <Col className="col-lg-9 mb-2">
@@ -357,7 +357,7 @@ function Recruiters_Candidatures_List() {
                     * Are you Like working with independent :
                   </h6>
                 </Col>
-                <Col>{profilDetails.likeIndependent === "true" ? "Yes" : "No"}</Col>
+                <Col>{profilDetails.likeIndependent == true ? "Yes" : "No"}</Col>
               </Row>
               <Row>
                 <Col className="col-lg-9 mb-2">
@@ -365,7 +365,7 @@ function Recruiters_Candidatures_List() {
                     * Are you working with remote consultants :
                   </h6>
                 </Col>
-                <Col>{profilDetails.remoteConsultant === "true" ? "Yes" : "No"}</Col>
+                <Col>{profilDetails.remoteConsultant == true ? "Yes" : "No"}</Col>
               </Row>
               <Row>
                 <Col className="col-lg-9 mb-2">
@@ -374,7 +374,7 @@ function Recruiters_Candidatures_List() {
                   </h6>
                 </Col>
                 <Col>
-                  {profilDetails.expandTeam === "true" ? "Yes" : "No"}
+                  {profilDetails.expandTeam == true ? "Yes" : "No"}
                 </Col>
               </Row>
               <Row>
@@ -384,7 +384,7 @@ function Recruiters_Candidatures_List() {
                   </h6>
                 </Col>
                 <Col>
-                  {profilDetails.newProject === "true" ? "Yes" : "No"}
+                  {profilDetails.newProject == true ? "Yes" : "No"}
                 </Col>
               </Row>
               <Row>
@@ -394,7 +394,7 @@ function Recruiters_Candidatures_List() {
                   </h6>
                 </Col>
                 <Col>
-                  {profilDetails.hireIng === "true" ? "Yes" : "No"}
+                  {profilDetails.hireIng == true ? "Yes" : "No"}
                 </Col>
               </Row>
             </div>

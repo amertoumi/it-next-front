@@ -1,3 +1,15 @@
+#blockRecruiter {
+  height : '100vh';
+  width: '100%';
+  position:'relative';
+  display: flex;
+  justify-content:center ;
+  
+}
+#embaucher {
+  
+  right: 50%;
+}
 .t1 {
   top: 1339px;
   left: 844px;
@@ -29,7 +41,6 @@
   left: 325px;
   width: 833px;
   height: 214px;
-  background: transparent url("/assets/svg/REcruter.svg") 0% 0% no-repeat padding-box;
   opacity: 1;
 }
 

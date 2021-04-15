@@ -5,19 +5,12 @@ import './recruiter.css';
 import { FullscreenExitTwoTone } from '@material-ui/icons';
 import './recruiter.css';
 
-const blockRecruiter = {
-    height : '100vh',
-    width:'100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-}
 
 const Recruiter = () => {
     
     return ( 
-        <div style={blockRecruiter}>   
-            <div style={{display:'flex', flexDirection:'column'}}>
+        <div id="blockRecruiter">
+            <div id='embaucher'>
                 <div className="t1">
                     embaucher
                 </div>
