@@ -6,10 +6,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/nextjs-argon-dashboard.scss";
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import AuthAPI from '../services/authApi';
-
 import {Provider as AuthProvider, Provider} from '../Context/Auth/AuthContext';
 
-export default class MyApp extends App {
+class MyApp extends App {
   
     componentDidMount() {
     // AuthAPI.setup();
@@ -41,3 +40,5 @@ export default class MyApp extends App {
     );
   }
 }
+
+export default MyApp

@@ -2,8 +2,17 @@ import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import "./presentation.css";
 import scrollBottom from "../../../assets/svg/scroll.svg";
+import { makeStyles } from "@material-ui/core/styles";
 
-const WelcomeComponent = ({ t }) => {
+const   blockRecruiter= {
+  height : '80vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center', 
+  
+}
+const WelcomeComponent = () => {
+  
   const isServer = typeof window === "undefined";
   const WOW = !isServer ? require("wow.js") : null;
 
@@ -13,13 +22,14 @@ const WelcomeComponent = ({ t }) => {
 
   return (
     <div
-      className={"wow slideInUp mt-5"}
+      className={"wow slideInUp"}
       data-wow-duration="3s"
       data-wow-delay="0.2s"
     >
-      <div className="text-center mt-9">
-        <div id="t1">{t("Pas de slogan")}</div>
-        <h2 id="t2">juste du talent</h2>
+      <div style={blockRecruiter}>
+        <div style={{display:'flex', flexDirection:'column'}}>
+        <div id="t1">Pas de slgan</div>
+        <h2 id="t2">juste du talen</h2>
         <div id="desc">
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur et
@@ -27,13 +37,16 @@ const WelcomeComponent = ({ t }) => {
             animi facilis, vero mollitia voluptatibus repellendus in? Neque,
             architecto natus.
           </p>
-          <div className="mt-7">
-            <img id="scroll" src={scrollBottom}></img>
+          <div>
+            <img src={scrollBottom} className="mt-7"></img>
           </div>
         </div>
+        </div>
+        
       </div>
     </div>
   );
 };
 
-export default withTranslation()(WelcomeComponent);
+
+export default WelcomeComponent;

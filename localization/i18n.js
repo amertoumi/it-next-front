@@ -4,8 +4,8 @@ import detector from "i18next-browser-languagedetector";
 import backend from "i18next-xhr-backend";
 import { reactI18nextModule } from "react-i18next";
 import axios from 'axios';
-import navbarEN from '../Localization/locales/en/navbar.json';
-import navbarFR from '../Localization/locales/fr/navbar.json';
+import presentationEN from '../localization/locales/en/presentation.json';
+import presentationFR from '../localization/locales/fr/presentation.json';
 
 function FetchContent(){
     const [content, setContent] = useState([]);
@@ -40,12 +40,12 @@ console.log(ENContent);
 const resources = {
     // Namspaces
     en: {
-     presentation : "ENContent",
-     sectionFooter : ENContent[0]?.sectionFooter
+     presentation : presentationEN,
+    
     },
     fr: {
-     presentation : "FRContent",
-     sectionFooter : FRContent[0]?.sectionFooter 
+     presentation : presentationFR,
+     
     },
  
 };
