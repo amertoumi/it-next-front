@@ -147,7 +147,7 @@ const Videoblock = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [dependency1]);
+  }, [dependency1, dependency2]);
 
   return (
     <div>
@@ -190,7 +190,7 @@ const Videoblock = () => {
 
           <div style={div_btn_video}>
             <label htmlFor="record-btn" style={custom_file_record}>
-              <i class="fas fa-record-vinyl pr-2"></i>Record video
+              <i className="fas fa-record-vinyl pr-2"></i>Record video
             </label>
             <input
               id="record-btn"
@@ -199,7 +199,7 @@ const Videoblock = () => {
               onClick={UploadVideo}
             />
             <label htmlFor="file-upload" style={custom_file_upload}>
-              <i class="fas fa-cloud-upload-alt pr-2"></i>Upload a video
+              <i className="fas fa-cloud-upload-alt pr-2"></i>Upload a video
             </label>
             <input
               id="file-upload"
@@ -266,7 +266,7 @@ const Videoblock = () => {
               onClick={() => {
                 handleClose();
                 removeVideo(state.video.id);
-                //setDependency1((prev) => prev + 1);
+                setDependency2((prev) => prev + 1);
               }}
               color="primary"
               autoFocus
