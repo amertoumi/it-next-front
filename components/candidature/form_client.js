@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import { Toast } from "primereact/toast";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Container, Row, Col } from "reactstrap";
 import Icon from "@material-ui/core/Icon";
-import {API_HOST, API_CREATE_ENTREPRISE_PATH} from "../../API";
+import { API_HOST, API_CREATE_ENTREPRISE_PATH } from "../../API";
 import {
   Divider,
   FormControl,
@@ -14,7 +18,66 @@ import {
   FormControlLabel,
   FormLabel,
 } from "@material-ui/core";
-import Swal from 'sweetalert2';
+import "./ToastDemo.css";
+
+const useStyles = makeStyles({
+  root: {
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
+  icon: {
+    borderRadius: "50%",
+    width: 16,
+    height: 16,
+    boxShadow:
+      "inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)",
+    backgroundColor: "#f5f8fa",
+    backgroundImage:
+      "linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))",
+    "$root.Mui-focusVisible &": {
+      outline: "2px auto rgba(19,124,189,.6)",
+      outlineOffset: 2,
+    },
+    "input:hover ~ &": {
+      backgroundColor: "#ebf1f5",
+    },
+    "input:disabled ~ &": {
+      boxShadow: "none",
+      background: "rgba(206,217,224,.5)",
+    },
+  },
+  checkedIcon: {
+    backgroundColor: "#137cbd",
+    backgroundImage:
+      "linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))",
+    "&:before": {
+      display: "block",
+      width: 16,
+      height: 16,
+      backgroundImage: "radial-gradient(#fff,#fff 28%,transparent 32%)",
+      content: '""',
+    },
+    "input:hover ~ &": {
+      backgroundColor: "#106ba3",
+    },
+  },
+});
+
+function StyledRadio(props) {
+  const classes = useStyles();
+
+  return (
+    <Radio
+      className={classes.root}
+      disableRipple
+      color="default"
+      checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+      icon={<span className={classes.icon} />}
+      {...props}
+    />
+  );
+}
 
 export default function Client_Form() {
   const [managerName, setManagerName] = React.useState("");
@@ -26,60 +89,54 @@ export default function Client_Form() {
   const [domain, setDomain] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
   const [poste, setPoste] = React.useState("");
-  const [recruitEmployee, setRecruitEmployee] = React.useState("true");
-  const [selfEmployed, setSelfEmployed] = React.useState("true");
-  const [independent, setIndependent] = React.useState("true");
-  const [likeIndependent, setLikeIndependent] = React.useState("true");
-  const [remoteConsultant, setRemoteConsultant] = React.useState("true");
-  const [expandTeam, setExpandTeam] = React.useState("true");
-  const [newProject, setNewProject] = React.useState("true");
-  const [hireIng, setHireIng] = React.useState("true");
+  const [recruitEmployee, setRecruitEmployee] = React.useState();
+  const [selfEmployed, setSelfEmployed] = React.useState();
+  const [independent, setIndependent] = React.useState();
+  const [likeIndependent, setLikeIndependent] = React.useState();
+  const [remoteConsultant, setRemoteConsultant] = React.useState();
+  const [expandTeam, setExpandTeam] = React.useState();
+  const [newProject, setNewProject] = React.useState();
+  const [hireIng, setHireIng] = React.useState();
+  const toast = useRef(null);
 
-  const handle__Recruit_Employee = (event) => {
-    setRecruitEmployee(event.target.value);
+  const showSuccess = () => {
+    toast.current.show({
+      severity: "success",
+      summary: "Success Message",
+      detail: "Inscription Done !!",
+      life: 3000,
+    });
   };
-  const handle__Self_Employed = (event) => {
-    setSelfEmployed(event.target.value);
-  };
-  const handle__Independents = (event) => {
-    setIndependent(event.target.value);
-  };
-  const handle__Like_Independents = (event) => {
-    setLikeIndependent(event.target.value);
-  };
-  const handle__Remote_Cansultants = (event) => {
-    setRemoteConsultant(event.target.value);
-  };
-
-  const handle__Expand_Team = (event) => {
-    setExpandTeam(event.target.value);
-  };
-  const handle__New_Project = (event) => {
-    setNewProject(event.target.value);
-  };
-  const handle__Embauche_Ing = (event) => {
-    setHireIng(event.target.value);
+  const showError = () => {
+    toast.current.show({
+      severity: "error",
+      summary: "Error Message",
+      detail: "Inscription Failed",
+      life: 3000,
+    });
   };
 
-  function SuccessAccus() {
-    Swal.fire({
-      title: 'Success!',
-      text: 'Thanks :) Your registration is Done, we will return you asap!!',
-      icon: 'success',
-      confirmButtonText: 'Cool'
-    })
-  }
-  
-  function ErrorAccus() {
-    Swal.fire({
-      title: 'Error !!',
-      text: 'Oups :/ There is an error in your inserted data, do you want to try again',
-      icon: 'error',
-      confirmButtonText: 'Try Again'
-    })
-  }
+  const clearInput = () => {
+    setEmail("");
+    setLastName("");
+    setPassword("");
+    setentrepriseName("");
+    setManagerName("");
+    setCountry("");
+    setDomain("");
+    setPhoneNumber("");
+    setPoste("");
+    setRecruitEmployee();
+    setSelfEmployed();
+    setIndependent();
+    setLikeIndependent();
+    setRemoteConsultant();
+    setExpandTeam();
+    setNewProject();
+    setHireIng();
+  };
 
-  function handleSubmission(event) { 
+  function handleSubmission(event) {
     event.preventDefault();
 
     var formdata = new FormData();
@@ -100,59 +157,62 @@ export default function Client_Form() {
     formdata.append("newProject", newProject);
     formdata.append("selfEmployed", selfEmployed);
     formdata.append("hireIng", hireIng);
-    
-    var urlApi= API_HOST+API_CREATE_ENTREPRISE_PATH
+
+    var urlApi = API_HOST + API_CREATE_ENTREPRISE_PATH;
     var requestOptions = {
       method: "POST",
       body: formdata,
       redirect: "follow",
-      
     };
-    try {
-      fetch(urlApi, requestOptions)
-      .then((response) => response)
-      SuccessAccus();
-    } catch (error) {
-      ErrorAccus()
-    }  
-   
+
+    fetch(urlApi, requestOptions).then((response) => {
+      if (response.ok) {
+        showSuccess();
+        clearInput();
+      } else {
+        showError();
+      }
+    });
   }
   return (
     <Container>
       <h1 className="text-center mt-5 mb-3">Inscription Recruteur</h1>
-      <form noValidate autoComplete="off" onSubmit={handleSubmission}>
+      <ValidatorForm onSubmit={handleSubmission}>
         <Row>
           <h5>User Account</h5>
         </Row>
         <Divider variant="middle" className="mb-2" />
         <Row>
           <Col>
-            <TextField
+            <TextValidator
               id="entrepriseName"
               label="Entreprise Name"
               type="search"
               value={entrepriseName}
-              required
+              validators={["required"]}
+              errorMessages={["Entreprise name is required"]}
               onInput={(e) => setentrepriseName(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="email"
               label="Professional Email"
-              type="search"
+              name="email"
               value={email}
-              required
+              validators={["required", "isEmail"]}
+              errorMessages={["Email is required", "email is not valid"]}
               onInput={(e) => setEmail(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="password"
               label="Password"
               type="password"
               value={password}
-              required
+              validators={["required"]}
+              errorMessages={["Password is required"]}
               onInput={(e) => setPassword(e.target.value)}
             />
           </Col>
@@ -164,28 +224,34 @@ export default function Client_Form() {
         <Divider variant="middle" className="mb-2" />
         <Row>
           <Col>
-            <TextField
+            <TextValidator
               id="name"
               label="Name"
               type="search"
               value={managerName}
+              validators={["required"]}
+              errorMessages={["Name is required"]}
               onInput={(e) => setManagerName(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               label="LastName"
               type="search"
               value={lastName}
+              validators={["required"]}
+              errorMessages={["Last Name is required"]}
               onInput={(e) => setLastName(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="phoneNumber"
               label="Phone Number"
               type="search"
               value={phoneNumber}
+              validators={["minNumber:0", "maxNumber:99999999999"]}
+              errorMessages={["Phone Number required"]}
               onInput={(e) => setPhoneNumber(e.target.value)}
             />
           </Col>
@@ -202,6 +268,8 @@ export default function Client_Form() {
                 value={poste}
                 onChange={(e) => setPoste(e.target.value)}
                 placeholder=""
+                validators={["required"]}
+                errorMessages={["Poste required"]}
               >
                 <option></option>
                 <option value={"dirigeant"}>Je suis dirigeant</option>
@@ -221,6 +289,8 @@ export default function Client_Form() {
               type="search"
               value={domain}
               onInput={(e) => setDomain(e.target.value)}
+              validators={["required"]}
+              errorMessages={["domain required"]}
             />
           </Col>
           <Col>
@@ -230,6 +300,8 @@ export default function Client_Form() {
               type="search"
               value={country}
               onInput={(e) => setCountry(e.target.value)}
+              validators={["required"]}
+              errorMessages={["Country required"]}
             />
           </Col>
         </Row>
@@ -247,16 +319,18 @@ export default function Client_Form() {
                 aria-label="radio_1"
                 name="radio_1"
                 value={recruitEmployee}
-                onChange={handle__Recruit_Employee}
+                onChange={(event) => {
+                  setRecruitEmployee(event.target.value);
+                }}
               >
                 <FormControlLabel
-                  value="true"
-                  control={<Radio id="rd1" />}
+                  value="1"
+                  control={<StyledRadio />}
                   label="OUI"
                 />
                 <FormControlLabel
-                  value="false"
-                  control={<Radio id="rd2" />}
+                  value="0"
+                  control={<StyledRadio />}
                   label="NON"
                 />
               </RadioGroup>
@@ -271,16 +345,18 @@ export default function Client_Form() {
                 aria-label="radio_2"
                 name="radio_2"
                 value={selfEmployed}
-                onChange={handle__Self_Employed}
+                onChange={(event) => {
+                  setSelfEmployed(event.target.value);
+                }}
               >
                 <FormControlLabel
-                  value="true"
-                  control={<Radio id="rd3" />}
+                  value="1"
+                  control={<StyledRadio />}
                   label="OUI"
                 />
                 <FormControlLabel
-                  value="false"
-                  control={<Radio id="rd4" />}
+                  value="0"
+                  control={<StyledRadio />}
                   label="NON"
                 />
               </RadioGroup>
@@ -302,16 +378,18 @@ export default function Client_Form() {
                   aria-label="radio_3"
                   name="radio_3"
                   value={independent}
-                  onChange={handle__Independents}
+                  onChange={(event) => {
+                    setIndependent(event.target.value);
+                  }}
                 >
                   <FormControlLabel
-                    value="true"
-                    control={<Radio id="rd5" />}
+                    value="1"
+                    control={<StyledRadio />}
                     label="OUI"
                   />
                   <FormControlLabel
-                    value="false"
-                    control={<Radio id="rd6" />}
+                    value="0"
+                    control={<StyledRadio />}
                     label="NON"
                   />
                 </RadioGroup>
@@ -326,16 +404,18 @@ export default function Client_Form() {
                   aria-label="radio_4"
                   name="radio_4"
                   value={likeIndependent}
-                  onChange={handle__Like_Independents}
+                  onChange={(event) => {
+                    setLikeIndependent(event.target.value);
+                  }}
                 >
                   <FormControlLabel
-                    value="true"
-                    control={<Radio id="rd7" />}
+                    value="1"
+                    control={<StyledRadio />}
                     label="OUI"
                   />
                   <FormControlLabel
-                    value="false"
-                    control={<Radio id="rd8" />}
+                    value="0"
+                    control={<StyledRadio />}
                     label="NON"
                   />
                 </RadioGroup>
@@ -348,16 +428,18 @@ export default function Client_Form() {
                   aria-label="radio_5"
                   name="radio_5"
                   value={remoteConsultant}
-                  onChange={handle__Remote_Cansultants}
+                  onChange={(event) => {
+                    setRemoteConsultant(event.target.value);
+                  }}
                 >
                   <FormControlLabel
-                    value="true"
-                    control={<Radio id="rd9" />}
+                    value="1"
+                    control={<StyledRadio />}
                     label="OUI"
                   />
                   <FormControlLabel
-                    value="false"
-                    control={<Radio id="rd10" />}
+                    value="0"
+                    control={<StyledRadio />}
                     label="NON"
                   />
                 </RadioGroup>
@@ -378,16 +460,18 @@ export default function Client_Form() {
                   aria-label="radio_6"
                   name="radio_6"
                   value={expandTeam}
-                  onChange={handle__Expand_Team}
+                  onChange={(event) => {
+                    setExpandTeam(event.target.value);
+                  }}
                 >
                   <FormControlLabel
-                    value="true"
-                    control={<Radio id="rd11" />}
+                    value="1"
+                    control={<StyledRadio />}
                     label="OUI"
                   />
                   <FormControlLabel
-                    value="false"
-                    control={<Radio id="rd12" />}
+                    value="0"
+                    control={<StyledRadio />}
                     label="NON"
                   />
                 </RadioGroup>
@@ -400,16 +484,18 @@ export default function Client_Form() {
                   aria-label="radio_7"
                   name="radio_7"
                   value={newProject}
-                  onChange={handle__New_Project}
+                  onChange={(event) => {
+                    setNewProject(event.target.value);
+                  }}
                 >
                   <FormControlLabel
-                    value="true"
-                    control={<Radio id="rd13" />}
+                    value="1"
+                    control={<StyledRadio />}
                     label="OUI"
                   />
                   <FormControlLabel
-                    value="false"
-                    control={<Radio id="rd14" />}
+                    value="0"
+                    control={<StyledRadio />}
                     label="NON"
                   />
                 </RadioGroup>
@@ -424,16 +510,18 @@ export default function Client_Form() {
                   aria-label="radio_8"
                   name="radio_8"
                   value={hireIng}
-                  onChange={handle__Embauche_Ing}
+                  onChange={(event) => {
+                    setHireIng(event.target.value);
+                  }}
                 >
                   <FormControlLabel
-                    value="true"
-                    control={<Radio id="rd15" />}
+                    value="1"
+                    control={<StyledRadio />}
                     label="OUI"
                   />
                   <FormControlLabel
-                    value="false"
-                    control={<Radio id="rd16" />}
+                    value="0"
+                    control={<StyledRadio />}
                     label="NON"
                   />
                 </RadioGroup>
@@ -452,8 +540,10 @@ export default function Client_Form() {
           >
             Subscribe
           </Button>
+
+          <Toast ref={toast} />
         </Row>
-      </form>
+      </ValidatorForm>
     </Container>
   );
 }

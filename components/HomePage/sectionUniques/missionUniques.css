@@ -1,0 +1,57 @@
+.bgMissionUnique {
+    height: 70vh;
+    width: 100%;
+    background-image: url('../../../assets/svg/Planet1.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    
+}
+.missionUnique {
+    display:flex;
+    justify-content: center;
+}
+
+.missions {
+    text-align: left;
+    font: normal normal bold 100px/110px Roboto;
+    letter-spacing: 0px;
+    color: #2DF8C0;
+    text-transform: uppercase;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    padding: 10% 0% 0%;
+}
+
+.uniques {
+    text-align: left;
+    font: normal normal bold 100px/100px Roboto;
+    letter-spacing: 0px;
+    color: #2DF8C0;
+    text-transform: uppercase;
+    opacity: 1;
+    position: relative;
+    margin-right: 5%;
+    
+}
+
+.uniques p {
+    text-align: left;
+    font: normal normal bold 25px/30px Roboto;
+    letter-spacing: 0px;
+    color: #2DF8C0;
+    text-transform: uppercase;
+    opacity: 1;
+}
+.cosmonaut2 {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    width: 60%;
+}
+
+.cosmonaut2 img{
+    width: 220%;
+    height: 60%;
+}

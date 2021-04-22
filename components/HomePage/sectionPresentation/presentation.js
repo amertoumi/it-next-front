@@ -38,7 +38,7 @@ const WelcomeComponent = () => {
             architecto natus.
           </p>
           <div>
-            <img src={scrollBottom} className="mt-7"></img>
+            <img src={scrollBottom} className="mt-3"></img>
           </div>
         </div>
         </div>

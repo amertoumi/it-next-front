@@ -8,17 +8,19 @@ import Router from 'next/router';
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case 'add_error':
+    case 'ADD_ERROR':
       return {...state, errorMessage: action.payload};
-    case 'signup':
+    case 'SIGNUP':
       return {...state, errorMessage: '', token: action.payload.token};
-    case 'signin':
+    case 'SIGNIN':
       return {...state, errorMessage: '', token: action.payload};
-    case 'clear_error_message':
+    case 'CLEAR_ERROR_MESSAGE':
       return {...state, errorMessage: ''};
-    case 'signout':
+    case 'IS_AUTH':
       return {token: null, errorMessage: '', currentUser:0};
-    case 'user':
+    case 'SIGNOUT':
+      return {token: null, errorMessage: '', currentUser:0};
+    case 'USER':
         return {...state, currentUser:action.payload}
     default:
       return state;
@@ -28,12 +30,12 @@ const authReducer = (state, action) => {
 const tryLocalSignin = dispatch => async () => {
   const token = await ls.get('token');
   if (token) {
-    dispatch({type: 'signin', payload: token});
+    dispatch({type: 'SIGNIN', payload: token});
   }
 };
 
 const clearErrorMessage = dispatch => () => {
-  dispatch({type: 'clear_error_message'});
+  dispatch({type: 'CLEAR_ERROR_MESSAGE'});
 };
 
 
@@ -48,7 +50,7 @@ const signin = dispatch => async (data) => {
     const token = await ls.get('token');
     const { id: xx} = await jwtDecode(token)
     ls.set('currentUser', xx)
-    dispatch({type: 'signin', payload: response.data.token})
+    dispatch({type: 'SIGNIN', payload: response.data.token})
     const {roles: role} = jwtDecode(token)
       
        if(role[0] === "ROLE_ADMIN"){
@@ -56,14 +58,14 @@ const signin = dispatch => async (data) => {
       }else if (role[0]=== "ROLE_RECRUITER"){
         Router.push('/recruiter/profil');
       }
-      else Router.push('/user/viewcv')
+      else Router.push('/user/profil')
      
       return true;
 
   } catch (error) {
       console.log('failed');
     dispatch({
-      type: 'add_error',
+      type: 'ADD_ERROR',
       payload: "adresse e-mail ou mot de passe n'est pas valide",
     });
   }
@@ -75,22 +77,35 @@ const signout = dispatch => async () => {
    ls.remove('token');
    ls.remove('currentUser');
    delete axios.defaults.headers["Authorization"];
-   dispatch({type: 'signout'});
+   dispatch({type: 'SIGNOUT'});
    Router.push('/home');
 };
 
-const getCurrentUser = dispatch => async ()=>{
-    const token = await ls.get('token');
-
-const { id: xx} = await jwtDecode(token);
-dispatch({type:'user', payload: xx})
-console.log('+++ current userrr :: ', xx)
-
-
+function setAxiosToken(){
+  const token = ls.get('token');
+  const Axios = axios.defaults.headers["Authorization"] = "Bearer  " + token;
+  return Axios;
 }
+
+export function is_Authenticated (dispatch) {
+
+  const token = ls.get('token');
+  if(token) {
+    const {exp: expiration} = jwtDecode(token)
+    //const {roles: role} = jwtDecode(token)
+    if (expiration * 1000 > new Date().getTime()){
+        setAxiosToken(token); 
+         
+    } else {
+        Router.push('/home');
+        
+    }
+}
+}
+
 
 export const {Provider, Context} = AuthState(
   authReducer,
-  {signin, signout, clearErrorMessage, tryLocalSignin,getCurrentUser},
+  {signin, signout, is_Authenticated, clearErrorMessage, tryLocalSignin },
   {token: null, errorMessage: '', currentUser: null},
 );

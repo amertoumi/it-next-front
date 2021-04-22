@@ -24,8 +24,6 @@
     "export": "npm run build && next export"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^27.0.0",
-    "@ckeditor/ckeditor5-react": "^3.0.2",
     "@date-io/date-fns": "^1.3.13",
     "@fortawesome/fontawesome-free": "^5.15.2",
     "@material-ui/core": "^4.11.3",
@@ -41,7 +39,6 @@
     "axios": "^0.21.1",
     "bootstrap": "4.6.0",
     "chart.js": "2.9.4",
-    "ckeditor5": "^27.0.0",
     "classnames": "2.2.6",
     "date-fns": "^2.19.0",
     "fomantic-ui-css": "^2.8.7",
@@ -64,6 +61,9 @@
     "nouislider": "14.6.3",
     "package": "^1.0.1",
     "path": "0.12.7",
+    "primeflex": "^2.0.0",
+    "primeicons": "4.1.0",
+    "primereact": "^6.2.1",
     "react": "17.0.1",
     "react-beautiful-dnd": "^13.1.0",
     "react-bootstrap": "^1.4.3",
@@ -73,6 +73,7 @@
     "react-dom": "17.0.1",
     "react-hook-form": "^6.15.1",
     "react-i18next": "^11.8.13",
+    "react-material-ui-form-validator": "^2.1.4",
     "react-reveal": "^1.2.2",
     "react-router-dom": "^5.2.0",
     "react-swipeable-views": "^0.13.9",
@@ -81,7 +82,6 @@
     "reactstrap": "8.9.0",
     "semantic-ui-react": "^2.0.3",
     "styled-components": "^5.2.1",
-    "sweetalert2": "^10.16.2",
     "web-vitals": "^1.1.0",
     "webpack": "4.44.1",
     "wow.js": "^1.2.2"

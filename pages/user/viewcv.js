@@ -5,10 +5,8 @@ import "./css/cv.css";
 const EditHeaderCv = dynamic(()=> import('../../components/Form/EditHeaderCv'));
 
 import { Label, Row, Col } from "reactstrap";
-import jwtDecode from "jwt-decode";
 import User from "../../layouts/User";
 import { API_DETAILS_USER, API_HOST, API_PROFIL_DETAILS } from "../../API";
-import axios from "axios";
 import {Axios} from "../../services/authApi";
 import ls from "local-storage";
 
@@ -21,27 +19,8 @@ function ViewCV() {
   const [CurrentUser, setCurrentUser] = React.useState([]);
   const { format } = require("date-fns");
 
-  function SuccessAccus() {
-    Swal.fire({
-      title: "Success!!",
-      text: "Done, your data is inserted :)",
-      icon: "success",
-      confirmButtonText: "Cool",
-    });
-  }
-  function ErrorAccus() {
-    Swal.fire({
-      title: "Error !!",
-      text: "Oups :/ Cannot add data",
-      icon: "error",
-      confirmButtonText: "Try Again",
-    });
-  }
-
   React.useEffect(() => {
 
-    const token = ls.get("token");
-   
     const id_curent_user = ls.get("currentUser");
     var URL = API_HOST + API_DETAILS_USER + id_curent_user;
 
@@ -50,7 +29,7 @@ function ViewCV() {
       .then((response) => setCurrentUser(response.data["details"]))
       .catch((error) => console.log(error.response));
   }, []);
-  console.log(CurrentUser);
+
   return (
     <>
       <EditHeaderCv />

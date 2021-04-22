@@ -1,4 +1,4 @@
-import {Axios} from '../services/authApi';
+import Axios from '../services/axiosServices';
 import {
   API_HOST,
   API_SKILLS_PATH,

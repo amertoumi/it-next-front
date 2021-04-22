@@ -1,6 +1,5 @@
 import React ,{useContext} from "react";
 import Link from "next/link";
-import Api from "../../pages/api";
 import {Context as AuthContext} from '../../Context/Auth/AuthContext';
 
 // reactstrap components
@@ -9,12 +8,6 @@ import {
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Form,
-  FormGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input,
-  InputGroup,
   Navbar,
   Nav,
   Container,
@@ -95,7 +88,7 @@ function AdminNavbar({ brandText }) {
                 <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                   <i className="ni ni-user-run" />
                   <span>
-                    <Button onClick={() => signout()}>Logout</Button>
+                    <Button  onClick={() => signout()} >Logout</Button>
                   </span>
                 </DropdownItem>
               </DropdownMenu>

@@ -2,4 +2,5 @@
     /* background-color: #273B93; */
     background-image: url('./assets/img/bg.png');
     background-size: cover;
+    padding-right: 0;
   }

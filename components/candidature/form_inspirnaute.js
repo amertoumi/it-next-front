@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import axios from "axios";
 import { API_HOST, API_SKILLS_PATH, API_UPLOAD_FORM_FILE } from "../../API";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { Toast } from "primereact/toast";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Container, Row, Col } from "reactstrap";
 import { Divider } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import Swal from "sweetalert2";
+import "./ToastDemo.css";
 
 export default function Inspirenaute_Form() {
   const [isActive, setIsActive] = React.useState(false);
@@ -29,37 +31,33 @@ export default function Inspirenaute_Form() {
   const [nbrAnneeExp, setNbrAnneeExp] = React.useState();
   const [listSkills, setSkills] = React.useState([]);
   const [selectedFile, setSelectedFile] = React.useState(null);
-  
-  // Update skills array
+  const toast = useRef(null);
 
+  const showSuccess = () => {
+    toast.current.show({
+      severity: "success",
+      summary: "Success Message",
+      detail: "Inscription Done !!",
+      life: 3000,
+    });
+  };
+  const showError = () => {
+    toast.current.show({
+      severity: "error",
+      summary: "Error Message",
+      detail: "Inscription Failed",
+      life: 3000,
+    });
+  };
   // get list of skills
   React.useEffect(() => {
     let URL = API_HOST + API_SKILLS_PATH;
     axios
       .get(URL)
-      //.then((response)=>console.log(response.data["hydra:member"]))
       .then((response) => response.data["hydra:member"])
       .then((data) => setSkills(data))
       .catch((error) => console.log(error.response));
   }, []);
-
-  function SuccessAccus() {
-    Swal.fire({
-      title: "Success!",
-      text: "Thanks :) Your registration is Done, we will return you asap!!",
-      icon: "success",
-      confirmButtonText: "Cool",
-    });
-  }
-  function ErrorAccus() {
-    Swal.fire({
-      title: "Error !!",
-      text:
-        "Oups :/ There is an error in your inserted data, do you want to try again",
-      icon: "error",
-      confirmButtonText: "Try Again",
-    });
-  }
 
   function handleSubmission(event) {
     event.preventDefault();
@@ -78,7 +76,7 @@ export default function Inspirenaute_Form() {
     formdata.append("poste", poste);
     formdata.append("nbr_annee_exp", nbrAnneeExp);
     formdata.append("tarif", tarif);
-    formdata.append('mySkills', mySkills);
+    formdata.append("mySkills", mySkills);
     formdata.append("category", category);
     formdata.append("otherSkills", otherSkills);
     var url = API_HOST + API_UPLOAD_FORM_FILE;
@@ -88,52 +86,57 @@ export default function Inspirenaute_Form() {
       redirect: "follow",
     };
 
-
     if (selectedFile) {
-      fetch(url, requestOptions)
-      .then((response) => response);
-      SuccessAccus();
-    } else {
-      ErrorAccus();
+      fetch(url, requestOptions).then((response) => {
+        if (response.ok) {
+          showSuccess();
+        } else {
+          showError();
+        }
+      });
     }
   }
 
   return (
     <Container>
       <h1 className="text-center mt-5 mb-3">Inscription Inspirnaute</h1>
-      <form noValidate autoComplete="off" onSubmit={handleSubmission}>
+
+      <ValidatorForm onSubmit={handleSubmission}>
         <Row>
           <h5>User Account</h5>
         </Row>
         <Divider variant="middle" className="mb-2" />
         <Row>
           <Col>
-            <TextField
+            <TextValidator
               id="username"
               label="Username"
               type="search"
               value={username}
-              required
-              onInput={(e) => setUserName(e.target.value, index)}
+              validators={["required"]}
+              errorMessages={["username is required"]}
+              onInput={(e) => setUserName(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="email"
               label="Email"
               type="search"
               value={email}
-              required
+              validators={["required", "isEmail"]}
+              errorMessages={["email is required"]}
               onInput={(e) => setEmail(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="password"
               label="Password"
               type="password"
               value={password}
-              required
+              validators={["required"]}
+              errorMessages={["Password is required"]}
               onInput={(e) => setPassword(e.target.value)}
             />
           </Col>
@@ -148,58 +151,70 @@ export default function Inspirenaute_Form() {
           <input id="category" type="hidden" value={category} />
           <input id="type" type="hidden" value={type} />
           <Col>
-            <TextField
+            <TextValidator
               id="name"
               label="Name"
               type="search"
               value={name}
+              validators={["required"]}
+              errorMessages={["name is required"]}
               onInput={(e) => setName(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="lastname"
-              label="LastName"
+              label="Last Name"
               type="search"
               value={lastname}
+              validators={["required"]}
+              errorMessages={["last name is required"]}
               onInput={(e) => setLastName(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="phone"
               label="Phone Number"
               type="search"
               value={phone}
+              validators={["minNumber:0", "maxNumber:99999999999"]}
+              errorMessages={["Phone Number required"]}
               onInput={(e) => setPhone(e.target.value)}
             />
           </Col>
         </Row>
         <Row>
           <Col>
-            <TextField
+            <TextValidator
               id="country"
               label="Country"
               type="search"
               value={country}
+              validators={["required"]}
+              errorMessages={["Country required"]}
               onInput={(e) => setCountry(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="city"
               label="City"
               type="search"
               value={city}
+              validators={["required"]}
+              errorMessages={["city required"]}
               onInput={(e) => setCity(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="address"
               label="Address"
               type="search"
               value={address}
+              validators={["required"]}
+              errorMessages={["Address required"]}
               onInput={(e) => setAddress(e.target.value)}
             />
           </Col>
@@ -210,29 +225,35 @@ export default function Inspirenaute_Form() {
         <Divider variant="middle" className="mb-2" />
         <Row>
           <Col>
-            <TextField
+            <TextValidator
               id="poste"
               label="Poste"
               type="search"
               value={poste}
+              validators={["required"]}
+              errorMessages={["poste is required"]}
               onInput={(e) => setPoste(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="nbrAnneeExp"
               label="Years of Expérience"
               type="number"
               value={nbrAnneeExp}
+              validators={["required"]}
+              errorMessages={["years of Experience is required"]}
               onInput={(e) => setNbrAnneeExp(e.target.value)}
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="tarif"
               label="Tarif"
               type="search"
               value={tarif}
+              validators={["required"]}
+              errorMessages={["tarif is required"]}
               onInput={(e) => setTarif(e.target.value)}
             />
           </Col>
@@ -247,8 +268,10 @@ export default function Inspirenaute_Form() {
               onChange={(event, newValue) => {
                 setMySkills([
                   ...mySkills,
-                  ...newValue.filter((option) => mySkills.indexOf(option) === -1),
-                ]); 
+                  ...newValue.filter(
+                    (option) => mySkills.indexOf(option) === -1
+                  ),
+                ]);
               }}
               renderInput={(params) => (
                 <TextField
@@ -263,7 +286,7 @@ export default function Inspirenaute_Form() {
             />
           </Col>
           <Col>
-            <TextField
+            <TextValidator
               id="otherSkills"
               label="Other Skills"
               type="Multiline"
@@ -279,8 +302,8 @@ export default function Inspirenaute_Form() {
                 name="file"
                 id="file"
                 inputProps={{
-                accept: "application/pdf,application/vnd.ms-excel",
-              }}
+                  accept: "application/pdf,application/vnd.ms-excel",
+                }}
                 onChange={(e) => {
                   setSelectedFile(e.target.files[0]);
                 }}
@@ -298,8 +321,9 @@ export default function Inspirenaute_Form() {
           >
             Subscribe
           </Button>
+          <Toast ref={toast} />
         </Row>
-      </form>
+      </ValidatorForm>
     </Container>
   );
 }

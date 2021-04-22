@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import jwtDecode from "jwt-decode";
-import axios from "axios";
+import {Axios} from "../../services/authApi";
 import { Container, Row, Col } from "reactstrap";
 import {
   API_HOST,
@@ -17,7 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
-import Swal from "sweetalert2";
+//import Swal from "sweetalert2";
 import ls from 'local-storage';
 
 const useStyles = makeStyles((theme) => ({
@@ -57,8 +55,7 @@ const useStyles = makeStyles((theme) => ({
 function EditHeaderCv () {
 
   const classes = useStyles();
-  const token = ls.get("authToken");
-  const { id: id_Current_User } = jwtDecode(token);
+  const id_Current_User = ls.get('currentUser');
   const [disable, setDisable] = React.useState(true);
   const [skills, setSkills] = React.useState([]);
   const [skillsProfil, setProfilSkills] = React.useState([]);
@@ -77,11 +74,7 @@ function EditHeaderCv () {
     setDisable(!disable);
   };
 
-  const allSkillsArray = skills.map(function (obj) {
-    return obj.name;
-  });
-
-  function SuccessAccus() {
+/*    function SuccessAccus() {
     Swal.fire({
       title: "Success!!",
       text: "Done, your data is inserted :)",
@@ -96,15 +89,11 @@ function EditHeaderCv () {
       icon: "error",
       confirmButtonText: "Try Again",
     });
-  }
+  }  */
+
   function getAllSkills() {
     var URL = API_HOST + API_SKILLS_PATH;
-    var config = {
-      method: "get",
-      url: URL,
-      headers: {},
-    };
-    axios(config)
+    Axios.get(URL)
       .then((response) => response)
       .then((response) => setSkills(response.data["hydra:member"]))
       .catch((error) => error.response);
@@ -113,13 +102,8 @@ function EditHeaderCv () {
 
   function getProfilDetails (){
     var URL = API_HOST + API_DETAILS_USER + id_Current_User;
-    var config = {
-      method: "get",
-      url: URL,
-      headers: {},
-    };
 
-    axios(config)
+    Axios.get(URL)
       .then((response) => response)
       .then((response) => setCV(response.data["details"]))
 
@@ -144,18 +128,15 @@ function EditHeaderCv () {
     formdata.append("link", cv.link);
 
     var url = API_HOST + API_UPDATE_PROFILHEADER + id_Current_User;
-    var requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
 
     if (formdata) {
-      fetch(url, requestOptions).then((response) => response);
-      SuccessAccus();
+      Axios.post(url, formdata)
+      .then((response) => response);
+      //SuccessAccus();
       setDisable(true);
     } else {
-      ErrorAccus();
+      console.log('error')
+      //ErrorAccus();
     }
   };
 

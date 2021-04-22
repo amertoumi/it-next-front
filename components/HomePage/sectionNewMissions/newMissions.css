@@ -1,0 +1,100 @@
+.newMissionsBlock {
+  height: "100vh";
+  width: "100%";
+  display: flex;
+  justify-content: center;
+}
+
+.newMissionsTitle {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 5%;
+}
+.titleMission1 {
+  text-align: left;
+  font: normal normal bold 70px/90px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+.titleMission2 {
+  text-align: left;
+  font: normal normal bold 70px/90px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+  padding-left: 45%;
+}
+
+.titleMission3 {
+  text-align: left;
+  font: normal normal bold 70px/90px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+  padding-left: 30%;
+  width: 140%;
+}
+
+.newMissiondesc {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.newMissionDesc {
+  margin-left: 40%;
+}
+
+.desc1 {
+  text-align: left;
+  font: normal normal normal 30px/40px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+.desc2 {
+  text-align: left;
+  font: normal normal normal 30px/35px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+  width: max-content;
+}
+.desc3 {
+  text-align: left;
+  font: normal normal normal 30px/35px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+  width: max-content;
+}
+.desc4 {
+  text-align: left;
+  font: normal normal normal 30px/35px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+  width: max-content;
+}
+
+.buttonInspirnaute {
+    text-align: center;
+    font: normal normal bold 16px/16px Roboto;
+    background: #FFC937 0% 0% no-repeat padding-box;
+    opacity: 1; 
+    margin: 10% 0% 3%;
+    padding: 5% 10%;
+    color: #211F85;
+    text-transform: uppercase;
+}
