@@ -1,0 +1,11 @@
+.carBorder {
+    border: 1px solid #fff;
+    border-radius: 14px;
+    opacity: 1;
+}
+
+.divButton {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}

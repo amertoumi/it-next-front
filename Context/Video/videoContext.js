@@ -2,9 +2,6 @@ import VideoState from './videoState';
 import {API_HOST, API_LAST_FILE, API_delete_VIDEO} from "../../API";
 import {Axios} from "../../services/authApi";
 import ls from 'local-storage';
-import jwtDecode from "jwt-decode";
-import Router from 'next/router';
-import { RepeatOneSharp } from '@material-ui/icons';
 
 const videoReducer = (state, action) => {
     switch (action.type) {
@@ -25,13 +22,9 @@ const fetch_video = dispatch => async () => {
     const id = ls.get('currentUser')
     const url = API_HOST + API_LAST_FILE + "video/" + id
     try {
-        const response = await Axios
-        .get(url)
-        
-            dispatch({type: 'GET_VIDEO', payload:response.data[0]})
-            //console.log('+++++++++');
-            //console.log(response.data[0])
-        
+        const response = await Axios.get(url) 
+         dispatch({type: 'GET_VIDEO', payload:response.data[0]})
+
     } catch (error) {
         console.log(error);
     }
