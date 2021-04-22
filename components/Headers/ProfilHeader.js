@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { API_HOST, API_DETAILS_USER, API_UPLOAD_LOGO } from "../../API";
 import Link from "next/link";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Swal from "sweetalert2";
 import { Container, Row, Col } from "reactstrap";
-import jwtDecode from "jwt-decode";
-import axios from "axios";
 import ls from "local-storage";
+//import {Axios} from '../../services/authApi';
+import Axios from '../../services/axiosServices';
 
 const useStyles = makeStyles({
   root: {
@@ -33,43 +31,16 @@ function ProfilHeader() {
   const [selectedFile, setSelectedFile] = React.useState(null);
   const token = ls.get("authToken");
 
-  function SuccessAccus() {
-    Swal.fire({
-      title: "Success!",
-      text: "Thanks :) Your logo is uploaded",
-      icon: "success",
-      confirmButtonText: "Cool",
-    });
-  }
-  function ErrorAccus() {
-    Swal.fire({
-      title: "Error !!",
-      text: "Oups :/ Cannot upload logo",
-      icon: "error",
-      confirmButtonText: "Try Again",
-    });
-  }
   React.useEffect(() => {
     const token = ls.get("authToken");
-    //const { id: id_Current_User } = jwtDecode(token);
-    const dcd = jwtDecode(token);
-    const id_Current_User = dcd.id;
+    const id_Current_User = ls.get("currentUser");
     var URL = API_HOST + API_DETAILS_USER + id_Current_User;
 
-    var config = {
-      method: "get",
-      url: URL,
-      headers: {},
-    };
-
-    axios(config)
+    Axios.get(URL)
       .then((response) => response)
       .then((response) => setCurrentUser(response.data["details"]))
       .catch((error) => console.log(error.response));
   }, []);
-
-
-  //console.log(CurrentUser)
 
   const UploadLogo = () => {
     var formdata = new FormData();
@@ -77,17 +48,13 @@ function ProfilHeader() {
     formdata.append("type", "logo");
 
     var url = API_HOST + API_UPLOAD_LOGO;
-    var requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
 
     if (selectedFile) {
-      fetch(url, requestOptions).then((response) => response);
-      SuccessAccus();
+      Axios.post(url, formdata).then((response) => response);
+      //SuccessAccus();
     } else {
-      ErrorAccus();
+      console.log("error");
+      //ErrorAccus();
     }
   };
 

@@ -1,0 +1,59 @@
+.whyIt {
+  height: "100vh";
+  width: "100%";
+  display: flex;
+  justify-content: center;
+  display: flex;
+  justify-content: center;
+  padding: 15% 0% 5%;
+}
+
+.textStyleWhite {
+  text-align: left;
+  font: normal normal bold 80px/164px Roboto;
+  letter-spacing: 0px;
+  color: #ffffff;
+  text-transform: uppercase;
+  opacity: 1;
+  width: 115%;
+}
+
+.textStyleGreen {
+  text-align: center;
+  font: normal normal bold 80px/150px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+}
+.textStyleGreen2 {
+  text-align: center;
+  font: normal normal bold 60px/100px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+}
+.textWhite2 {
+    text-align: left;
+    font: normal normal bold 80px/164px Roboto;
+    letter-spacing: 0px;
+    color: #ffffff;
+    text-transform: uppercase;
+    opacity: 1;
+    width: 115%;
+    padding-left: 15%;
+}
+
+.text3 {
+  padding-left: 12%;
+  width: 115%;
+}
+.text4 {
+  text-align: center;
+  font: normal normal bold 30px/50px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+}

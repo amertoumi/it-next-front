@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Axios} from "../../services/authApi";
+import Axios from '../../services/axiosServices';
 import { Container, Card, Col, Table, Button,} from "react-bootstrap";
 import Admin from "layouts/Admin.js";
 import NewSkill from "../../components/Skills/newSkill";
@@ -46,9 +46,6 @@ function SkillsList() {
       <Header />
       <NewSkillType />
       <NewSkill />
-      {/* <SkillsContextProvider>
-        <SkillsTable />
-      </SkillsContextProvider> */}
       <Container fluid className="mt-3">
         <Col md="12">
           <Card className="card-plain table-plain-bg">

@@ -1,9 +1,7 @@
-import 'date-fns';
-import React, { useEffect } from "react";
-import axios from "axios";
+//import 'date-fns';
+import React, {useEffect} from "react";
+import {Axios} from '../../services/authApi';
 import dynamic from 'next/dynamic';
-import jwtDecode from "jwt-decode";
-import moment from 'moment';
 import {API_HOST, API_ADD_WORK_EXP_PATH, API_ADD_EDUCATION_PATH, API_WORK_BY_PROFIL_PATH } from "../../API";
 import { Container, Row, Col } from "reactstrap";
 import { TextField, Button } from "@material-ui/core";
@@ -11,12 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-  
-} from '@material-ui/pickers';
+import { MuiPickersUtilsProvider,KeyboardDatePicker } from '@material-ui/pickers';
 import ls from 'local-storage';
 
 const WorkExpBlock = dynamic(()=>import('./workExperienceBlock'));
@@ -40,11 +33,10 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const WorkExp_Education = () => {
+function WorkExp_Education() {
+    const [work, setWork] = React.useState([])
     const classes = useStyles();
-    const token = ls.get("authToken");
-    const [work, setWork] = React.useState([]);
-    const { id: id_Current_User } = jwtDecode(token);
+    const id_Current_User = ls.get("currentUser");
     const [fromDate, setFromDate] = React.useState(Date.now());
     const [toDate, setToDate] = React.useState(Date.now());
     const [fromDateEdu, setFromDateEdu] = React.useState(Date.now());
@@ -53,12 +45,13 @@ const WorkExp_Education = () => {
         poste: "",
         company: "",
         description:""
-      });
+    });
     const [education, setEducation] = React.useState({
       school:"",
       degree:"",
       descriptionEdu:""
     })
+
 
    const handleFromDateChange = (date) => {
     setFromDate(date);
@@ -72,21 +65,20 @@ const WorkExp_Education = () => {
   const handleToDateEduChange = (date) => {
     setToDateEdu(date);
   };
-//fetch Work Experience
+ //fetch Work Experience
 const fetchWork = ()  =>{
     var URL = API_HOST + API_WORK_BY_PROFIL_PATH + id_Current_User;
-  axios
-    .get(URL)
+    
+    Axios.get(URL)
     .then((response) => setWork(response.data));
 }
-console.log(work);
 
 useEffect(() => {
-  fetchWork({});
-}, []);
+  fetchWork();
+}, []); 
 
   //Add New work experience
-  const SubmitWorkExp = () => {
+const SubmitWorkExp = () => {
     var formdata = new FormData();
     formdata.append("position", workExp.poste);
     formdata.append("company", workExp.company);
@@ -95,17 +87,13 @@ useEffect(() => {
     formdata.append("description", workExp.description);
 
     var url = API_HOST + API_ADD_WORK_EXP_PATH + id_Current_User;
-    var requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
-    fetch(url, requestOptions)
+    
+    Axios.post(url, formdata)
     .then((response) => console.log(response));
   }
 
     //Add New education or training
-    const SubmitNewEducation = () => {
+  const SubmitNewEducation = () => {
       var formdata = new FormData();
       formdata.append("school", education.school);
       formdata.append("degree", education.degree);
@@ -114,12 +102,8 @@ useEffect(() => {
       formdata.append("descriptionEdu", education.descriptionEdu);
   
       var url = API_HOST + API_ADD_EDUCATION_PATH + id_Current_User;
-      var requestOptions = {
-        method: "POST",
-        body: formdata,
-        redirect: "follow",
-      };
-      fetch(url, requestOptions)
+      
+      Axios.post(url, formdata)
       .then((response) => console.log(response));
     }
 
@@ -127,7 +111,8 @@ useEffect(() => {
     <Container>
       
       <div className="d-flex ">
-        <Col className="col-7">
+        <h6>ttsttsssssssssssssssS</h6>
+         <Col className="col-7">
           <div className="mt-5 mb-5">
             <h5>Work Experience</h5>
           </div>
@@ -264,6 +249,7 @@ useEffect(() => {
           </div>
           </div>
         </Col>
+        
         <Col className="col-5">
           <div className="mt-5 mb-5">
             <h5>Education</h5>
@@ -279,7 +265,7 @@ useEffect(() => {
                     className={classes.btnSave}
                     variant="contained"
                     size="small"
-                    onClick={SubmitNewEducation} 
+                    onClick={SubmitNewEducation}
                   >
                     Save
                   </Button>

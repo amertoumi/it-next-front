@@ -1,0 +1,70 @@
+.mission_1 {
+  height: "100vh";
+  width: "100%";
+  display: flex;
+  justify-content: center;
+  
+}
+
+.trouverBlock {
+  height: 0%;
+}
+
+#title {
+  text-align: left;
+  font: normal normal bold 90px/62px Roboto;
+  letter-spacing: 0px;
+  color: #ffd94a;
+  text-transform: uppercase;
+  opacity: 1;
+  margin-bottom: 50px;
+  margin-top: 3%;
+}
+.trouver {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0%;
+}
+.une_mission {
+  width: 112%;
+  display: flex;
+  justify-content: center;
+}
+.qui_rend {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.content {
+  width: 100%;
+  margin-left: 32%;
+}
+.spaceship1 {
+  margin-right: 5%;
+  height: 0%;
+  display: block;
+}
+
+.spaceship1 img{
+ 
+  height: 130vh;
+  
+}
+
+.button_inspirnaute {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-left: 10%;
+  margin-top: 7%;
+}
+.button_inspirnaute button {
+  background: #0af2b2 0% 0% no-repeat padding-box;
+  text-align: center;
+  font: normal normal bold 13px/26px Roboto;
+  letter-spacing: 1.7px;
+  color: #211f85;
+  text-transform: uppercase;
+  opacity: 1;
+  width: 28%;
+}

@@ -25,23 +25,6 @@ function Login() {
   const { register, handleSubmit, watch, errors } = useForm();
   const {signin}=useContext(AuthContext)
   const onSubmit = (data,event)=>{console.log(data);event.preventDefault();signin(data);}
-  // async (data, event) => {
-  //   event.preventDefault();
-
-  //   try {
-  //     //await api.auth_api(data);
-  //     await API.authenticate(data);
-  //     setError("");
-  //     setIs_auth(true);
-
-  //   }
-  //   catch (error) {
-  //     setError(
-  //       "informations is invalid"
-  //     );
-  //     setIs_auth(false);
-  //   }
-  // };
 
 
   return (
@@ -142,7 +125,7 @@ function Login() {
               href="#pablo"
               onClick={(e) => e.preventDefault()}
             >
-              {/* <small>Create new account</small> */}
+    
             </a>
           </Col>
         </Row>

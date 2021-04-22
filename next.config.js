@@ -6,6 +6,16 @@ const withFonts = require("next-fonts");
 const webpack = require("webpack");
 const path = require("path");
 
+module.exports = {
+  exportPathMap: function() {
+    return {
+      "/locales/de-DE/summer-dress-f": {
+        page: "/locales/[locale]/[slug]",
+        query: { locale: "de-DE", slug: "summer-dress-f" }
+      }
+    };
+  }
+};
 
 module.exports = withFonts(
   withCSS(

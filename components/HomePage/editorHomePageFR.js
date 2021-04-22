@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+//import { CKEditor } from "@ckeditor/ckeditor5-react";
+//import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {
   API_HOST,
   API_HOMEPAGE_CONTENT_PATH,
@@ -10,6 +10,15 @@ import { Axios } from "../../services/authApi";
 import { Button } from "reactstrap";
 
 function EditorHomePageFR() {
+  return(
+    <div>
+      <h4>Eddit english content</h4>
+    </div>
+  )
+}
+
+
+/* function EditorHomePageFR() {
   const [presentation, setPresentation] = useState();
   const [recruiter, setRecruiter] = useState();
   const [recruiterBackground, setBackgroundRecruiter] = useState();
@@ -284,6 +293,6 @@ function EditorHomePageFR() {
       </div>
     </div>
   );
-}
+} */
 
 export default EditorHomePageFR;

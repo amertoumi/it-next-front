@@ -1,0 +1,100 @@
+.talents {
+  height: "100vh";
+  width: "100%";
+  display: flex;
+  justify-content: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0% 0% 5%;
+}
+
+.contentTalents {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.clientTitle {
+  text-align: left;
+  font: normal normal bold 180px/164px Roboto;
+  letter-spacing: 19.76px;
+  color: #ffffff;
+  text-transform: uppercase;
+  opacity: 0.3;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5% 0% 0%;
+}
+
+.text1 {
+  text-align: left;
+  font: normal normal bold 30px/50px Roboto;
+  letter-spacing: 0px;
+  color:  #F7D967;
+}
+.text2 {
+  text-align: left;
+  font: normal normal bold 35px/50px Roboto;
+  letter-spacing: 0px;
+  color: #ffffff;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding-left: 0%;
+}
+.paragraph {
+  margin-left: 10%;
+}
+.content2 {
+    width: 100%;
+}
+.tt3 {
+  text-align: left;
+  font: normal normal bold 50px/70px Roboto;
+  letter-spacing: 0px;
+  color: #ffffff;
+  text-transform: uppercase;
+  opacity: 1;
+  padding-left: 0%;
+ 
+}
+.buttonRecruter button {
+  margin-top: 5%;
+  background: #ffc937 0% 0% no-repeat padding-box;
+  opacity: 1;
+  color: #211f85;
+  text-transform: uppercase;
+  text-align: center;
+  font: normal normal bold 20px/26px Roboto;
+  letter-spacing: 0px;
+  padding: 2% 4%;
+}
+.planet2 {
+    height: 100%;
+}
+.planet2 img {
+  height: 13cm;
+}
+.transform {
+    margin: 10% 0% 0% 0%;
+}
+.expertise {
+    text-align: left;
+font: normal normal bold 35px/58px Roboto;
+letter-spacing: 0px;
+color: #2DF8C0;
+opacity: 1;
+}
+
+.expertiseContent {
+    margin-left: 3%;
+}
+
+.textAssistants {
+    text-align: left;
+font: normal normal bold 55px/90px Roboto;
+letter-spacing: 0px;
+color: #FFFFFF;
+text-transform: uppercase;
+opacity: 1;
+}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import {Axios} from "../../services/authApi";
+import Axios from '../../services/axiosServices';
 import { Container, Form, Button, FormGroup, Label, Input } from "reactstrap";
 import { API_HOST, API_TYPE_SKILLS_PATH } from "../../API";
 import Api from "../../pages/api";
