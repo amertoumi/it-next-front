@@ -1,3 +1,8 @@
+.bodyTrouverMission {
+  background-image: url('../../../assets//bg/bgTrouverMission.png');
+  background-size: cover;
+  height: 140vh;
+}
 .mission_1 {
   height: "100vh";
   width: "100%";

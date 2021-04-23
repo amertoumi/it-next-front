@@ -11,7 +11,7 @@ const Client = () => {
   }, []);
 
   return (
-    <div className="client">
+    <div className="bodyClient">
       <div className="clientTitle">client</div>
       <div className="paragraph">
         <div className="spaceship2">

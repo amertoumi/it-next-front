@@ -12,6 +12,7 @@ import 'primeicons/primeicons.css';
 
 import {Provider as AuthProvider} from '../Context/Auth/AuthContext';
 import {Provider as VideoProvider} from '../Context/Video/videoContext';
+import {Provider as UserProvider} from '../Context/UserContext/UserContext';
 import { is_Authenticated } from '../Context/Auth/AuthContext';
 
 class MyApp extends App { 
@@ -37,11 +38,13 @@ class MyApp extends App {
           <script src=""></script>
         </Head>
         <AuthProvider>
+          <UserProvider>
         <VideoProvider>
         <Layout>
             <Component {...pageProps} />
         </Layout> 
         </VideoProvider>
+        </UserProvider>
         </AuthProvider>
       </React.Fragment>
     );

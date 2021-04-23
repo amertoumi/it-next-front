@@ -1,10 +1,7 @@
 import React from 'react';
-import dynamic from 'next/dynamic'
-import { Container } from 'reactstrap';
-import '../styles.css';
-const HomePage = dynamic(() => import('../components/HomePage/homePageComponents'))
+import dynamic from 'next/dynamic';
+
 const NavBar = dynamic(() => import('../components/Navbars/AuthNavbar'))
-const Header = dynamic(() => import('../components/Headers/UserHeader'))
 const SectionPresentation = dynamic(()=> import('../components/HomePage/sectionPresentation/presentation'));
 const SectionRecruiter = dynamic(() =>import('../components/HomePage/sectionRecruiter/recruiter'));
 const TrouverMission = dynamic(() =>import('../components/HomePage/sectionTrouverMission/trouverMission'));
@@ -18,7 +15,7 @@ const Footer = dynamic(()=>import ('../components/HomePage/sectionFooter/footer'
 const HOME = () => {
   return (
     <React.Fragment >
-      <div id="body">
+
       <NavBar />
        <SectionPresentation />
        <SectionRecruiter />
@@ -29,7 +26,7 @@ const HOME = () => {
        <Talents />
        <NewMissions />
        <Footer />
-      </div>
+      
     </React.Fragment>
   );
 };

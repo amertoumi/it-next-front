@@ -1,3 +1,9 @@
+.bodyNewMission {
+  background-image: url('../../../assets//bg/newMission.png');
+  background-size: cover;
+  height: 110vh;
+}
+
 .newMissionsBlock {
   height: "100vh";
   width: "100%";

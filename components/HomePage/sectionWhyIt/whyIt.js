@@ -10,7 +10,7 @@ const WhyIt = () => {
   }, []);
   
   return (
-    <div className="whyIt">
+    <div className="bodyWhyIt whyIt">
       <div>
         <div  className={"ml-7 wow slideInRight"} data-wow-duration="3s" data-wow-delay="0.2s">
           <div className="textStyleWhite">pourqoui choisir</div>

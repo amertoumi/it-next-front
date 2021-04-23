@@ -1,0 +1,65 @@
+.carBorder {
+  border: 1px solid #434cb4;
+  border-radius: 14px;
+  opacity: 1;
+}
+.allBlock {
+  display: flex;
+  justify-content: space-around;
+}
+.divButton {
+  flex-direction: column;
+  display: flex;
+  flex: 0 0 20%;
+  justify-content: center;
+  text-align: center;
+}
+.firstBlock {
+  display: flex;
+  flex: 20 0 80%;
+  padding: 5% 0% 5%;
+}
+
+.txt {
+  text-align: left;
+  font: normal normal normal 15px/20px Roboto;
+  letter-spacing: 0px;
+  color: rgb(247 245 245);
+  opacity: 0.5;
+}
+
+hr.new1 {
+  border-top: 1px solid rgb(247 245 245);
+}
+.content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.labelCamera {
+  margin-left: -18px;
+}
+.txtCamera {
+  text-align: left;
+  font: normal normal normal 12px/19px Roboto;
+  letter-spacing: 0px;
+  color: #cdcaef;
+  opacity: 1;
+  text-align: center;
+}
+
+@media only screen and (max-width: 650px) {
+  .firstBlock {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .allBlock {
+    display: flex;
+    flex-direction: column;
+  }
+}

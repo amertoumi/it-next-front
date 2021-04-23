@@ -1,3 +1,18 @@
+.body {
+  background-image: url('../../../assets//bg/bgHeader.png');
+  background-size: cover;
+  height: 106vh;
+}
+.blockContent {
+  margin-top: 10%;
+}
+.NavBar {
+  padding-top: 3rem !important;
+  position: absolute;
+  width: 100%;
+  margin-bottom: 10%;
+  top: 0;
+}
 #t1 {
   top: 361px;
   left: 452px;

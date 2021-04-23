@@ -14,7 +14,7 @@ const Recruiter = () => {
   }, []);
 
   return (
-    <div className="recruiter">
+    <div className="bodyRecruiter recruiter">
     <div id="blockRecruiter" className="d-flex flex-column ">
       <div className="d-flex flex-row">
       <div className="col-5"

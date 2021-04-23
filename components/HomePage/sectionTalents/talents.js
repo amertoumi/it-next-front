@@ -11,7 +11,7 @@ const Talent = () => {
   }, []);
 
   return (
-    <div className="talents">
+    <div className="bodyTalent">
       <div className="clientTitle">Talents</div>
       <div className="contentTalents">
         <div className="planet2 col-6">
