@@ -3,6 +3,7 @@ import Axios from '../../services/axiosServices';
 import { API_HOST,API_UPDATE_PROFIL } from "../../API";
 import ls from "local-storage";
 import {
+  Container,
   Button,
   Form,
   FormGroup,
@@ -39,7 +40,7 @@ const WhoAmI = () => {
   };
 
   return (
-    <div>
+    <Container>
       <Form>
         <FormGroup>
           <Label for="exampleText" className="mt-3">
@@ -116,7 +117,7 @@ const WhoAmI = () => {
 
         <Button onClick={SubmitData}>Save</Button>
       </Form>
-    </div>
+    </Container>
   );
 };
 

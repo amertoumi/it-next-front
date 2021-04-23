@@ -7,7 +7,7 @@ import { Context as VideoContext } from "../../Context/Video/videoContext";
 import { MDBContainer } from "mdbreact";
 import { useTheme } from "@material-ui/core/styles";
 import { Button, useMediaQuery, DialogTitle, DialogContentText, DialogContent, DialogActions, Dialog } from "@material-ui/core";
-import { Label, Col } from "reactstrap";
+import { Label, Col, Container } from "reactstrap";
 import "./videoBlock.css";
 
 const custom_file_upload = {
@@ -150,7 +150,7 @@ const Videoblock = () => {
   }, [dependency1, dependency2]);
 
   return (
-    <div>
+    <Container>
       <Col>
         <Label style={record_text} className="mt-3">
           Record your video
@@ -277,7 +277,7 @@ const Videoblock = () => {
         </Dialog>
       </div>
       {/* End Block Confirm Dialog for remove video */}
-    </div>
+    </Container>
   );
 };
 

@@ -11,7 +11,7 @@ const NewMissions = () => {
   }, []);
 
   return (
-    <div className="newMissionsBlock">
+    <div className="bodyNewMission newMissionsBlock">
       <div>
         <div className={"newMissionsTitle wow  wow bounceInUp mt-5"} data-wow-duration="2s" data-wow-delay="0.3s">
           <div className="titleMission1">De nouvelles</div>

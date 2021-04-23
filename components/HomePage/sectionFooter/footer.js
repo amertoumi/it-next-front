@@ -10,7 +10,7 @@ const Footer = () => {
   }, []);
   
   return (
-    <div className="footerBlock">
+    <div className="bodyFooter footerBlock">
       <div className={"footerTitle wow slideInLeft"} data-wow-duration="3s" data-wow-delay="0.3s">
         <div className="univers">l'univers</div>
         <div className="infini">est infini...</div>

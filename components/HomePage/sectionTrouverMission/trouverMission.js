@@ -11,7 +11,7 @@ const Mission1 = () => {
   }, []);
   
   return (
-    <div className="mission_1 d-flex flex-row  justify-content-lg-around">
+    <div className="bodyTrouverMission mission_1 d-flex flex-row  justify-content-lg-around">
       <div className="d-flex flex-column col-8 trouverBlock">
         <div id="title" className="trouver ">
           trouver

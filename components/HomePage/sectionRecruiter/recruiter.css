@@ -1,3 +1,9 @@
+.bodyRecruiter {
+  background-image: url('../../../assets//bg/bgEmbaucher.png');
+  background-size: cover;
+  height: 140vh;
+}
+
 .recruiter {
   display: flex;
   justify-content: center;

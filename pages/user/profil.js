@@ -11,10 +11,10 @@ function UserPanel() {
     <>
       <ProfilHeader />
       <Row>
-        <Col className="col-6">
+        <Col className="col-lg-6 col-md-12 col-sm-12">
           <WhoAmI />
         </Col>
-        <Col className="col-6">
+        <Col className="col-lg-6 col-md-12 col-sm-12">
           <Videoblock />
         </Col>
       </Row>

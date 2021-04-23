@@ -10,7 +10,7 @@ const MissionUnique = () => {
   }, []);
 
   return (
-    <div>
+    <div className="bodyMissionUnique">
       <div className="missions">Misions</div>
       <div className="bgMissionUnique">
         <div className="missionUnique">

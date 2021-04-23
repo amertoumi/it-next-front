@@ -21,14 +21,17 @@ const WelcomeComponent = () => {
   }, []);
 
   return (
+    <div className="body">  
     <div
-      className={"wow slideInUp"}
+      className={" wow slideInUp"}
       data-wow-duration="3s"
       data-wow-delay="0.2s"
     >
       <div style={blockRecruiter}>
-        <div style={{display:'flex', flexDirection:'column'}}>
-        <div id="t1">Pas de slgan</div>
+        <div 
+          className="blockContent"
+          style={{display:'flex', flexDirection:'column'}}>
+        <div id="t1">Pas de slogan</div>
         <h2 id="t2">juste du talen</h2>
         <div id="desc">
           <p>
@@ -38,12 +41,13 @@ const WelcomeComponent = () => {
             architecto natus.
           </p>
           <div>
-            <img src={scrollBottom} className="mt-3"></img>
+            <img src={scrollBottom} className="mt-5"></img>
           </div>
         </div>
         </div>
         
       </div>
+    </div>
     </div>
   );
 };

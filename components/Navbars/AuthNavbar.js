@@ -18,7 +18,7 @@ import './AuthNavbar.css';
 function AuthNavbar() {
   return (
     <>
-      <Navbar className="navbar-top navbar-horizontal navbar-dark pt-5" expand="md">
+      <Navbar className="NavBar navbar-top navbar-horizontal navbar-dark bg-transparent pt-5" expand="md">
         <Container className="px-4">
           <Link href="/home">
             <span>
