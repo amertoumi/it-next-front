@@ -64,6 +64,14 @@ export default function DataTable() {
   const handleCloseWarning = () => {
     setOpenWarning(false);
   };
+  
+  const ClearFields = () => {
+    mission.title ="",
+    mission.description="",
+    mission.place="",
+    mission.nbrYearsExperience=""
+  }
+
   useEffect(async () => {
     try {
       FETCH_MISSIONS();
@@ -85,8 +93,9 @@ export default function DataTable() {
     const url = API_HOST + API_ADD_NEW_MISSION + id_Current_User;
     Axios.post(url, formdata).then((response) => console.log(response));
     setDependency((prev) => prev + 1);
+    ClearFields();
   };
-  
+
   return (
     <div>
       <div className="mb-3 mr-5 d-flex justify-content-end">
