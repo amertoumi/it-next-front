@@ -1,9 +1,7 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Recruiter from "layouts/Recruiter.js";
-import Link from "next/link";
-import dynamic from "next/dynamic";
 import jwtDecode from "jwt-decode";
-import {Axios} from '../../services/authApi';
+import Axios from '../../services/axiosServices';
 import ls from "local-storage";
 import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
@@ -66,7 +64,7 @@ const Profil_Recruiter = () => {
   const [company, setCompany] = useState([]);
   const [domain, setDomain] = useState([]);
   const [post, setPost] = useState([]);
-  const {state,getCurrentUser}=useContext(AuthContext);
+  const {state}=useContext(AuthContext);
 
   const Edithandler = (event) => {
     setDisable(!disable);
@@ -133,7 +131,6 @@ const Profil_Recruiter = () => {
     Axios.get(URL)
       .then((response) => response)
       .then((response) => setPost(response.data["hydra:member"]))
-
       .catch((error) => error.response);
   }
 
@@ -141,7 +138,7 @@ const Profil_Recruiter = () => {
     getProfilDetails();
     getDomainRecruiter();
     getPostRecruiter();
-    getCurrentUser();
+    
   }, []);
 
   const submitNewCompany = () => {

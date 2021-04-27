@@ -13,6 +13,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import './whoAmi.css';
 
 const WhoAmI = () => {
   const id_current_user = ls.get("currentUser");
@@ -56,9 +57,9 @@ const WhoAmI = () => {
             onInput={(e) => setDescription(e.target.value)}
           />
         </FormGroup>
-        <FormGroup>
-          <FormText color="muted">
-            Information only visible to you and the inspire crew
+        <FormGroup >
+          <FormText color="muted" className="bginfo">
+            <p>Information only visible to you and the inspire crew</p>
           </FormText>
         </FormGroup>
         <FormGroup>
@@ -115,7 +116,7 @@ const WhoAmI = () => {
           </Col>
         </Row>
 
-        <Button onClick={SubmitData}>Save</Button>
+        <Button onClick={SubmitData} className="button">Save</Button>
       </Form>
     </Container>
   );

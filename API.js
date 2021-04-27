@@ -1,4 +1,3 @@
-//export const API_HOST = 'http://api.mo.prod-projet.com';
 export const API_HOST = 'http://127.0.0.1:8000';
 //export const API_HOST = 'http://api.it.prod-projet.com';
 export const API_SKILLS_PATH = '/api/skills';
@@ -14,7 +13,7 @@ export const API_LIST_PROFILS_PATH = '/api/user/listbyprofil';
 export const API_LIST_ENTREPRISES_PATH = '/api/entreprises/details';
 export const API_UPLOAD_FORM_FILE='/file/manager';
 export const API_DETAILS_USER ='/api/details/user/';
-export const API_UPLOAD_LOGO = '/user/logo';
+export const API_UPLOAD_LOGO = '/api/upload/logo';
 export const API_UPDATE_PROFIL= '/update/profil/';
 export const API_UPDATE_PROFILHEADER = '/update/profilheader/';
 export const API_UPLOAD_FILE = '/api/upload/video';
@@ -37,9 +36,15 @@ export const API_PROFIL_DETAILS = '/api/profil/details/';
 
 export const API_RECRUITER_DETAILS_PATH = '/api/recruiter/details/';
 export const API_EDIT_RECRUITER_PATH = '/api/edit/recruiter/';
-
 export const API_POST_RECRUITER_PATH = '/api/post_recruiters/';
 export const API_DOMAIN_RECRUITER_PATH = '/api/domain_recruiters/';
+
+export const API_MISSIONS_BY_RECRUITER = '/api/missions/details/';
+export const API_MISSION_BY_ID = '/api/mission/details/';
+export const API_ADD_NEW_MISSION = '/api/add/mission/';
+export const API_DELETE_MISSION_PATH = '/api/delete/mission/';
+export const API_EDIT_MISSION = '/api/edit/mission/';
+
 
 export const API_HOMEPAGE_CONTENT_PATH = "/api/home/page/details";
 export const API_ADD_HOMEPAGE_CONTENT_PATH = "/api/add/home/page/details";

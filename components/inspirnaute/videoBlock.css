@@ -1,3 +1,6 @@
+.pUnderVideo {
+  font-size: small;
+}
 .custom_file_upload {
     display: "inline-block";
     cursor: "pointer";

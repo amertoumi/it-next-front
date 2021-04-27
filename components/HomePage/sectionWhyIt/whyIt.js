@@ -12,8 +12,8 @@ const WhyIt = () => {
   return (
     <div className="bodyWhyIt whyIt">
       <div>
-        <div  className={"ml-7 wow slideInRight"} data-wow-duration="3s" data-wow-delay="0.2s">
-          <div className="textStyleWhite">pourqoui choisir</div>
+        <div  className={"wow slideInRight"} data-wow-duration="3s" data-wow-delay="0.2s">
+          <div className="textStyleWhite">pourquoi <span className="text_Stroke">choisir</span></div>
           <div className="textWhite2">inspire talents ?</div>
         </div>
         <div  className={"ml-7 wow slideInLeft"} data-wow-duration="3s" data-wow-delay="0.2s">

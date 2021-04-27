@@ -24,7 +24,7 @@ function AdminNavbar({ brandText }) {
         <Container fluid>
           <Link href="/home">
             <a className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">
-              {brandText}
+              {/* {brandText} */}
             </a>
           </Link>
           {/* <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">

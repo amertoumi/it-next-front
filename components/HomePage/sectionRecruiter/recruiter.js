@@ -15,9 +15,9 @@ const Recruiter = () => {
 
   return (
     <div className="bodyRecruiter recruiter">
-    <div id="blockRecruiter" className="d-flex flex-column ">
-      <div className="d-flex flex-row">
-      <div className="col-5"
+    <div className="d-flex flex-column bRecruiter">
+      <div className="d-flex justify-content-center">
+      <div className="col-6"
         className={"wow slideInUp"}
         data-wow-duration="3s"
         data-wow-delay="0.2s"
@@ -29,7 +29,7 @@ const Recruiter = () => {
           
         />
       </div>
-      <div>
+      <div className="col-6 text-center">
         <div className="title-embaucher">embaucher</div>
         <div className="t2">des pépites de l'it</div>
         <div>
@@ -44,15 +44,14 @@ const Recruiter = () => {
           width="450px"
           />
       </div>
-      <div className="d-flex flex-row wavyText wow bounceInUp"
-      data-wow-duration="3s"
-      data-wow-delay="0.2s"
-      > 
-           <span className="mt-5">engineer</span>
-           <span>developers</span>
-           <span className="mt-5">Devops</span>
-           <span>project manager</span>
-           <span className="mt-5">agile coach</span>
+      <div className="d-flex flex-row wavy"> 
+           <span style={{["--i"] : '1', color:'white'}} className="mr-4">Ingénieurs</span>
+           <span style={{["--i"] : '2', color:'white'}} className="mr-4">Développeurs</span>
+           <span style={{["--i"] : '3', color:'white'}} className="mr-4">Devops</span>
+           <span style={{["--i"] : '4', color:'white'}} className="mr-4">Chefs de projets</span>
+           <span style={{["--i"] : '5', color:'white'}} className="mr-4">Project manager</span>
+           <span style={{["--i"] : '6', color:'white'}} className="mr-4">Coach Agile</span>
+           <span style={{["--i"] : '7', color:'white'}}>Coach Agile</span>
            
       </div>
     </div>

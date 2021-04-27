@@ -1,25 +1,21 @@
 .bodyRecruiter {
   background-image: url('../../../assets//bg/bgEmbaucher.png');
   background-size: cover;
-  height: 140vh;
+  height: 150vh;
 }
 
 .recruiter {
   display: flex;
   justify-content: center;
 }
-#blockRecruiter {
-  height : '100vh';
-  width: '100%';
+.bRecruiter {
   display: flex;
-  justify-content:center ;
-  padding: 20% 0% 20%;
- 
+  padding-top: 10%;
   
 }
 .recruiter-img {
   margin-top: -170px;
-  margin-left: 200px;
+  margin-left: 23%;
 }
 .bg {
   background-image: url("../../../assets/svg/cristals.svg");
@@ -47,10 +43,10 @@
   opacity: 1;
   margin-bottom: 50px;
 }
+
 .bgRecruiter {
   opacity: 1;
 }
-
 
 #button {
   background: #FFC937 0% 0% no-repeat padding-box;
@@ -60,36 +56,35 @@
   font-weight: bold;
 }
 
-.wavyText {
-  margin-top: 15%;
-  font-weight:bold;
-  font-size: large;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  text-transform: uppercase;
+.wavy {
+	position: relative;
+  font: normal normal bold 23px/50px Roboto;
   justify-content: center;
-  font-family: consolas;
-  position: relative;
-  -webkit-box-reflect: below -12px linear-gradient(
-    transparent, rgba(0,0,0,0.2));
-}
-.wavyText span {
-  position: relative;
-  display: inline-block;
-  color: #fff;
-  font-size: 1em;
-  animation: animate 1x ease-in-out infinite;
-  margin-right: 3%;
+  margin-top: 20%;
+  margin-bottom: 10%;
+  
 }
 
-@keyframes animate {
-  0%
-  {
-    transform: translateY(0px);
-  }
-  20%
-  {
-    transform: translateY(-20px);
-  }
+.wavy span {
+  text-transform: uppercase;
+	position: relative;
+   /*I don't think it's necessary*/
+	display: inline-block;
+	animation: jumper 2s ease-in-out infinite;
+	animation-delay: calc(0.1s * var(--i));
+
+}
+
+@keyframes jumper {
+	0% {
+		transform: translateY(0px);
+	}
+	20% {
+		transform: translateY(-80px);
+	}
+	40%,100% {
+		transform: translateY(0px);
+	}
 }
 
 @media (max-width: 600px) {

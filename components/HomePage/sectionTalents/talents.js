@@ -12,7 +12,7 @@ const Talent = () => {
 
   return (
     <div className="bodyTalent">
-      <div className="clientTitle">Talents</div>
+      <div className="text_Stroke_Talent">Talents</div>
       <div className="contentTalents">
         <div className="planet2 col-6">
           <img src={require("../../../assets/svg/Planet2.svg")} />
@@ -30,7 +30,6 @@ const Talent = () => {
             <div className="tt3">votre mission</div>
             <div className="tt3">en passion</div>
           </div>
-          
         </div>
       </div>
       <div className="expertiseContent">

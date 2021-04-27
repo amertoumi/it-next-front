@@ -19,16 +19,17 @@
 }
 .titleMission1 {
   text-align: left;
-  font: normal normal bold 70px/90px Roboto;
+  font: normal normal bold 55px/70px Roboto;
   letter-spacing: 0px;
   color: #2df8c0;
   text-transform: uppercase;
   opacity: 1;
+  padding-left: 10%;
 }
 
 .titleMission2 {
   text-align: left;
-  font: normal normal bold 70px/90px Roboto;
+  font: normal normal bold 55px/70px Roboto;
   letter-spacing: 0px;
   color: #2df8c0;
   text-transform: uppercase;
@@ -38,37 +39,40 @@
 
 .titleMission3 {
   text-align: left;
-  font: normal normal bold 70px/90px Roboto;
+  font: normal normal bold 55px/70px Roboto;
   letter-spacing: 0px;
   color: #2df8c0;
   text-transform: uppercase;
   opacity: 1;
-  padding-left: 30%;
+  padding-left: 35%;
   width: 140%;
+  
 }
 
 .newMissiondesc {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  
 }
 
 .newMissionDesc {
-  margin-left: 40%;
+  margin-left: 44%;
 }
 
 .desc1 {
   text-align: left;
-  font: normal normal normal 30px/40px Roboto;
+  font: normal normal normal 25px/30px Roboto;
   letter-spacing: 0px;
   color: #2df8c0;
   text-transform: uppercase;
   opacity: 1;
+  width: 140%;
 }
 
 .desc2 {
   text-align: left;
-  font: normal normal normal 30px/35px Roboto;
+  font: normal normal normal 25px/30px Roboto;
   letter-spacing: 0px;
   color: #2df8c0;
   text-transform: uppercase;
@@ -77,7 +81,7 @@
 }
 .desc3 {
   text-align: left;
-  font: normal normal normal 30px/35px Roboto;
+  font: normal normal normal 25px/30px Roboto;
   letter-spacing: 0px;
   color: #2df8c0;
   text-transform: uppercase;
@@ -86,7 +90,7 @@
 }
 .desc4 {
   text-align: left;
-  font: normal normal normal 30px/35px Roboto;
+  font: normal normal normal 25px/30px Roboto;
   letter-spacing: 0px;
   color: #2df8c0;
   text-transform: uppercase;

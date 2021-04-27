@@ -67,7 +67,7 @@ const custom_file_upload = {
   const div_video = {
     background: "#F0F0F4 0% 0% no-repeat padding-box",
     borderRadius: "17px",
-    padding: "40px 40px 122px 40px",
+    padding: "30px 30px 100px 20px",
     opacity: 1,
   };
   
@@ -221,8 +221,8 @@ const Videoblock = () => {
             />
           </div>
         </div>
-        <div style={{ marginTop: "2rem" }}>
-          <p>
+        <div style={{ marginTop: "2rem"}}>
+          <p className="pUnderVideo">
             Dear inspirnaute, to start out, you can, if you wish record a video
             to explain in <b> 30 seconds </b>
             your background, who you are, what you like and what you expect from
@@ -230,7 +230,7 @@ const Videoblock = () => {
           </p>
         </div>
         <div>
-          <p>
+          <p className="pUnderVideo">
             Usually, videos generate excitement with our customers and increase
             your visibility. So
             <b>

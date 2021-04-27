@@ -1,13 +1,14 @@
 .bodyTrouverMission {
   background-image: url('../../../assets//bg/bgTrouverMission.png');
   background-size: cover;
-  height: 140vh;
+  height: 150vh;
 }
 .mission_1 {
   height: "100vh";
   width: "100%";
   display: flex;
   justify-content: center;
+  padding-top: 5%;
   
 }
 
@@ -15,9 +16,40 @@
   height: 0%;
 }
 
-#title {
+#title1 {
   text-align: left;
-  font: normal normal bold 90px/62px Roboto;
+  font: normal normal bold 85px/60px Roboto;
+  letter-spacing: 0px;
+  color: #ffd94a;
+  text-transform: uppercase;
+  opacity: 1;
+  margin-bottom: 50px;
+  margin-top: 3%;
+}
+#title2 {
+  text-align: left;
+  font: normal normal bold 85px/60px Roboto;
+  letter-spacing: 0px;
+  color: #ffd94a;
+  text-transform: uppercase;
+  opacity: 1;
+  margin-bottom: 50px;
+  margin-top: 3%;
+}
+#title3 {
+  text-align: left;
+  font: normal normal bold 85px/60px Roboto;
+  letter-spacing: 0px;
+  color: #ffd94a;
+  text-transform: uppercase;
+  opacity: 1;
+  margin-bottom: 50px;
+  margin-top: 3%;
+}
+
+#title4 {
+  text-align: left;
+  font: normal normal bold 85px/60px Roboto;
   letter-spacing: 0px;
   color: #ffd94a;
   text-transform: uppercase;
@@ -29,8 +61,9 @@
   display: flex;
   justify-content: center;
   padding-bottom: 0%;
+  padding-left: 10%;
 }
-.une_mission {
+.Une_mission {
   width: 112%;
   display: flex;
   justify-content: center;
@@ -39,6 +72,7 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  margin-left: 15%;
 }
 .content {
   width: 100%;
@@ -51,9 +85,9 @@
 }
 
 .spaceship1 img{
- 
-  height: 130vh;
-  
+  height: 115vh;
+  margin-top: 25%;
+  margin-right: 20%;
 }
 
 .button_inspirnaute {

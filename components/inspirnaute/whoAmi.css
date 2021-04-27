@@ -1,0 +1,25 @@
+.bginfo {
+    background-color: #F0F0F4;
+    margin: 7% 0%;
+}
+
+.bginfo p {
+    margin-left: 2%;
+    text-align: center;
+    display: flex;
+    padding: 2% 0%;
+    color: black;
+    font-size: small;
+    font-weight: bold;
+} 
+
+.button {
+    display: inline-block;
+    cursor: pointer;
+    background: 0% 0% no-repeat padding-box padding-box rgb(29, 38, 140);
+    border-radius: 23px;
+    opacity: 1;
+    width: 30%;
+    height: 35px;
+    margin: 15% 0% 10%;    
+}

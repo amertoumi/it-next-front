@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Container } from "reactstrap";
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import AdminFooter from "components/Footers/AdminFooter.js";
+//import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import routes from "routesUsers.js";
 
@@ -35,13 +35,15 @@ function Admin(props) {
           innerLink: "/admin/index",
           imgSrc: require("assets/img/brand/logo-inspire talent-black.svg"),
           imgAlt: "...",
+          
         }}
+        style={{width: "10%"}}
       />
       <div className="main-content" ref={mainContentRef}>
         <AdminNavbar {...props} brandText={getBrandText()} />
         {props.children}
         <Container fluid>
-          <AdminFooter />
+         {/*  <AdminFooter /> */}
         </Container>
       </div>
     </>

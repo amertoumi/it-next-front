@@ -21,7 +21,7 @@ function Auth(props) {
       <AuthNavbar />
       <Container>
         <Row className="d-flex justify-content-between" >
-          <Col className="col-lg-6 mt-7">
+          <Col className="col-lg-6 mt-9">
             <div className="header bg-gradient-info py-7 py-lg-8">
 
               <div className="header-body text-center mb-4">

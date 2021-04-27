@@ -13,16 +13,16 @@ const Mission1 = () => {
   return (
     <div className="bodyTrouverMission mission_1 d-flex flex-row  justify-content-lg-around">
       <div className="d-flex flex-column col-8 trouverBlock">
-        <div id="title" className="trouver ">
+        <div id="title1" className="trouver">
           trouver
         </div>
-        <div id="title" className="une_mission">
+        <div id="title2" className="Une_mission">
           une mission
         </div>
-        <div id="title" className="qui_rend">
+        <div id="title3" className="qui_rend">
           qui rend
         </div>
-        <div id="title" className="content">
+        <div id="title4" className="content">
           content
         </div>
         <div className="button_inspirnaute">

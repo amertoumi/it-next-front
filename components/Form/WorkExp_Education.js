@@ -111,7 +111,6 @@ const SubmitWorkExp = () => {
     <Container>
       
       <div className="d-flex ">
-        <h6>ttsttsssssssssssssssS</h6>
          <Col className="col-7">
           <div className="mt-5 mb-5">
             <h5>Work Experience</h5>

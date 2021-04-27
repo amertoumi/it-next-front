@@ -1,63 +1,63 @@
 .bodyMissionUnique {
-    background-image: url('../../../assets//bg/bgUniqueMission.png');
-    background-size: cover;
-    height: 125vh;
-  }
-  
+  background-image: url("../../../assets//bg/bgUniqueMission.png");
+  background-size: cover;
+  height: 135vh;
+}
+
 .bgMissionUnique {
-    height: 70vh;
-    width: 100%;
-    background-image: url('../../../assets/svg/Planet1.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: relative;
-    
+  height: 70vh;
+  width: 100%;
+  background-image: url("../../../assets/svg/Planet1.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
 }
 .missionUnique {
-    display:flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .missions {
-    text-align: left;
-    font: normal normal bold 100px/110px Roboto;
-    letter-spacing: 0px;
-    color: #2DF8C0;
-    text-transform: uppercase;
-    opacity: 1;
-    display: flex;
-    justify-content: center;
-    padding: 10% 0% 0%;
+  text-align: left;
+  font: normal normal bold 100px/110px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  padding: 10% 0% 0%;
 }
 
 .uniques {
-    text-align: left;
-    font: normal normal bold 100px/100px Roboto;
-    letter-spacing: 0px;
-    color: #2DF8C0;
-    text-transform: uppercase;
-    opacity: 1;
-    position: relative;
-    margin-right: 5%;
-    
+  text-align: left;
+  font: normal normal bold 100px/100px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
+  position: relative;
+  margin-right: 5%;
 }
 
 .uniques p {
-    text-align: left;
-    font: normal normal bold 25px/30px Roboto;
-    letter-spacing: 0px;
-    color: #2DF8C0;
-    text-transform: uppercase;
-    opacity: 1;
+  text-align: left;
+  font: normal normal bold 25px/30px Roboto;
+  letter-spacing: 0px;
+  color: #2df8c0;
+  text-transform: uppercase;
+  opacity: 1;
 }
 .cosmonaut2 {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    width: 60%;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  width: 60%;
 }
 
-.cosmonaut2 img{
-    width: 220%;
-    height: 60%;
+.cosmonaut2 img {
+  width: 165%;
+  -ms-transform: rotate(20deg); /* IE 9 */
+  transform: rotate(20deg);
+  margin-left: 12%;
 }

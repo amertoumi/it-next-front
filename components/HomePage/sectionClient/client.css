@@ -1,7 +1,7 @@
 .bodyClient {
   background-image: url('../../../assets//bg/bgClient.png');
   background-size: cover;
-  height: 150vh;
+  height: 160vh;
 }
 
 .clientTitle {
@@ -14,6 +14,19 @@
   display: flex;
   justify-content: center;
   margin-bottom: 5%;
+}
+
+.text_Stroke_Client {
+  text-align: center;
+  text-transform: uppercase;
+  font: normal normal bold 170px/150px Roboto;
+  letter-spacing: 19.76px;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 2px;
+  opacity: 0.3;
+  display: flex;
+  justify-content: center; 
+  color: white;
 }
 
 .paragraph {
@@ -71,7 +84,7 @@
 }
 
 .spaceship2 {
-  height: 100vh;
+  height: 125vh;
 }
 .spaceship2 img {
   height: 100%;

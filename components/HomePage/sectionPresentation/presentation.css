@@ -1,10 +1,10 @@
 .body {
   background-image: url('../../../assets//bg/bgHeader.png');
   background-size: cover;
-  height: 106vh;
+  height: 110vh;
 }
 .blockContent {
-  margin-top: 10%;
+  margin-top: 15%;
 }
 .NavBar {
   padding-top: 3rem !important;
@@ -13,6 +13,17 @@
   margin-bottom: 10%;
   top: 0;
 }
+
+.text_Stroke {
+  text-align: center;
+  text-transform: uppercase;
+  font: normal normal 700 90px/100px Roboto;
+  letter-spacing: 0.94px;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 2px;
+  color: white;
+}
+
 #t1 {
   top: 361px;
   left: 452px;

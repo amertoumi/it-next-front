@@ -12,7 +12,7 @@ const Client = () => {
 
   return (
     <div className="bodyClient">
-      <div className="clientTitle">client</div>
+      <div className="text_Stroke_Client">client</div>
       <div className="paragraph">
         <div className="spaceship2">
           <img src={require("../../../assets/svg/spaceship2.svg")} />

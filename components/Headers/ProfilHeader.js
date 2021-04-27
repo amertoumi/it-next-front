@@ -15,7 +15,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Axios from "../../services/axiosServices";
-
+import ls from 'local-storage';
 import "./profilHeader.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -59,10 +59,10 @@ function ProfilHeader() {
   }, []);
 
   const UploadLogo = () => {
+    const userId = ls.get('currentUser');
     var formdata = new FormData();
-    formdata.append("File", selectedFile);
-    formdata.append("type", "logo");
-
+    formdata.append("logo", selectedFile);
+    formdata.append("userId", userId);
     var url = API_HOST + API_UPLOAD_LOGO;
 
     if (selectedFile) {
@@ -73,7 +73,7 @@ function ProfilHeader() {
       //ErrorAccus();
     }
   };
-console.log(selectedFile)
+console.log(state)
   return (
     <>
       <div
@@ -95,7 +95,7 @@ console.log(selectedFile)
             <div className="row allBlock">
               <div
                 className={classes.textWhite}
-                className="col col-lg-6 col-sm-6 col-md-12 d-flex mr-5 mb-3"
+                className="col col-lg-6 col-sm-6 col-md-12 d-flex  mb-3"
               >
                 <div className="firstBlock carBorder">
                   <Col>
@@ -150,7 +150,7 @@ console.log(selectedFile)
               </div>
               <div
                 className={classes.textWhite}
-                className="col-lg-3 col-sm-6 col-md-12  mr-3 mb-3 carBorder divButton"
+                className="col-lg-3 col-sm-6 col-md-12  mb-3 carBorder divButton"
               >
                 <div>
                 <Col className="text-center">
@@ -236,7 +236,7 @@ console.log(selectedFile)
           <Button onClick={handleClose} color="primary">
             Annuler
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={()=>{UploadLogo(),handleClose()}} color="primary" autoFocus>
             Enregistrer
           </Button>
         </DialogActions>

@@ -31,14 +31,12 @@ const WelcomeComponent = () => {
         <div 
           className="blockContent"
           style={{display:'flex', flexDirection:'column'}}>
-        <div id="t1">Pas de slogan</div>
-        <h2 id="t2">juste du talen</h2>
+        <div className="text_Stroke">Pas de slogan</div>
+        <h2 id="t2">juste du talent</h2>
         <div id="desc">
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur et
-            minus nemo tempore obcaecati in incidunt quae,<br/> sequi eaque? Magnam
-            animi facilis, vero mollitia voluptatibus repellendus in? Neque,
-            architecto natus.
+            Les candidats chez inspire talentont réussi des évaluations de code, de style de travail et<br/>
+             de réfèrence, et sont jumelés à vous en fonction de vos besoins d'embauche uniques 
           </p>
           <div>
             <img src={scrollBottom} className="mt-5"></img>
