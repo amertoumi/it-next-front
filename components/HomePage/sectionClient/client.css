@@ -1,7 +1,8 @@
 .bodyClient {
-  background-image: url('../../../assets//bg/bgClient.png');
-  background-size: cover;
-  height: 160vh;
+  background-image: url('../../../assets/bg/bgClient.png');
+    background-size: cover;
+    min-height: 1070px;
+    display: block;
 }
 
 .clientTitle {
@@ -29,11 +30,12 @@
   color: white;
 }
 
-.paragraph {
+.para {
   display: flex;
   justify-content: space-around;
   padding: 5% 0%;
 }
+
 .text1 {
   text-align: left;
   font: normal normal 300 30px/50px Roboto;
@@ -84,8 +86,8 @@
 }
 
 .spaceship2 {
-  height: 125vh;
+  margin-bottom: 44px;
 }
-.spaceship2 img {
+/* .spaceship2 img {
   height: 100%;
-}
+} */

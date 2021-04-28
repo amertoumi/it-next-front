@@ -1,7 +1,11 @@
 .bodyRecruiter {
-  background-image: url('../../../assets//bg/bgEmbaucher.png');
+  background-image: url('../../../assets/bg/bgEmbaucher.png');
   background-size: cover;
-  height: 150vh;
+    min-height: 990px;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .recruiter {
@@ -47,8 +51,11 @@
 .bgRecruiter {
   opacity: 1;
 }
-
-#button {
+.imgAstronaute1 img{
+  width: 110%;
+  margin-top: -17%;
+}
+.btnRecruter {
   background: #FFC937 0% 0% no-repeat padding-box;
   opacity: 1; 
   color: #211F85;

@@ -11,8 +11,9 @@ const Mission1 = () => {
   }, []);
   
   return (
-    <div className="bodyTrouverMission mission_1 d-flex flex-row  justify-content-lg-around">
-      <div className="d-flex flex-column col-8 trouverBlock">
+    <div className="bodyTrouverMission">
+      <div className="bgFuser">
+      <div className="d-flex flex-column trouverBlock">
         <div id="title1" className="trouver">
           trouver
         </div>
@@ -29,15 +30,6 @@ const Mission1 = () => {
           <Button>devenir un inspirnaute</Button>
         </div>
       </div>
-      <div
-        className={"spaceship1 wow slideInUp"}
-        data-wow-duration="3s"
-        data-wow-delay="0.2s"
-      > 
-        <img  
-        
-        src={require("../../../assets/svg/spaceship1.svg")} />
-        
       </div>
     </div>
   );

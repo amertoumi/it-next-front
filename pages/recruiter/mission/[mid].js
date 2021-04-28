@@ -103,8 +103,6 @@ const Mission = () => {
     FETCH_MISSION_BY_ID();
   }, []);
 
-  //console.log(mission);
-
   return (
     <div className="pt-7">
       <h2 className="text-center"> Edit Mission</h2>

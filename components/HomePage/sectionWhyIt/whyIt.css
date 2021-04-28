@@ -1,7 +1,10 @@
 .bodyWhyIt {
-  background-image: url('../../../assets//bg/bgWhyIt.png');
+  background-image: url('../../../assets/bg/bgWhyIt.png');
   background-size: cover;
-  height: 100vh;
+    min-height: 723px;
+    background-position: center;
+    display: flex;
+    justify-content: center;
 }
 
 .whyIt {

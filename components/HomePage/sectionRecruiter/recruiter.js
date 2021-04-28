@@ -22,18 +22,20 @@ const Recruiter = () => {
         data-wow-duration="3s"
         data-wow-delay="0.2s"
       >
+        <div className="imgAstronaute1">
         <img
-          src={require("../../../assets/svg/cosmonaut1.svg")}
-          height="500px"
-          width="450px"
+          src={require("../../../assets/svg/planet_astronaute.svg")}
+          
           
         />
+        </div>
+        
       </div>
-      <div className="col-6 text-center">
+      <div className="col-6">
         <div className="title-embaucher">embaucher</div>
         <div className="t2">des pépites de l'it</div>
         <div>
-          <Button id="button">Recruter un Talent</Button>
+          <Button className="btnRecruter">Recruter un Talent</Button>
         </div>
       </div>
       </div>

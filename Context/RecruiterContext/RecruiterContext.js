@@ -20,7 +20,7 @@ const RecruiterReducer = (state, action) => {
             return state;
     }
 }
-
+// Fetch ALL Missions By Recruiter
 const FETCH_MISSIONS = dispatch => async () => {
     const id_CurrentUser = ls.get('currentUser');
     const url = API_HOST + API_MISSIONS_BY_RECRUITER + id_CurrentUser
@@ -34,6 +34,7 @@ const FETCH_MISSIONS = dispatch => async () => {
     }
 }
 
+//Delete Mission
 const DELETE_MISSION = dispatch => async (id) => {
     const url =API_HOST+ API_DELETE_MISSION_PATH + id
     Axios.delete(url)
@@ -42,8 +43,8 @@ const DELETE_MISSION = dispatch => async (id) => {
 } 
 
 
-
-const FETCH_MISSION_BY_ID  = dispatch => async () =>{
+//Fetch Mission by ID
+const FETCH_MISSION_BY_ID  = dispatch => async () => {
     const router = useRouter();
     const { mid } = router.query;
     const url = API_HOST + API_MISSION_BY_ID + mid;
@@ -52,9 +53,11 @@ const FETCH_MISSION_BY_ID  = dispatch => async () =>{
         const response = await Axios.get(url)
         dispatch({type: 'GET_MISSION_BY_ID', payload: response.data})
         console.log(response)
+        console.log(mid)
     } catch (error) {
         console.log(error);
     }
+    return response
       
 };
 

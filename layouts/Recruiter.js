@@ -2,11 +2,12 @@ import React from "react";
 import { useRouter } from "next/router";
 // reactstrap components
 import { Container } from "reactstrap";
-// core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import AdminFooter from "components/Footers/AdminFooter.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
+import dynamic from 'next/dynamic';
 import routes from "routesRecruiter.js";
+
+const AdminNavbar = dynamic(() =>import ('components/Navbars/AdminNavbar.js'));
+const AdminFooter = dynamic(() => import ('components/Footers/AdminFooter.js'));
+const Sidebar = dynamic(() => import ('components/Sidebar/Sidebar.js'));
 
 function Admin(props) {
   // used for checking current route

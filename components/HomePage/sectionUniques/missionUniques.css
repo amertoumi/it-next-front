@@ -1,7 +1,8 @@
 .bodyMissionUnique {
-  background-image: url("../../../assets//bg/bgUniqueMission.png");
+  background-image: url("../../../assets/bg/bgUniqueMission.png");
   background-size: cover;
-  height: 135vh;
+    min-height: 927px;
+    background-position: center;
 }
 
 .bgMissionUnique {
