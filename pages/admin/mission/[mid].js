@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
 import { API_HOST, API_MISSION_BY_ID, API_EDIT_MISSION } from "../../../API";
 import { useRouter } from "next/router";
-import Recruiter from "../../../layouts/Recruiter";
+import Admin from "../../../layouts/Admin";
 import { Context as SkillsContext } from "../../../Context/Skills/SkillsContext";
 import { Axios } from "../../../services/authApi";
 import { TextField } from "@material-ui/core";
@@ -17,6 +17,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+const Inspirnautefilter = dynamic(() => import('../../../components/Admin/inspirnauteFilter'));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,10 +109,10 @@ const Mission = () => {
     FETCH_SKILLS();
   }, []);
 
-console.log(state.skills)
+//console.log(state.skills)
   return (
     <div className="pt-7">
-      <h2 className="text-center"> Edit Mission</h2>
+      <h2 className="text-center"> Edit Mission / Select Inspirnaute</h2>
       <div>
         <div>
           <Button
@@ -259,9 +260,13 @@ console.log(state.skills)
         </form>
       </div>
       
+      <div>
+        filter be here ...
+       <Inspirnautefilter />
+      </div>
     </div>
   );
 };
-Mission.layout = Recruiter;
+Mission.layout = Admin;
 
 export default Mission;

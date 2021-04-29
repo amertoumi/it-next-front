@@ -36,6 +36,12 @@ var routes = [
     layout: "/admin",
   },
   {
+    path: "/missions",
+    name: "Missions",
+    icon: "ni ni-bell-55 text-blue",
+    layout: "/admin",
+  },
+  {
     path: "/notifications",
     name: "Notifications",
     icon: "ni ni-bell-55 text-blue",

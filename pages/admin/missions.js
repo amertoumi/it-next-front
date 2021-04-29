@@ -1,17 +1,17 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import Recruiter from '../../layouts/Recruiter';
+import Admin from '../../layouts/Admin';
 
-const Missions = dynamic(()=>import ('../../components/Recruiter/missions'));
+const ListMissions = dynamic(()=>import ('../../components/Admin/listMissions'));
 
 const allMissions = () => {
     return ( 
         <div className="pt-9">
             <h2>Missions List</h2>
-            <Missions />
             
+            <ListMissions />
         </div>
      );
 }
-allMissions.layout = Recruiter;
+allMissions.layout = Admin;
 export default allMissions;

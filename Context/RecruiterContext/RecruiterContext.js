@@ -3,7 +3,6 @@ import RecruiterState from './RecruiterState';
 import {API_HOST, API_MISSIONS_BY_RECRUITER, API_DELETE_MISSION_PATH, API_MISSION_BY_ID} from "../../API";
 import Axios from '../../services/axiosServices';
 import ls from 'local-storage';
-import jwtDecode from "jwt-decode";
 import { useRouter } from 'next/router';
 
 const RecruiterReducer = (state, action) => {

@@ -1,5 +1,5 @@
-//export const API_HOST = 'http://127.0.0.1:8000';
-export const API_HOST = 'http://api.it.prod-projet.com';
+export const API_HOST = 'http://127.0.0.1:8000';
+//export const API_HOST = 'http://api.it.prod-projet.com';
 export const API_SKILLS_PATH = '/api/skills';
 export const API_AUTH_PATH = '/api/login';
 export const API_USERS_PATH = '/api/users';
@@ -30,6 +30,7 @@ export const API_ADD_EDUCATION_PATH = "/profil/add/education/";
 export const API_EDUCATION_BY_PROFIL = "/profil/all/education/";
 export const API_REMOVE_EDUCATION_PATH = "/profil/remove/education/";
 export const API_UPDATE_EDUCATION_PATH = "/profil/update/education/";
+export const API_PROFILS_BY_SKILLS = '/api/profils/by/skills';
 
 export const API_STATUS_Skills_PATH = "/skills/status/profil/";
 export const API_PROFIL_DETAILS = '/api/profil/details/';
@@ -44,7 +45,7 @@ export const API_MISSION_BY_ID = '/api/mission/details/';
 export const API_ADD_NEW_MISSION = '/api/add/mission/';
 export const API_DELETE_MISSION_PATH = '/api/delete/mission/';
 export const API_EDIT_MISSION = '/api/edit/mission/';
-
+export const API_ALL_MISSIONS = '/api/missions/details';
 
 export const API_HOMEPAGE_CONTENT_PATH = "/api/home/page/details";
 export const API_ADD_HOMEPAGE_CONTENT_PATH = "/api/add/home/page/details";
