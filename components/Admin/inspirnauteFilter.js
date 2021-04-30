@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Context as SkillsContext } from "../../Context/Skills/SkillsContext";
+import { Context as MissionContext } from "../../Context/Missions/Missioncontext";
 import { Autocomplete } from "@material-ui/lab";
 import { Button, TextField } from "@material-ui/core";
 import MaterialTable from "material-table";
@@ -19,12 +20,15 @@ const useStyles = makeStyles((theme) => ({
 const Inspirnautefilter = () => {
   const classes = useStyles();
   const router = useRouter();
-  
-  const { state, FETCH_SKILLS, FETCH_PROFIL_BY_SKILLS } = useContext(
-    SkillsContext
-  );
+  const [disable, setDisable] = React.useState(false);
+  const { state, FETCH_SKILLS, FETCH_PROFIL_BY_SKILLS } = useContext(SkillsContext);
+  const {AFFECT_PROFIL} = useContext(MissionContext);
+  const { mid } = router.query;
   const [skillSearch, setSkillSearch] = React.useState([]);
-
+  
+  const DisableHandler = (event) => {
+    setDisable(!disable);
+  };
   // get list of skills
   React.useEffect(() => {
     FETCH_SKILLS();
@@ -46,21 +50,9 @@ const Inspirnautefilter = () => {
     { title: 'Nbr years Exp', field: 'nbrAnneeExp' },
     { title: 'Dispo Start', field: 'dispoStart' },
     { title: 'Dispo End', field: 'dispoEnd' },
-    {
-      title: "Custom Add",
-      field: 'id',
-      editable: false,
-      render: (rowData) =>
-          rowData && (
-          <Button onClick={(event, profils) => alert("You saved " )}><Icon style={{ color: green[500] }}>add_circle</Icon></Button>
-          )
-      }
     
   ];
   
-  // AFFECT PROFIL TO MISSION
-  const { mid } = router.query;
-  console.log(mid);
   return (
     <React.Fragment>
       <div className="mt-5 mb-3">
@@ -120,9 +112,26 @@ const Inspirnautefilter = () => {
         options={{
           filtering: true
         }}
+        actions={[
+          rowData => ({
+            icon: 'library_add',
+            tooltip: 'Affect Profil',
+            //disabled:disable,
+            onClick: (event, rowData) => {
+              const idProfil = rowData.id
+              AFFECT_PROFIL(mid ,idProfil);
+              //DisableHandler();
+              
+            },
+            disabled: rowData.tarif < 300
+          })
+        ]}
+        options={{
+          actionsColumnIndex: -1
+        }}
         
-    
       /> :
+
       <MaterialTable
       title="Inspirnaute profils"
       columns={[
