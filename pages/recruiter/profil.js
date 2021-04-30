@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import Recruiter from "layouts/Recruiter.js";
+import Recruiter from "../../layouts/Recruiter";
 import jwtDecode from "jwt-decode";
 import Axios from '../../services/axiosServices';
 import ls from "local-storage";
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profil_Recruiter = () => {
+const Profil = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState();
   const [disable, setDisable] = useState(true);
@@ -229,7 +229,6 @@ const Profil_Recruiter = () => {
                 disabled={disable}
                 value={company.name || ""}
                 onChange={(e) => {
-                  e.preventDefault(),
                     setCompany({ ...company, name: e.target.value });
                 }}
               />
@@ -244,7 +243,6 @@ const Profil_Recruiter = () => {
                 disabled={disable}
                 value={company.lastName || ""}
                 onChange={(e) => {
-                  e.preventDefault(),
                     setCompany({ ...company, lastName: e.target.value });
                 }}
               />
@@ -259,7 +257,6 @@ const Profil_Recruiter = () => {
                 disabled={disable}
                 value={company.username || ""}
                 onChange={(e) => {
-                  e.preventDefault(),
                     setCompany({ ...company, username: e.target.value });
                 }}
               />
@@ -274,7 +271,6 @@ const Profil_Recruiter = () => {
                 disabled={disable}
                 value={company.email || ""}
                 onChange={(e) => {
-                  e.preventDefault(),
                     setCompany({ ...company, email: e.target.value });
                 }}
               />
@@ -293,7 +289,6 @@ const Profil_Recruiter = () => {
                 disabled={disable}
                 value={company.phoneNumber || ""}
                 onChange={(e) => {
-                  e.preventDefault(),
                     setCompany({ ...company, phoneNumber: e.target.value });
                 }}
               />
@@ -308,7 +303,6 @@ const Profil_Recruiter = () => {
                 disabled={disable}
                 value={company.poste || ""}
                 onChange={(e) => {
-                  e.preventDefault(),
                     setCompany({ ...company, poste: e.target.value });
                 }}
               />
@@ -323,7 +317,6 @@ const Profil_Recruiter = () => {
                 disabled={disable}
                 value={company.country || ""}
                 onChange={(e) => {
-                  e.preventDefault(),
                     setCompany({ ...company, country: e.target.value });
                 }}
               />
@@ -341,7 +334,6 @@ const Profil_Recruiter = () => {
           disabled={disable}
           value={company.postRecruiter?.id}
           onChange={(e) => {
-            e.preventDefault(),
               setCompany({ ...company, postRecruiter:e.target.value});
           }}
         >
@@ -372,7 +364,6 @@ const Profil_Recruiter = () => {
           disabled={disable}
           value={company.domainRecruiter?.id}
           onChange={(e) => {
-            e.preventDefault(),
               setCompany({ ...company, domainRecruiter:e.target.value});
           }}
         >     
@@ -622,6 +613,6 @@ const Profil_Recruiter = () => {
   );
 };
 
-Profil_Recruiter.layout = Recruiter;
+Profil.layout = Recruiter;
 
-export default Profil_Recruiter;
+export default Profil;

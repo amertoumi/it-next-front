@@ -35,3 +35,7 @@ module.exports = withFonts(
     )
   )
 );
+
+/* module.exports = {
+  trailingSlash: true,
+} */

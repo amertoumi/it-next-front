@@ -1,0 +1,1 @@
+(window.webpackJsonp_N_E=window.webpackJsonp_N_E||[]).push([[92],{sx8z:function(n,a,e){"use strict";e.d(a,"a",(function(){return c}));e("q1tI");var t=e("vDqi"),r=e.n(t),o=(e("EjJx"),e("bBbg"),e("20a2"),e("TdDX")),i=e.n(o);var s=i.a.get("token"),c=r.a.create({headers:{Authorization:"Bearer "+s}})}}]);

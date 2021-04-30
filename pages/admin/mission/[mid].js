@@ -4,7 +4,7 @@ import { API_HOST, API_MISSION_BY_ID, API_EDIT_MISSION } from "../../../API";
 import { useRouter } from "next/router";
 import Admin from "../../../layouts/Admin";
 import { Context as SkillsContext } from "../../../Context/Skills/SkillsContext";
-import { Axios } from "../../../services/authApi";
+import Axios from "../../../services/axiosServices";
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Col, Button } from "reactstrap";
@@ -98,7 +98,6 @@ const Mission = () => {
 
   const FETCH_MISSION_BY_ID = () => {
     const url = API_HOST + API_MISSION_BY_ID + mid;
-    mid &&
       Axios.get(url).then((response) => {
         setMission(response.data);
       });
@@ -259,9 +258,7 @@ const Mission = () => {
           </div>
         </form>
       </div>
-      
-      <div>
-        filter be here ...
+      <div>        
        <Inspirnautefilter />
       </div>
     </div>

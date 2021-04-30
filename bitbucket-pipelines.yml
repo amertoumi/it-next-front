@@ -18,7 +18,7 @@ pipelines:
                 USER: $FTP_USERNAME
                 SERVER: $SFTP_HOST
                 REMOTE_PATH: $SFTP_FOLDER
-                LOCAL_PATH: 'dist/*'
+                LOCAL_PATH: 'out/*'
                 PASSWORD: $FTP_PASSWORD
           artifacts:
             - out/**

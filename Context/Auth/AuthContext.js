@@ -52,7 +52,7 @@ const signin = (dispatch) => async (data) => {
     if (role[0] === "ROLE_ADMIN") {
       Router.push("/admin/dashboard");
     } else if (role[0] === "ROLE_RECRUITER") {
-      Router.push("/recruiter/profil");
+      Router.push("/recruiter/missions");
     } else if (role[0] === "ROLE_USER") {
       Router.push("/user/profil");
     } else Router.push("/home");
