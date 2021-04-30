@@ -48,14 +48,19 @@ const signin = (dispatch) => async (data) => {
     ls.set("currentUser", xx);
     dispatch({ type: "SIGNIN", payload: response.data.token });
     const { roles: role } = jwtDecode(token);
+    const {isActive : active} = jwtDecode(token);
 
-    if (role[0] === "ROLE_ADMIN") {
-      Router.push("/admin/dashboard");
-    } else if (role[0] === "ROLE_RECRUITER") {
-      Router.push("/recruiter/profil");
-    } else if (role[0] === "ROLE_USER") {
-      Router.push("/user/profil");
-    } else Router.push("/home");
+    if (active == true) {
+      if (role[0] === "ROLE_ADMIN") {
+        Router.push("/admin/dashboard");
+      } else if (role[0] === "ROLE_RECRUITER") {
+        Router.push("/recruiter/profil");
+      } else if (role[0] === "ROLE_USER") {
+        Router.push("/user/profil");
+      } else Router.push("/home");
+    } else {
+      Router.push("/inscription_client")
+    }
 
     return true;
   } catch (error) {
