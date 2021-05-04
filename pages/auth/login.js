@@ -24,7 +24,7 @@ function Login() {
   const [is_auth, setIs_auth] = React.useState(false);
   const { register, handleSubmit, watch, errors } = useForm();
   const {signin}=useContext(AuthContext)
-  const onSubmit = (data,event)=>{console.log(data);event.preventDefault();signin(data);}
+  const onSubmit = (data,event)=>{event.preventDefault();signin(data);}
 
 
   return (
