@@ -1,21 +1,19 @@
-FROM node:alpine
+FROM node:12
 
-# # create & set working directory
-RUN mkdir -p /usr/src
-WORKDIR /usr/src/
-
-# Copying source files
-COPY . /usr/src/
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
 # Installing dependencies
-COPY package*.json .
+COPY package*.json ./
 RUN npm install
+
+# Copying source files
+COPY . .
 
 # Building app
 RUN npm build
 EXPOSE 3000
 
-# Start app
-RUN npm run build
-EXPOSE 3000
-CMD npm run start
+# Running the app
+CMD ["yarn", "dev"]

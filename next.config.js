@@ -6,39 +6,6 @@ const withFonts = require("next-fonts");
 const webpack = require("webpack");
 const path = require("path");
 
-/* module.exports = {
-  exportPathMap: function() {
-    return {
-      "/locales/de-DE/summer-dress-f": {
-        page: "/locales/[locale]/[slug]",
-        query: { locale: "de-DE", slug: "summer-dress-f" }
-      }
-    };
-  }
-}; */ 
-module.exports = {
-  exportPathMap: async function (
-    defaultPathMap,
-    { dev, dir, outDir, distDir, buildId }
-  ) {
-    return {
-      '/': { page: '/home' },
-      '/auth/login': { page: '/auth/login' },
-      '/auth/register': { page: '/auth/register' },
-      '/admin/dashboard': { page: '/admin/dashboard' },
-      '/admin/candidatures': { page: '/admin/candidatures' },
-      '/recruiter/dashboard': { page: '/recruiter/dashboard' },
-      '/recruiter/profil': { page: '/recruiter/profil'},
-      '/recruiter/missions': { page: '/recruiter/missions'},
-      '/user/dashboard': { page: '/user/dashboard'},
-      '/user/profil': { page: '/user/profil'},
-      '/user/editcv': { page: '/user/editcv'},
-      '/user/viewcv': { page: '/user/viewcv'},
-
-    }
-  },
-}
-
 module.exports = {
   trailingSlash: true,
 }

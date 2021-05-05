@@ -9,7 +9,7 @@
   align-items: center;
 }
 .blockContent {
-  margin-top: 15%;
+  margin-top: 5%;
 }
 .NavBar {
   padding-top: 3rem !important;
@@ -19,10 +19,10 @@
   top: 0;
 }
 
-.text_Stroke {
+#text_Stroke {
   text-align: center;
   text-transform: uppercase;
-  font: normal normal 700 90px/100px Roboto;
+  font: normal normal 700 75px/100px Roboto;
   letter-spacing: 0.94px;
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 2px;
@@ -44,16 +44,16 @@
 #t2 {
   top: 492px;
   left: 381px;
-  height: 162px;
+  height: 120px;
   text-align: center;
-  font: normal normal 900 100px/162px Roboto;
+  font: normal normal 900 90px/90px Roboto;
   letter-spacing: 0.94px;
   color: #ffd94a;
   text-transform: uppercase;
   opacity: 1;
 }
 
-#desc {
+#descr {
   top: 699px;
   left: 466px;
   height: 86px;
@@ -71,4 +71,71 @@
   width: 30px;
   height: 43px;
   opacity: 1;
+}
+
+@media only screen and (min-width: 1295px) {
+  .body {
+    height: 110vh;
+  }
+
+  #text_Stroke {
+    font: normal normal 900 125px/120px Roboto;
+  }
+
+  #t2 {
+    font: normal normal 900 135px/160px Roboto;
+  }
+  #descr p{
+    height: 120px;
+    font: normal normal  25px/40px Roboto;
+    letter-spacing: 0px;
+    padding-top: 10%;
+    padding-bottom: 5%;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .body {
+    height: 39.8vh;
+  }
+  .blockContent {
+    margin-top: -30%;
+  }
+  #text_Stroke {
+    font: normal normal 300 50px/80px Roboto;
+  }
+
+  #t2 {
+    font: normal normal 600 50px/100px Roboto;
+   margin-bottom: 8%;
+  }
+  #descr p{
+    height: 60px;
+    font: normal normal  20px/30px Roboto;
+    padding-bottom: 28%;
+    
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .body {
+    height: 39.8vh;
+  }
+  .blockContent {
+    margin-top: -30%;
+  }
+  #text_Stroke {
+    font: normal normal 200 25px/40px Roboto;
+  }
+
+  #t2 {
+    font: normal normal 200 25px/20px Roboto;
+    height: 50px;
+  }
+  #descr p{
+    height: 60px;
+    font: normal normal  15px/20px Roboto;
+    padding-bottom: 28%;
+    
+  }
 }

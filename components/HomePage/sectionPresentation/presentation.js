@@ -21,7 +21,7 @@ const WelcomeComponent = () => {
   }, []);
 
   return (
-    <div className="body">  
+    <div className="body">
     <div
       className={" wow slideInUp"}
       data-wow-duration="3s"
@@ -31,9 +31,9 @@ const WelcomeComponent = () => {
         <div 
           className="blockContent"
           style={{display:'flex', flexDirection:'column'}}>
-        <div className="text_Stroke">Pas de slogan</div>
+        <div id="text_Stroke">Pas de slogan</div>
         <h2 id="t2">juste du talent</h2>
-        <div id="desc">
+        <div id="descr">
           <p>
             Les candidats chez inspire talentont réussi des évaluations de code, de style de travail et<br/>
              de réfèrence, et sont jumelés à vous en fonction de vos besoins d'embauche uniques 
